@@ -124,4 +124,9 @@
 .trigger-btn {
     display: inline-block;
     margin: 100px auto;
+    
+}
+
+.btn .btnprimary{
+    width: 100%;
 }

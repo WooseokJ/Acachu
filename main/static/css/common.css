@@ -93,6 +93,7 @@ header .inner .btn{
     border: 2px solid #101010;
     border-radius: 4px;
     color: #101010;
+    background-color: antiquewhite;
     font-size: 16px;
     font-weight: 700;
     text-align: center;
@@ -100,6 +101,7 @@ header .inner .btn{
     box-sizing: border-box;
     display: block;
     transition: .4s;
+
 }
 
 .btn:hover{
@@ -108,7 +110,7 @@ header .inner .btn{
 }
 
 .btn.btn--white {
-    color: antiquewhite;
+    color: #101010;
     border-color: antiquewhite;
 }
 
