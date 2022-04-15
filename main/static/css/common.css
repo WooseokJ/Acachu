@@ -1,6 +1,7 @@
 
 body {
     background-color: #fff;
+    height: auto;
 }
 
 header {
@@ -20,6 +21,7 @@ header .inner .menu{
     transform: translateY(-50%);
     margin: auto 0;
     border: 5px, solid, gray;
+    cursor: pointer;
 }
 header .inner .menu .material-icons{
     color: #fff;
@@ -81,4 +83,80 @@ header .inner .btn{
 
 img {
     display: block;
+}
+
+/* FOOTER */
+footer{
+    background-color: #101010;
+    border-top: 1px solid #333;
+}
+
+footer .inner {
+    padding: 0px 0 60px 0;
+}
+
+footer .inner .logo{
+    width: 350px;
+    height: 200px;
+}
+
+footer .menu {
+    display: flex;
+    justify-content: center;    
+}
+
+footer .menu li{
+    position: relative;
+}
+
+footer .menu li::before{
+    content: "";
+    width: 3px;
+    height: 3px;
+    background-color: #555;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;
+    margin: auto;
+}
+
+footer .menu li:last-child::before{
+    display: none;
+}
+
+footer .menu li a {
+    color: #ccc;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 15px;
+    display: block;
+}
+
+footer .copyright {
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 12px;
+}
+
+footer .logo {
+    margin: 30px auto 0;
+}
+
+#to-top {
+    width: 42px;
+    height: 42px;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 30px;
+    right: -100px;
+    z-index: 9;
 }

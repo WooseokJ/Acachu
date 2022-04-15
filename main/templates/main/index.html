@@ -12,18 +12,31 @@
   <link rel="stylesheet" href="..\..\static\css\main.css">
 	<link rel="stylesheet" href="..\..\static\css\common.css">
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <!-- SWIPER -->
   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+  <!-- GSAP & scrollToPlugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js" integrity="sha512-agNfXmEo6F+qcj3WGryaRvl9X9wLMQORbTt5ACS9YVqzKDMzhRxY+xjgO45HCLm61OwHWR1Oblp4QSw/SGh9SA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
+  <!-- ScrollMagic -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>history.scrollRestoration = "manual"</script>
   <script defer src="..\..\static\js\main.js"></script>
+  <script defer src="..\..\static\js\common.js"></script>
+
+
 
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 	<!-- HEADER -->
 	<header>
 		<div class="inner">
-      <div class="menu">
+      <div class="menu" >
   			<span class="material-icons">menu</span>
       </div>
 			<div class="logo">
@@ -52,9 +65,6 @@
 
   <!-- CAFE IMAGE -->
   <section class="cafe-image">
-    <div class="cafe-recommend-title">
-      <div class="title">어디가지 카페 추천</div>
-    </div>
     <div class="cafe-recommend">
       <div class="inner">
         <div class="swiper-container">
@@ -83,8 +93,26 @@
       <div class="swiper-next">
         <div class="material-icons">arrow_forward</div>
       </div>
-  </div>
+    </div>
+    <div class="cafe-recommend-title">
+      <div class="title">어디가지 카페 추천</div>
+      <p>대충 프로젝트 소개하는 글</p>
+    </div>
   </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="inner">
+      <img src="..\..\static\image\logo.png" alt="" class="logo"/>
+
+      <p class="copyright">
+        &copy; <span class="this-year"></span> Acachu. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+  <div id="to-top">
+    <div class="material-icons">arrow_upward</div>
+  </div>
 
 </body>
 </html>
