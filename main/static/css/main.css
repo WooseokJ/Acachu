@@ -1,57 +1,10 @@
-body {
-    background-color: #fff;
+body{
+    height: 3000px;
 }
-
-header {
-    background-color: #101010;
-    height: 200px;
-}
-
-header .inner {
-    width:1100px;
-    height: 200px;
-    margin: 0 auto;
-    position: relative;
-}
-header .inner .menu{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: auto 0;
-    border: 5px, solid, gray;
-}
-header .inner .menu .material-icons{
-    color: #fff;
-    font-size: 50px;
-}
-
-header .inner .logo{
-    position: absolute;
-    display: block;
-    left: 50%;
-    transform: translate(-50%);
-    width: 350px;
-    height: 100px;
-}
-
-header .inner .logo img{
-    width: 350px;
-    height: 200px;
-}
-
-
-header .inner .btn{
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: auto, 0;
-}
-
 
 /* RECOMMEND */
 .recommend-store {
-    background-image: url("\main\static\image\France-Paris-cafe-night-lights-street-city_2560x1440.jpg");
+    background-image: url("../image/recommend_back.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -107,29 +60,52 @@ header .inner .btn{
 }
 
 /* CAFE IMAGE */
+.cafe-image{
+    position: relative;
+}
+
+.cafe-image .cafe-recommend-title{
+    font-size: 50px;
+    width: fit-content;
+    margin : 0 auto;
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
 .cafe-recommend {
-    height: 693px;
-    background-color: #f6f5ef;
+    background-color: #000;
+    height: 800px;
     position: relative;
     overflow: hidden;
-    transition: height .4s;
+}
+
+.cafe-recommend .inner{
+    width: 1100px;
+    height: 800px;
+    position: relative;
     overflow: hidden;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .cafe-recommend .swiper-container{
-    width: calc(819px * 3 + 20px);
-    height: 553px;
+    width: 1100px;
+    height: 400px;
     position: absolute;
     top: 40px;
-    left: 50%;
-    margin-left: calc((819px * 3 + 20px) / -2);
 }
 
 .cafe-recommend .swiper-slide{
-    opacity: .5;
+    width: 300px;
+    height: 400px;
+    opacity: 1;
     transition: opacity 1s;
     position: relative;
-}
+} 
+.cafe-recommend img{
+    width: 300px;
+    height: 200px;
+} 
 
 .cafe-recommend .swiper-slide-active{
     opacity: 1;
@@ -144,12 +120,6 @@ header .inner .btn{
     margin: auto;
 }
 
-.cafe-recommend .swiper-pagination {
-    bottom: 40px;
-    left: 0;
-    right: 0;
-}
-
 .cafe-recommend .swiper-prev,
 .cafe-recommend .swiper-next {
     width: 42px;
@@ -157,7 +127,7 @@ header .inner .btn{
     border: 2px solid #333;
     border-radius: 50%;
     position: absolute;
-    top: 300px;
+    top: 150px;
     z-index: 1;
     cursor: pointer;
     outline: none;
@@ -165,4 +135,22 @@ header .inner .btn{
     justify-content: center;
     align-items: center;
     transition: .4s; 
+}
+
+.cafe-recommend .swiper-prev {
+    left: 50%;
+    margin-left: -700px;
+    color: #fff;
+}
+
+.cafe-recommend .swiper-next {
+    right: 50%;
+    margin-right: -700px;
+    color: #fff;
+}
+
+.cafe-recommend .swiper-prev:hover,
+.cafe-recommend .swiper-next:hover {
+    background-color: #fff;
+    color: #101010
 }

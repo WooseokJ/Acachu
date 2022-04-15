@@ -1,5 +1,52 @@
+
 body {
     background-color: #fff;
+}
+
+header {
+    background-color: #101010;
+    height: 200px;
+}
+
+header .inner {
+    width:1100px;    
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+header .inner .menu{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto 0;
+    border: 5px, solid, gray;
+}
+header .inner .menu .material-icons{
+    color: #fff;
+    font-size: 50px;
+}
+
+header .inner .logo{
+    position: absolute;
+    display: block;
+    left: 50%;
+    transform: translate(-50%);
+    width: 350px;
+    height: 100px;
+}
+
+header .inner .logo img{
+    width: 350px;
+    height: 200px;
+}
+
+
+header .inner .btn{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto, 0;
 }
 
 .btn {
