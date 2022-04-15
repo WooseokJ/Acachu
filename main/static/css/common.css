@@ -1,0 +1,37 @@
+body {
+    background-color: #fff;
+}
+
+.btn {
+    width: 130px;
+    padding : 10px;
+    border: 2px solid #101010;
+    border-radius: 4px;
+    color: #101010;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: block;
+    transition: .4s;
+}
+
+.btn:hover{
+    background-color: #101010;
+    color: #fff;
+}
+
+.btn.btn--white {
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn.btn--white:hover {
+    color: #333;
+    background-color: #fff;
+}
+
+img {
+    display: block;
+}
