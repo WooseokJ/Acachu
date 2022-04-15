@@ -24,3 +24,13 @@ toTopEl.addEventListener('click', function(){
 const thisYear = document.querySelector('.this-year');
 thisYear.textContent = new Date().getFullYear();
 
+const headerMenu = document.querySelector('#sidebarToggle');
+const sidebar = document.querySelector('.sidebar');
+headerMenu.addEventListener('click', function(){
+    if(!sidebar.classList.contains('active')){
+        sidebar.classList.add('active')
+    }
+    else{
+        sidebar.classList.remove('active')
+    }
+});

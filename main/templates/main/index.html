@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -6,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 
+  <!-- CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
@@ -32,11 +35,11 @@
 
 
 </head>
-<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+<body>
 	<!-- HEADER -->
 	<header>
 		<div class="inner">
-      <div class="menu" >
+      <div class="menu" id="sidebarToggle">
   			<span class="material-icons">menu</span>
       </div>
 			<div class="logo">
@@ -47,6 +50,12 @@
       </div>
 		</div>
 	</header>
+  <!-- SIDE BAR -->
+  <section class="sidebar">
+    <div class="leftmenu">마이 페이지</div>
+    <div class="leftmenu">업주 등록</div>
+    <div class="leftmenu">카페 추천</div>
+  </section>
 
 	<!-- RECOMMEND -->
 	<section class="recommend-store">

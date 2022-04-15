@@ -1,6 +1,6 @@
 
 body {
-    background-color: #fff;
+    background-color: antiquewhite;
     height: auto;
 }
 
@@ -24,7 +24,7 @@ header .inner .menu{
     cursor: pointer;
 }
 header .inner .menu .material-icons{
-    color: #fff;
+    color: antiquewhite;
     font-size: 50px;
 }
 
@@ -51,6 +51,42 @@ header .inner .btn{
     margin: auto, 0;
 }
 
+.sidebar {
+    width:300px;
+    position:absolute;
+    top:0px;
+    left:-300px;
+    width:300px;
+    height:1400px;
+    background-color:#101010;
+    transition:left 0.3s;
+    cursor:pointer;
+}
+
+.sidebar.active {
+    left:0;
+    cursor:default;
+}
+
+.sidebar div:first-child{
+    margin-top: 200px;
+}
+
+.sidebar .leftmenu{
+    color: #fff;
+    height: 120px;
+    line-height: 120px;
+    font-size: 24px;
+    text-align: center;
+    align-items: center;
+    transition: .4s;
+}
+
+.sidebar .leftmenu:hover{
+    background-color: antiquewhite;
+    color: #101010;
+}
+
 .btn {
     width: 130px;
     padding : 10px;
@@ -68,17 +104,17 @@ header .inner .btn{
 
 .btn:hover{
     background-color: #101010;
-    color: #fff;
+    color: antiquewhite;
 }
 
 .btn.btn--white {
-    color: #fff;
-    border-color: #fff;
+    color: antiquewhite;
+    border-color: antiquewhite;
 }
 
 .btn.btn--white:hover {
     color: #333;
-    background-color: #fff;
+    background-color: antiquewhite;
 }
 
 img {
