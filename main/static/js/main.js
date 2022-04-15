@@ -12,3 +12,4 @@ new Swiper('.cafe-image .swiper-container', {
     }
 
 });
+
