@@ -47,62 +47,10 @@
 </head>
 
 <body>
-	<!-- HEADER -->
-	<header>
-		<div class="inner">
-      <div class="menu" id="sidebarToggle">
-  			<span class="material-icons">menu</span>
-      </div>
-			<div class="logo">
-        <img src="..\..\static\image\logo.png" alt="logo">
-      </div>
-      <!--login-->
-      <div class="text-center">
-          <div class="btn btn--white" href="#myModal"data-toggle="modal">Login</div>
-      </div>
-    </div>
-  </header>
-  <!-- Modal HTML -->
-  <div id="myModal" class="modal fade">
-    <div class="modal-dialog modal-login">
-      <div class="modal-content">
-        <div class="modal-header">				
-          <h4 class="modal-title">로그인</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form action="/examples/actions/confirmation.php" method="post">
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="text" class="form-control" name="password" placeholder="Password" required="required">
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block btn-lg">로그인</button>
-            </div>
-            <p class="hint-text"><a href="#">패스워드 찾기</a></p>
-          </form>
-        </div>
-        <div class="modal-footer">계정가 없나요? <a href="#">회원가입</a></div>
-      </div>
-    </div>
-  </div>   
-
-  <!-- SIDE BAR -->
-  <section class="sidebar">
-    <div class="leftmenu">마이 페이지</div>
-    <div class="leftmenu">업주 등록</div>
-    <div class="leftmenu">카페 추천</div>
-  </section>
-    
-
+  <!-- HEADER -->
+  {% include "main/header.html" %}
+  <!-- SIDEBAR -->
+  {% include "main/sidebar.html" %}
 	<!-- RECOMMEND -->
 	<section class="recommend-store">
 		<div class="inner">
@@ -112,7 +60,7 @@
 			</div>
 			<div class="back">
 			  <img src="..\..\static\image\reserve_store_medal_back.png" alt="">
-			  <a href="javascript:void(0)" class="btn">카페 추천</a>
+			  <a href="javascript:void(0)" class="accbtn">카페 추천</a>
 			</div>
 		  </div>
 		</div>
@@ -153,21 +101,9 @@
       <div class="title">어디가지 카페 추천</div>
       <p>대충 프로젝트 소개하는 글</p>
     </div>
-  </section>
-
+  </section> 
+  
   <!-- FOOTER -->
-  <footer>
-    <div class="inner">
-      <img src="..\..\static\image\logo.png" alt="" class="logo"/>
-
-      <p class="copyright">
-        &copy; <span class="this-year"></span> Acachu. All Rights Reserved.
-      </p>
-    </div>
-  </footer>
-  <div id="to-top">
-    <div class="material-icons">arrow_upward</div>
-  </div>
-
+  {% include "main/footer.html" %}
 </body>
 </html>

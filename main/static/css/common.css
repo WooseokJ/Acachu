@@ -43,7 +43,7 @@ header .inner .logo img{
 }
 
 
-header .inner .btn{
+header .inner .accbtn{
     position: absolute;
     right: 0;
     top: 50%;
@@ -87,10 +87,10 @@ header .inner .btn{
     color: #101010;
 }
 
-.btn {
+.accbtn {
     width: 130px;
     padding : 10px;
-    border: 2px solid #101010;
+    border: 2px solid antiquewhite;
     border-radius: 4px;
     color: #101010;
     background-color: antiquewhite;
@@ -104,19 +104,23 @@ header .inner .btn{
 
 }
 
-.btn:hover{
+.accbtn:hover{
     background-color: #101010;
     color: antiquewhite;
 }
 
-.btn.btn--white {
+.accbtn.btn--white {
     color: #101010;
     border-color: antiquewhite;
 }
 
-.btn.btn--white:hover {
+.accbtn.btn--white:hover {
     color: #333;
     background-color: antiquewhite;
+}
+
+.accbtn .triger-btn-btn{
+    position: absolute;
 }
 
 img {

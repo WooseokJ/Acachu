@@ -1,0 +1,52 @@
+<!-- HEADER -->
+<header>
+    <div class="inner">
+    <div class="menu" id="sidebarToggle">
+        <span class="material-icons">menu</span>
+    </div>
+        <div class="logo">
+    <img src="..\..\static\image\logo.png" alt="logo">
+    </div>
+    <!--login-->
+    <div class="text-center">
+        <div class="text-center">
+            <!-- Button HTML (to Trigger Modal) -->
+            <a href="#myModal" class="accbtn" data-toggle="modal">Login</a>
+        </div>   
+    </div>
+    
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-login">
+        <div class="modal-content">
+        <div class="modal-header">				
+            <h4 class="modal-title">로그인</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form action="/examples/actions/confirmation.php" method="post">
+            <div class="form-group">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="text" class="form-control" name="password" placeholder="Password" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">로그인</button>
+            </div>
+            <p class="hint-text"><a href="#">패스워드 찾기</a></p>
+            </form>
+        </div>
+        <div class="modal-footer">계정가 없나요? <a href="#">회원가입</a></div>
+        </div>
+    </div>
+    </div>   
+</div>
+</header>
+
