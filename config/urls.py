@@ -20,8 +20,5 @@ from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main),
-<<<<<<< Updated upstream
-=======
     path('', include('ImageSearchPage.urls'))
->>>>>>> Stashed changes
 ]

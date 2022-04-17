@@ -3,6 +3,7 @@
 .btn_div{
     display: flex;
     justify-content: center;
+    margin-bottom: 200px;
 }
 .btn {
     width: 200px;
@@ -68,4 +69,8 @@
 
 .img:hover{
     background-color: rgb(199, 199, 199);
+}
+
+.btn.btn--black .send{
+    text-align: center;
 }

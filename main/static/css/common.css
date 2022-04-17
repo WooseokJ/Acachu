@@ -54,10 +54,10 @@ header .inner .accbtn{
 .sidebar {
     width:300px;
     position:absolute;
-    top:0px;
+    top:200px;
     left:-300px;
     width:300px;
-    height:1400px;
+    height:1200px;
     background-color:#101010;
     transition:left 0.3s;
     cursor:pointer;
@@ -66,10 +66,6 @@ header .inner .accbtn{
 .sidebar.active {
     left:0;
     cursor:default;
-}
-
-.sidebar div:first-child{
-    margin-top: 200px;
 }
 
 .sidebar .leftmenu{
