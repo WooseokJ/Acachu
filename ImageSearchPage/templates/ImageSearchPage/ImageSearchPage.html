@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+        <link rel="stylesheet" href="..\..\..\main\static\css\main.css">
+        <link rel="stylesheet" href="..\..\..\main\static\css\common.css">
+        <link rel="stylesheet" href="..\..\static\css\style.css">
+    
+    </head>
+<body>
+	<!-- HEADER -->
+	<header>
+		<div class="inner">
+      <div class="menu">
+  			<span class="material-icons">menu</span>
+      </div>
+			<div class="logo">
+        <img src="..\..\..\main\static\image\logo.png" alt="logo">
+      </div>
+      <div class="btn btn--white">
+        <div class="login">Login</div>
+      </div>
+		</div>
+	</header>
+    
+    <form method='post'>
+        <div>
+            <div class="title">카페 이미지 추천</div>
+            <hr style='width:400px'>
+            <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
+        </div>
+        
+        <div class='imgzip'>
+            <input type="file" id="upload_file1" class = 'real-upload' accept="image/*" required multiple style="display: none;">
+            <img src="..\..\static\img\uppic.png" id="img_section1" class='upload img'>
+            
+            <!-- 다중 이미지-->
+            <input type="file" id="upload_file2" class = 'real-upload1' accept="image/*" required multiple style="display: none;">
+            <img src="..\..\static\img\uppic.png" id="img_section2" class='upload1 img'>
+
+            <input type="file" id="upload_file3" class = 'real-upload2' accept="image/*" required multiple style="display: none;">
+            <img src="..\..\static\img\uppic.png" id="img_section3" class='upload2 img'>
+
+            <script>
+                const realUpload = document.querySelector('.real-upload');
+                const realUpload1 = document.querySelector('.real-upload1');
+                const realUpload2 = document.querySelector('.real-upload2');
+
+                const upload = document.querySelector('.upload');
+                const upload1 = document.querySelector('.upload1');
+                const upload2 = document.querySelector('.upload2');
+            
+                // 파일이 이미지가 아니면 경고
+                
+
+                upload.addEventListener('click', () => realUpload.click());
+                upload1.addEventListener('click', () => realUpload1.click());
+                upload2.addEventListener('click', () => realUpload2.click());
+            </script>
+            
+            <!-- 파일 선택 및 미리보기-->
+            <script>
+                const reader = new FileReader();
+                const reader1 = new FileReader();
+                const reader2 = new FileReader();
+
+                // 첫 번째 사진
+                reader.onload = (readerEvent) => {
+                    document.querySelector("#img_section1").setAttribute("src", readerEvent.target.result);
+                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+                };
+        
+                document.querySelector("#upload_file1").addEventListener("change", (changeEvent) => {
+                    //upload_file 에 이벤트리스너를 장착
+        
+                    const imgFile = changeEvent.target.files[0];
+                    reader.readAsDataURL(imgFile);
+                    //업로드한 이미지의 URL을 reader에 등록
+                })
+
+                // 두 번째 사진
+                reader1.onload = (readerEvent) => {
+                    document.querySelector("#img_section2").setAttribute("src", readerEvent.target.result);
+                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+                };
+        
+                document.querySelector("#upload_file2").addEventListener("change", (changeEvent) => {
+                    //upload_file 에 이벤트리스너를 장착
+        
+                    const imgFile = changeEvent.target.files[0];
+                    reader1.readAsDataURL(imgFile);
+                    //업로드한 이미지의 URL을 reader에 등록
+                })
+
+                //세 번째 사진
+                reader2.onload = (readerEvent) => {
+                    document.querySelector("#img_section3").setAttribute("src", readerEvent.target.result);
+                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+                };
+        
+                document.querySelector("#upload_file3").addEventListener("change", (changeEvent) => {
+                    //upload_file 에 이벤트리스너를 장착
+        
+                    const imgFile = changeEvent.target.files[0];
+                    reader2.readAsDataURL(imgFile);
+                    //업로드한 이미지의 URL을 reader에 등록
+                })
+            </script>
+        </div>
+
+        <div class='btn_div'>
+            <div class="btn btn--black">
+                <div class="send">카페 검색</div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
