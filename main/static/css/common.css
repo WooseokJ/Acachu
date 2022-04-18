@@ -43,7 +43,7 @@ header .inner .logo img{
 }
 
 
-header .inner .btn{
+header .inner .accbtn{
     position: absolute;
     right: 0;
     top: 50%;
@@ -54,10 +54,10 @@ header .inner .btn{
 .sidebar {
     width:300px;
     position:absolute;
-    top:0px;
+    top:200px;
     left:-300px;
     width:300px;
-    height:1400px;
+    height:1200px;
     background-color:#101010;
     transition:left 0.3s;
     cursor:pointer;
@@ -66,10 +66,6 @@ header .inner .btn{
 .sidebar.active {
     left:0;
     cursor:default;
-}
-
-.sidebar div:first-child{
-    margin-top: 200px;
 }
 
 .sidebar .leftmenu{
@@ -87,12 +83,13 @@ header .inner .btn{
     color: #101010;
 }
 
-.btn {
+.accbtn {
     width: 130px;
     padding : 10px;
-    border: 2px solid #101010;
+    border: 2px solid antiquewhite;
     border-radius: 4px;
     color: #101010;
+    background-color: antiquewhite;
     font-size: 16px;
     font-weight: 700;
     text-align: center;
@@ -100,21 +97,26 @@ header .inner .btn{
     box-sizing: border-box;
     display: block;
     transition: .4s;
+
 }
 
-.btn:hover{
+.accbtn:hover{
     background-color: #101010;
     color: antiquewhite;
 }
 
-.btn.btn--white {
-    color: antiquewhite;
+.accbtn.btn--white {
+    color: #101010;
     border-color: antiquewhite;
 }
 
-.btn.btn--white:hover {
+.accbtn.btn--white:hover {
     color: #333;
     background-color: antiquewhite;
+}
+
+.accbtn .triger-btn-btn{
+    position: absolute;
 }
 
 img {
