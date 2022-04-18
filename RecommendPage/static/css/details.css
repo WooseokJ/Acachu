@@ -1,0 +1,84 @@
+/* CAFE IMAGE */
+.cafe-image{
+    position: relative;
+}
+
+.cafe-image .inner {
+    width: 1100px;
+    height: 1000px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.cafe-image .inner .swiper-container{
+    width: 900px;
+    height: 550px;
+    position: absolute;
+    left: 100px;
+    
+}
+
+.cafe-image .inner .swiper-slide{
+    width: 900px;
+    height: 550px;
+    opacity: 1;
+    transition: opacity 1s;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+} 
+.cafe-image .inner img{
+    width: 900px;
+    height: 550px;
+    
+} 
+
+.cafe-image .inner .swiper-slide-active{
+    opacity: 1;
+}
+
+.cafe-image .inner .swiper-slide .btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+.cafe-image .inner .swiper-prev,
+.cafe-image .inner .swiper-next {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .4s; 
+    opacity: 0;
+}
+
+.cafe-image .inner .swiper-prev {
+    margin-left: 0;
+    color: #101010;
+}
+
+.cafe-image .inner .swiper-next {
+    margin-right: 0;
+    color: #101010;
+}
+
+.cafe-image .inner .swiper-prev:hover,
+.cafe-image .inner .swiper-next:hover {
+    background-color: #fff;
+    color: #101010
+}
