@@ -42,13 +42,17 @@ header .inner .logo img{
     height: 200px;
 }
 
-
-header .inner .accbtn{
+header .inner .btns{
     position: absolute;
+    display: flex;
+    width: 300px;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    margin: auto, 0;
+}
+header .inner .btns .accbtn{
+    position: relative;
+    margin: 0 15px;
 }
 
 .sidebar {
@@ -113,6 +117,14 @@ header .inner .accbtn{
 .accbtn.btn--white:hover {
     color: #333;
     background-color: antiquewhite;
+}
+
+.btn--more{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-color: #101010;
+
 }
 
 .accbtn .triger-btn-btn{

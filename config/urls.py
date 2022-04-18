@@ -20,5 +20,6 @@ from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main),
-    path('', include('ImageSearchPage.urls'))
+    path('', include('ImageSearchPage.urls')),
+    path('', include('RecommendPage.urls')),
 ]
