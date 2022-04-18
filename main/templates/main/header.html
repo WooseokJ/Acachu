@@ -8,43 +8,91 @@
             <img src="..\..\static\image\logo.png" alt="logo">
         </div>
 
+   
         <div class="btns">
             <a href="#myModal" class="accbtn login" data-toggle="modal">Login</a>
-            <a href="#myModal" class="accbtn signup" data-toggle="modal">Signup</a>
+            <a href="#myModal_signup" class="accbtn signup" data-toggle="modal">Signup</a>
         </div>
+
 
         <!-- Modal HTML -->
         <div id="myModal" class="modal fade">
-        <div class="modal-dialog modal-login">
-            <div class="modal-content">
-            <div class="modal-header">				
-                <h4 class="modal-title">로그인</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div class="modal-dialog modal-login">
+                <div class="modal-content">
+                <div class="modal-header">				
+                    <h4 class="modal-title">로그인</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="/examples/actions/confirmation.php" method="post">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="text" class="form-control" name="password" placeholder="Password" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">로그인</button>
+                    </div>
+                    {% comment %} <p class="hint-text"><a href="#">패스워드 찾기</a></p> {% endcomment %}
+                    </form>
+                </div>
+                <div class="modal-footer">계정이 없나요? <a href="#myModal_signup" data-toggle="modal">회원가입</a></div>
+                </div>
             </div>
-            <div class="modal-body">
-                <form action="/examples/actions/confirmation.php" method="post">
-                <div class="form-group">
-                    <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+        </div>  
+
+        <!-- sign up modal -->
+        <div id ="myModal_signup" class="modal fade">
+            <div  class="modal-dialog signup-form">	
+                <div class="modal-content">
+                <div class="modal-header">				
+                    <h4 class="modal-title">회원가입</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                    <form action="/examples/actions/confirmation.php" method="post">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="id" class="form-control" name="username" placeholder="id" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                            <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="text" class="form-control" name="password" placeholder="Password" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock"></i>
+                                <i class="fa fa-check"></i>
+                            </span>
+                            <input type="text" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+                        </div>
+                    </div>        
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="text" class="form-control" name="password" placeholder="Password" required="required">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">로그인</button>
-                </div>
-                <p class="hint-text"><a href="#">패스워드 찾기</a></p>
-                </form>
-            </div>
-            <div class="modal-footer">계정가 없나요? <a href="#">회원가입</a></div>
-            </div>
-        </div>
-    </div>   
-</div>
+                    </form>
+                
+            </div>  
+        </div> 
+        
+    </div>
 </header>
 
