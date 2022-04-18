@@ -1,11 +1,11 @@
 /* style.css */
 
-.btn_div{
+.is-btn_div{
     display: flex;
     justify-content: center;
     margin-bottom: 200px;
 }
-.btn {
+.is-btn {
     width: 200px;
     padding : 10px;
     border: 2px solid #101010;
@@ -19,19 +19,23 @@
     transition: .4s;
 }
 
-.btn:hover{
+.is-btn:hover{
     background-color: #ffffff;
     color: rgb(39, 39, 39);
 }
 
-.btn.btn--black {
+.is-btn.btn--black {
     color: rgb(34, 34, 34);
     border-color: rgb(58, 58, 58);
 }
 
-.btn.btn--black:hover {
+.is-btn.is-btn--black:hover {
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
+}
+
+.is-btn.is-btn--black .send{
+    text-align: center;
 }
 
 .title{
@@ -55,7 +59,7 @@
     display: flex;
     justify-content: center;
     margin-top:20px;
-    margin-bottom:30px;
+    margin-bottom:50px;
 }
 
 .img{
@@ -71,6 +75,41 @@
     background-color: rgb(199, 199, 199);
 }
 
-.btn.btn--black .send{
-    text-align: center;
+.cp-tag{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius: 100%;
+    width: 180px;
+    height: 180px;
+    background-color: #ffffff;
+    cursor:pointer;
+    margin: 20px;
 }
+
+.cp-tag:hover{
+    color: antiquewhite;
+    background-color: rgb(0, 0, 0);
+}
+
+.cop-tag{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+    background-color: #ffffff;
+    cursor:pointer;
+    margin: 20px;
+    margin-bottom:210px;
+}
+
+.cop-tag:hover{
+    color: antiquewhite;
+    background-color: rgb(250, 146, 60);
+}
+
+.map_wrap {position:relative;width:100%;height:350px;}
+.hAddr {position:absolute;left:10px;top:10px;border-radius: 2px;background:#fff;background:rgba(255,255,255,0.8);z-index:1;padding:5px;}
+.bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}

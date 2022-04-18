@@ -21,6 +21,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main),
     path('', include('ImageSearchPage.urls')),
+<<<<<<< Updated upstream
     path('', include('RecommendPage.urls')),
     path('',include('main.urls')),
+=======
+    path('', include('CategoryPage.urls')),
+    path('', include('ChoicePage.urls'))
+>>>>>>> Stashed changes
 ]

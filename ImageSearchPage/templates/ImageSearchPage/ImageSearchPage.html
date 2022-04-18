@@ -5,9 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        
-
+        <title>ImageSearch</title>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
         <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
@@ -23,7 +21,7 @@
 
         <link rel="stylesheet" href="{% static 'css/common.css'%}">
         <link rel="stylesheet" href="{% static 'css/modal.css'%}">
-        <link rel="stylesheet" href="..\..\static\css\style.css">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
 
         <!-- LODASH -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -43,23 +41,23 @@
 
     <!-- SIDE BAR -->
     {% include "main/sidebar.html" %}
+    <div>
+        <div class="title">카페 이미지 추천</div>
+        <hr style='width:400px'>
+        <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
+    </div>
+
     <form method='post'>
-        <div>
-            <div class="title">카페 이미지 추천</div>
-            <hr style='width:400px'>
-            <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
-        </div>
-        
         <div class='imgzip'>
             <input type="file" id="upload_file1" class = 'real-upload' accept="image/*" required multiple style="display: none;">
-            <img src="..\..\static\img\uppic.png" id="img_section1" class='upload img'>
+            <img src="{% static 'img/uppic.png'%}" id="img_section1" class='upload img'>
             
             <!-- 다중 이미지-->
             <input type="file" id="upload_file2" class = 'real-upload1' accept="image/*" required multiple style="display: none;">
-            <img src="..\..\static\img\uppic.png" id="img_section2" class='upload1 img'>
+            <img src="{% static 'img/uppic.png'%}" id="img_section2" class='upload1 img'>
 
             <input type="file" id="upload_file3" class = 'real-upload2' accept="image/*" required multiple style="display: none;">
-            <img src="..\..\static\img\uppic.png" id="img_section3" class='upload2 img'>
+            <img src="{% static 'img/uppic.png'%}" id="img_section3" class='upload2 img'>
 
             <script>
                 const realUpload = document.querySelector('.real-upload');
@@ -128,8 +126,8 @@
             </script>
         </div>
 
-        <div class='btn_div'>
-            <div class="btn btn--black">
+        <div class='is-btn_div'>
+            <div class="is-btn is-btn--black">
                 <div class="send">카페 검색</div>
             </div>
         </div>
