@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.main),
     path('', include('ImageSearchPage.urls')),
     path('', include('RecommendPage.urls')),
+    path('',include('main.urls')),
 ]

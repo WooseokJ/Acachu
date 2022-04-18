@@ -11,14 +11,20 @@
   <!-- LODASH -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
-  <!--modal-->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <!--login modal-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+  <!--sign up modal-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 
   <!-- CSS -->
@@ -51,58 +57,11 @@
   {% include "main/header.html" %}
   <!-- SIDEBAR -->
   {% include "main/sidebar.html" %}
-	<!-- RECOMMEND -->
-	<section class="recommend-store">
-		<div class="inner">
-		  <div class="medal">
-        <div class="front">
-          <img src="{% static 'image/reserve_store_medal_front.png'%}" alt=""/>
-        </div>
-        <div class="back">
-          <img src="{% static 'image/reserve_store_medal_back.png'%}" alt="">
-          <div href="javascript:void(0)" class="accbtn">카페 추천</div>
-        </div>
-		  </div>
-		</div>
-	</section>
 
-  <!-- CAFE IMAGE -->
-  <section class="cafe-image">
-    <div class="cafe-recommend">
-      <div class="inner">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="..\..\static\image\cp1.jpg" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="..\..\static\image\cp2.jpg" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="..\..\static\image\cp3.jpg" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="..\..\static\image\cp4.jpg" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="..\..\static\image\cp5.jpg" alt=""/>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-prev">
-        <div class="material-icons">arrow_back</div>
-      </div>
-      <div class="swiper-next">
-        <div class="material-icons">arrow_forward</div>
-      </div>
-    </div>
-    <div class="cafe-recommend-title">
-      <div class="title">어디가지 카페 추천</div>
-      <p>대충 프로젝트 소개하는 글</p>
-    </div>
-  </section> 
-  
+
+
+
+
   <!-- FOOTER -->
   {% include "main/footer.html" %}
 </body>
