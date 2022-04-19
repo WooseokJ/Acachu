@@ -9,3 +9,6 @@ def main(request):
 
 def mypage(request):
     return render(request,'main/mypage.html',{})
+
+def delete(request):
+    return render(request,'main/delete.html',{})
