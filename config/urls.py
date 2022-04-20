@@ -24,5 +24,5 @@ urlpatterns = [
     path('', include('RecommendPage.urls')),
     path('',include('main.urls')),
     path('', include('CategoryPage.urls')),
-    path('', include('ChoicePage.urls'))
+    path('', include('ChoicePage.urls')),
 ]
