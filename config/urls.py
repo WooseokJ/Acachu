@@ -24,9 +24,6 @@ urlpatterns = [
     path('', include('RecommendPage.urls')),
     path('',include('main.urls')),
     path('', include('CategoryPage.urls')),
-<<<<<<< HEAD
     path('', include('ChoicePage.urls')),
-=======
-    path('', include('ChoicePage.urls'))
->>>>>>> 2bf7cf8cff6218c6658eec41c1f21d13a55d6a29
+
 ]
