@@ -66,6 +66,7 @@ header .inner .btns .accbtn{
     background-color:#101010;
     transition:left 0.3s;
     cursor:pointer;
+    z-index: 9;
 }
 
 .sidebar.active {

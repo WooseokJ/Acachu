@@ -1,3 +1,4 @@
+{% load static %}
 <!-- HEADER -->
 <header>
     <div class="inner">
@@ -5,7 +6,7 @@
             <span class="material-icons">menu</span>
         </div>
             <div class="logo">
-            <img src="..\..\static\image\logo.png" alt="logo">
+            <img src="{% static 'image\logo2.png'%}" alt="logo" onclick="location.href='{% url "main"%}'">
         </div>
 
    
