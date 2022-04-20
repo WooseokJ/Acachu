@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AuthManaged</title>
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+        <script
+            src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+
+        <!--modal-->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="{% static 'css/common.css'%}">
+        <link rel="stylesheet" href="{% static 'css/modal.css'%}">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+        <!-- LODASH -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+            integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+        <!-- GSAP & scrollToPlugin -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+            integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"
+            integrity="sha512-agNfXmEo6F+qcj3WGryaRvl9X9wLMQORbTt5ACS9YVqzKDMzhRxY+xjgO45HCLm61OwHWR1Oblp4QSw/SGh9SA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+        <!-- ScrollMagic -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"
+            integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script> 
+    </head>
+    <body>
+        <!-- HEADER -->
+        {% include "main/header.html" %}
+
+        <!-- SIDE BAR -->
+        {% include "main/sidebar.html" %}
+
+        <div class="container"  style='margin-bottom:50px'>
+            <div class="main-body">
+                <nav aria-label="breadcrumb" class="main-breadcrumb"  style='margin-bottom:50px'>
+                    <br>
+                    <h2>업주 관리</h2>
+                    <hr>
+                    
+                    <div class="is-btn is-btn--black">
+                        <div class="send">업장 등록</div>
+                    </div>
+                </nav>
+
+                <div class="row gutters-sm">
+                    <div class="col-md-5">
+                        <article>
+                            <div class="line-item hf-item-odd clearfix">
+                                <div class="row">
+                                    <div class="row-8">최신 리뷰</div>
+                                    <div class="col-md-10" align="right">
+                                        <a class="mp-more" href="/member/more/board/">more+</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        <article>
+                            <div class="line-item hf-item-odd clearfix">
+                                <div class="row">
+                                    <div class="row-8">추천 태그</div>
+                                    <!--즐겨찾기 리스트-->
+
+                                    <!--<hr class="mp-hr"> {% for bbookmark in bbookmark_list %} <a class =
+                                    "mp-link" href="/board_real/board_view/?id={{bbookmark.board.board_id}}">
+                                    {{bbookmark.board.board_title}} </a> {% endfor %}-->
+
+                                    <!-- 태그 내용-->
+                                </div>
+                            </div>
+                        </article>
+                        <br><br><br><br>
+                    </div>
+
+                    <!--테이블 형태-->
+                    <div class="col-md-7">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table">
+                                    <h4 style='text-align:center; margin-bottom:20px'>업장 수정 요청 게시판</h4>
+                                    <thead class="thead-light">
+                                    <tr class="text-center">
+                                        <th scope="col">번호</th>
+                                        <th scope="col">제목</th>
+                                        <th scope="col">작성일</th>
+                                        <th scope="col">답변여부</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for board in boards %}
+                                    <tr class="text-center">
+                                        <th scope="row">
+                                            <span>{{ board.id }}</span>
+                                        </th>
+                                        <td>
+                                            <a href="/post/{{ board.id }}">
+                                                <span>{{ board.title }}</span>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span>{{ board.created_date | date:"Y-m-d h:i" }}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ board.YN }}</span> <!-- 답변여부-->
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-auto mr-auto"></div>
+                                    <div class="col-auto">
+                                        <a class="btn btn-primary" href="/post" role="button">글쓰기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- FOOTER -->
+    {% include 'main/footer.html' %}
+</body>
+</html>

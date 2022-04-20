@@ -25,4 +25,5 @@ urlpatterns = [
     path('',include('main.urls')),
     path('', include('CategoryPage.urls')),
     path('', include('ChoicePage.urls')),
+    path('', include('AuthManagedPage.urls'))
 ]

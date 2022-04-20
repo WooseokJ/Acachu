@@ -3,7 +3,7 @@ var mapContainer = document.getElementById('map'),
     mapOption = {
         center: new kakao
             .maps
-            .LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            .LatLng( 37.35879, 127.11494), // 지도의 중심좌표
         level: 1 // 지도의 확대 레벨
     };
 
@@ -12,6 +12,20 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
+
+// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+// 확대 축소
+// 지도가 확대 또는 축소되면 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'zoom_changed', function() {        
+    
+    // 지도의 현재 레벨을 얻어옵니다
+    var level = map.getLevel();
+    
+    
+});
 
 // 클릭시 위치 표시
 // 마커표시
@@ -23,9 +37,6 @@ kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
         searchDetailAddrFromCoords(mouseEvent.latLng, function (result, status) {
             Marker(mouseEvent.latLng,status,result);
         });
-
-        // 지도에 마커 선택 시 검색 주소 값 초기화
-        document.getElementById("address_detail").value = null;
     });
 
 // 현재 위치 표시
@@ -93,7 +104,6 @@ window.onload = function(){
         //카카오 지도 발생
         new daum.Postcode({
             oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_detail").value = data.address; // 주소 넣기
                 document.getElementById("address_now").text = data.address; // 현재 위치에 주소 넣기
 
                 // 검색 위치 지도 마커 표시
