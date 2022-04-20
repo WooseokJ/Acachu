@@ -12,3 +12,14 @@ new Swiper('.cafe-image .inner .swiper-container', {
     }
 
 });
+
+const bookmark = document.querySelector('.bookmark')
+
+bookmark.addEventListener('click', function(){
+    if(!bookmark.classList.contains('active')){
+        bookmark.classList.add('active')
+    }
+    else{
+        bookmark.classList.remove('active')
+    }
+});
