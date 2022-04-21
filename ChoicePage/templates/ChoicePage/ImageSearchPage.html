@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ImageSearch</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+        <!--modal-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="{% static 'css/common.css'%}">
+        <link rel="stylesheet" href="{% static 'css/modal.css'%}">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+        <!-- LODASH -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+        <!-- GSAP & scrollToPlugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js" integrity="sha512-agNfXmEo6F+qcj3WGryaRvl9X9wLMQORbTt5ACS9YVqzKDMzhRxY+xjgO45HCLm61OwHWR1Oblp4QSw/SGh9SA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <!-- ScrollMagic -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script defer src="{% static 'js/common.js'%}"></script>
+        <script defer="defer" src="{% static 'js/receive.js'%}"></script>
+    </head>
+<body>
+	<!-- HEADER -->
+    {% include "main/header.html" %}
+
+    <!-- SIDE BAR -->
+    {% include "main/sidebar.html" %}
+    <div>
+        <div class="title">카페 이미지 추천</div>
+        <hr style='width:400px'>
+        <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
+    </div>
+
+    <form method='post'>
+        <div class='imgzip'>
+            <input type="file" id="upload_file1" class = 'real-upload' accept="image/*" required multiple style="display: none;">
+            <img src="{% static 'img/uppic.png'%}" id="img_section1" class='upload img'>
+            
+            <!-- 다중 이미지-->
+            <input type="file" id="upload_file2" class = 'real-upload1' accept="image/*" required multiple style="display: none;">
+            <img src="{% static 'img/uppic.png'%}" id="img_section2" class='upload1 img'>
+
+            <input type="file" id="upload_file3" class = 'real-upload2' accept="image/*" required multiple style="display: none;">
+            <img src="{% static 'img/uppic.png'%}" id="img_section3" class='upload2 img'>
+
+            <script>
+                const realUpload = document.querySelector('.real-upload');
+                const realUpload1 = document.querySelector('.real-upload1');
+                const realUpload2 = document.querySelector('.real-upload2');
+
+                const upload = document.querySelector('.upload');
+                const upload1 = document.querySelector('.upload1');
+                const upload2 = document.querySelector('.upload2');
+            
+                // 파일이 이미지가 아니면 경고
+                
+
+                upload.addEventListener('click', () => realUpload.click());
+                upload1.addEventListener('click', () => realUpload1.click());
+                upload2.addEventListener('click', () => realUpload2.click());
+            </script>
+            
+            <!-- 파일 선택 및 미리보기-->
+            <script>
+                const reader = new FileReader();
+                const reader1 = new FileReader();
+                const reader2 = new FileReader();
+
+                // 첫 번째 사진
+                reader.onload = (readerEvent) => {
+                    document.querySelector("#img_section1").setAttribute("src", readerEvent.target.result);
+                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+                };
+        
+                document.querySelector("#upload_file1").addEventListener("change", (changeEvent) => {
+                    //upload_file 에 이벤트리스너를 장착
+        
+                    const imgFile = changeEvent.target.files[0];
+                    reader.readAsDataURL(imgFile);
+                    //업로드한 이미지의 URL을 reader에 등록
+                })
+
+                // 두 번째 사진
+                reader1.onload = (readerEvent) => {
+                    document.querySelector("#img_section2").setAttribute("src", readerEvent.target.result);
+                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+                };
+        
+                document.querySelector("#upload_file2").addEventListener("change", (changeEvent) => {
+                    //upload_file 에 이벤트리스너를 장착
+        
+                    const imgFile = changeEvent.target.files[0];
+                    reader1.readAsDataURL(imgFile);
+                    //업로드한 이미지의 URL을 reader에 등록
+                })
+
+                //세 번째 사진
+                reader2.onload = (readerEvent) => {
+                    document.querySelector("#img_section3").setAttribute("src", readerEvent.target.result);
+                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+                };
+        
+                document.querySelector("#upload_file3").addEventListener("change", (changeEvent) => {
+                    //upload_file 에 이벤트리스너를 장착
+        
+                    const imgFile = changeEvent.target.files[0];
+                    reader2.readAsDataURL(imgFile);
+                    //업로드한 이미지의 URL을 reader에 등록
+                })
+            </script>
+        </div>
+
+        <div class='is-btn_div'>
+            <div class="is-btn is-btn--black">
+                <div class="send">카페 검색</div>
+            </div>
+        </div>
+    </form>
+
+    <!-- FOOTER -->
+    {% include 'main/footer.html' %}
+</body>
+</html>

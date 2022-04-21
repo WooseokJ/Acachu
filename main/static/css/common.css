@@ -1,13 +1,101 @@
 body {
-    background-color: #fff;
+    background-color: antiquewhite;
+    font-family: 'Varela Round', sans-serif;
+    height: auto;
+    
 }
 
-.btn {
+header {
+    background-color: #101010;
+    height: 200px;
+}
+
+header .inner {
+    width:1100px;    
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+header .inner .menu{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto 0;
+    border: 5px, solid, gray;
+    cursor: pointer;
+}
+header .inner .menu .material-icons{
+    color: antiquewhite;
+    font-size: 50px;
+}
+
+header .inner .logo{
+    position: absolute;
+    display: block;
+    left: 50%;
+    transform: translate(-50%);
+    width: 350px;
+    height: 100px;
+}
+
+header .inner .logo img{
+    width: 350px;
+    height: 200px;
+}
+
+header .inner .btns{
+    position: absolute;
+    display: flex;
+    width: 300px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+header .inner .btns .accbtn{
+    position: relative;
+    margin: 0 15px;
+}
+
+.sidebar {
+    width:300px;
+    position:absolute;
+    top:200px;
+    left:-300px;
+    width:300px;
+    height:1200px;
+    background-color:#101010;
+    transition:left 0.3s;
+    cursor:pointer;
+    z-index: 9;
+}
+
+.sidebar.active {
+    left:0;
+    cursor:default;
+}
+
+.sidebar .leftmenu{
+    color: #fff;
+    height: 120px;
+    line-height: 120px;
+    font-size: 24px;
+    text-align: center;
+    align-items: center;
+    transition: .4s;
+}
+
+.sidebar .leftmenu:hover{
+    background-color: antiquewhite;
+    color: #101010;
+}
+
+.accbtn {
     width: 130px;
     padding : 10px;
-    border: 2px solid #101010;
+    border: 2px solid antiquewhite;
     border-radius: 4px;
     color: #101010;
+    background-color: antiquewhite;
     font-size: 16px;
     font-weight: 700;
     text-align: center;
@@ -15,23 +103,112 @@ body {
     box-sizing: border-box;
     display: block;
     transition: .4s;
+
 }
 
-.btn:hover{
+.accbtn:hover{
     background-color: #101010;
-    color: #fff;
+    color: antiquewhite;
 }
 
-.btn.btn--white {
-    color: #fff;
-    border-color: #fff;
+.accbtn.btn--white {
+    color: #101010;
+    border-color: antiquewhite;
 }
 
-.btn.btn--white:hover {
+.accbtn.btn--white:hover {
     color: #333;
-    background-color: #fff;
+    background-color: antiquewhite;
+}
+
+.btn--more{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-color: #101010;
+
+}
+
+.accbtn .triger-btn-btn{
+    position: absolute;
 }
 
 img {
     display: block;
+}
+
+/* FOOTER */
+footer{
+    background-color: #101010;
+    border-top: 1px solid #333;
+}
+
+footer .inner {
+    padding: 0px 0 60px 0;
+}
+
+footer .inner .logo{
+    width: 350px;
+    height: 200px;
+}
+
+footer .menu {
+    display: flex;
+    justify-content: center;    
+}
+
+footer .menu li{
+    position: relative;
+}
+
+footer .menu li::before{
+    content: "";
+    width: 3px;
+    height: 3px;
+    background-color: #555;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;
+    margin: auto;
+}
+
+footer .menu li:last-child::before{
+    display: none;
+}
+
+footer .menu li a {
+    color: #ccc;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 15px;
+    display: block;
+}
+
+footer .copyright {
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 12px;
+}
+
+footer .logo {
+    margin: 30px auto 0;
+}
+
+#to-top {
+    width: 42px;
+    height: 42px;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 30px;
+    right: -100px;
+    z-index: 9;
 }

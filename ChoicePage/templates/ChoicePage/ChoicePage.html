@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Category</title>
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"/>
+        <script
+            src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+
+        <!--modal-->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="{% static 'css/common.css'%}">
+        <link rel="stylesheet" href="{% static 'css/modal.css'%}">
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+        <!-- LODASH -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+            integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+        <!-- GSAP & scrollToPlugin -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+            integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"
+            integrity="sha512-agNfXmEo6F+qcj3WGryaRvl9X9wLMQORbTt5ACS9YVqzKDMzhRxY+xjgO45HCLm61OwHWR1Oblp4QSw/SGh9SA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+        <!-- ScrollMagic -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"
+            integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+        <script defer="defer" src="{% static 'js/common.js'%}"></script>
+        <script defer="defer" src="{% static 'js/send.js'%}"></script>
+    </head>
+    <body>
+        <!-- HEADER -->
+        {% include "main/header.html" %}
+
+        <!-- SIDE BAR -->
+        {% include "main/sidebar.html" %}
+        <div>
+            <div class="title">추천 기능선택</div>
+            <hr style='width:400px'>
+            <div class='sub'>추천 받고싶은 기능을 선택해주세요</div>
+        </div>
+
+        <!-- 카카오 맵 현재 위치와 검색기능-->
+        <div style='display: flex;justify-content: center; margin-bottom : 40px'>
+            <table style='width:500px text-align: center;'>
+                <tr style='height:80px'>
+                    <td style='text-align: center;'>
+                        현재위치 :
+                    </td>
+                    <td  style='text-align: center; width:500px'>
+                        <a id='address_now' name='address_now'></a>
+                    </td>
+                    <td style = 'text-align: right; width:150px'>
+                        <button id='address_btn' class='is-btn is-btn--black' >주소검색</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div id="map" style="width:800px;height:300px;"></div>
+                    <td>
+                </tr>
+            </table>
+        </div>
+
+        <script
+            type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e01062d22699cae4f1c9892e35ba0072&libraries=services">
+        </script>
+        <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script type="text/javascript" src="{% static 'js/map.js' %}"></script>
+
+        <!-- 기본 카테고리-->
+        <div id = 'category_id'class='imgzip' style = "display:none">
+            <div id='re_cat' class='cop-tag' onclick="search_cat()">
+                카테고리 추천
+            </div>
+            <div id='re_cat' class='cop-tag' onclick="search_img()">
+                이미지 추천
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        {% include 'main/footer.html' %}
+</body>
+</html>

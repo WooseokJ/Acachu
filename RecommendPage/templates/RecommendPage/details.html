@@ -1,74 +1,60 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+      
   <!-- LODASH -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
   <!--modal-->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+  <!-- BOOTSTRAP CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
   <!-- CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/main.css'%}">
-	<link rel="stylesheet" href="{% static 'css/common.css'%}">
+  <link rel="stylesheet" href="{% static 'css/common.css'%}">
   <link rel="stylesheet" href="{% static 'css/modal.css'%}">
+  <link rel="stylesheet" href="{% static 'css/details.css'%}">
   
   <!-- SWIPER -->
   <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
   <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-
+    
   <!-- GSAP & scrollToPlugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js" integrity="sha512-agNfXmEo6F+qcj3WGryaRvl9X9wLMQORbTt5ACS9YVqzKDMzhRxY+xjgO45HCLm61OwHWR1Oblp4QSw/SGh9SA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
   <!-- ScrollMagic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+  
+  
   <script>history.scrollRestoration = "manual"</script>
-  <script defer src="{% static 'js/main.js'%}"></script>
   <script defer src="{% static 'js/common.js'%}"></script>
+  <script defer src="{% static 'js/details.js'%}"></script>
 
 </head>
-
 <body>
   <!-- HEADER -->
-  {% include "main/header.html" %}
-  <!-- SIDEBAR -->
-  {% include "main/sidebar.html" %}
-	<!-- RECOMMEND -->
-	<section class="recommend-store">
-		<div class="inner">
-		  <div class="medal">
-        <div class="front">
-          <img src="{% static 'image/medal_front.png'%}" alt=""/>
-        </div>
-        <div class="back">
-          <img src="{% static 'image/medal_back1.png'%}" alt="">
-          <a href="{% url 'choice'%}" class="accbtn">카페 추천</a>
-        </div>
-		  </div>
-		</div>
-	</section>
+  {% include 'main/header.html' %}
+  <!-- SIDE BAR -->
+  {% include 'main/sidebar.html' %}
 
-  <!-- CAFE IMAGE -->
-  <section class="cafe-image">
-    <div class="cafe-recommend">
+  <div class="w-background">
+    <!-- CAFE IMAGE -->
+    <section class="cafe-image">
       <div class="inner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
@@ -90,20 +76,81 @@
           </div>
         </div>
       </div>
-      <div class="swiper-prev">
-        <div class="material-icons">arrow_back</div>
-      </div>
-      <div class="swiper-next">
-        <div class="material-icons">arrow_forward</div>
-      </div>
-    </div>
-    <div class="cafe-recommend-title">
-      <div class="title">어디가지 카페 추천</div>
-      <p>대충 프로젝트 소개하는 글</p>
-    </div>
-  </section> 
+    </section>
   
+    <section class="cafe-info">
+      <div class="title">
+        <div class="store-name">점포명</div>
+        <div class="bookmark">
+          <div class="material-icons">star</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="store-info">
+          <div class="address">
+            제주 제주시 구좌읍 일주동로 2806 2층
+          </div>
+          <hr>
+          <div class="business-hour">
+            10:00 - 18:00, 정기휴무 : 토, 일
+          </div>
+          <hr>
+          <div class="cafe-tag">
+            태그1, 태그2, 태그3
+          </div>
+          <hr>
+          <div class="content">
+            카페설명 ~~~
+          </div>
+        </div>
+        <div id="map"></div>
+        <!-- 카카오지도 API -->
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e01062d22699cae4f1c9892e35ba0072&libraries=services"></script>
+        <script src="{% static 'js/detailsmap.js'%}"></script>
+      </div>
+    </section>
+  
+    <!-- REVIEW -->
+    <section class="review">
+      <div class="review-title">Review</div>
+      <div class="div-center">
+        <div class="review-write">
+          <form action="">
+            <textarea name="" id="" cols="30" rows="5"></textarea>
+            <div class="submit accbtn">리뷰등록</div>
+          </form>
+        </div>
+        <div class="review-board">
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          <div>댓글댓글</div>
+          <hr>
+          
+        </div>
+      </div>
+    </section>
+  </div>
   <!-- FOOTER -->
-  {% include "main/footer.html" %}
+  {% include 'main/footer.html' %}
 </body>
 </html>

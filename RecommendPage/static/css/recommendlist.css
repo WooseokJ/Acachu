@@ -1,0 +1,57 @@
+
+#recommendinner{
+    width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: 100px;
+}
+
+hr {
+    margin-bottom: 30px;
+}
+.inner .title{
+    margin-top: 50px;
+    font-size: 40px;
+}
+
+.inner .recommendlist {
+    position: relative;
+}
+
+.inner .recommendlist .row{
+    flex-flow: row wrap;
+    align-content: flex-start;
+}
+
+.inner .recommendlist .row .container{
+    width: 300px;
+    height: 350px;
+    overflow: hidden;
+    border: 2px solid #101010;
+    border-radius: 10%;
+    display: block;
+    margin-bottom: 50px;
+    padding: 0;
+    box-shadow: 3px 3px 3px 3px gray;
+}
+
+.inner .recommendlist .container img{
+    width: 300px;
+    height: 200px;
+}
+
+.inner .recommendlist .container .content{
+    background-color: #fff;
+    height: 150px;
+}
+
+.inner .recommendlist .container .cafename{
+    font-size: 25px;
+    text-align: center;
+    padding: 12px;
+}
+
+.inner .recommendlist .container .content p{
+    padding: 12px;
+    font-size: 15px;
+}
