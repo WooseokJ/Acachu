@@ -23,8 +23,6 @@ kakao.maps.event.addListener(map, 'zoom_changed', function() {
     
     // 지도의 현재 레벨을 얻어옵니다
     var level = map.getLevel();
-    
-    
 });
 
 // 클릭시 위치 표시
@@ -113,8 +111,18 @@ window.onload = function(){
                         var locPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
                         Marker(locPosition , status,result);
                     }
+                    else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                        alert('검색 결과가 존재하지 않습니다.');
+                        return;
+                    }
                 });
             }
         }).open();
     });
+}
+
+// 주소 검색
+function search(){
+    var address = document.getElementById("address_now").text;
+    console.log(address);
 }
