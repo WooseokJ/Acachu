@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from main import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
@@ -25,5 +24,6 @@ urlpatterns = [
     path('',include('main.urls')),
     path('', include('CategoryPage.urls')),
     path('', include('ChoicePage.urls')),
-    path('', include('AuthManagedPage.urls'))
+    path('', include('AuthManagedPage.urls')),
+    
 ]

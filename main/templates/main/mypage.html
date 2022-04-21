@@ -94,10 +94,7 @@
                         <h6 class="mb-0">이메일</h6>
                       <span class="text-secondary">kt@aivle.kt.co.kr</span>
                   </li>
-                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 class="mb-0">사업자등록번호</h6>
-                      <span class="text-secondary">930-2894-2894</span>
-                  </li>
+
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <div class="row-10">
                       {% comment %} <button class="btn btn-primary"><div class="send">수정</div></button> {% endcomment %}
@@ -139,9 +136,6 @@
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0">이메일</h6>
                   </li>
-                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 class="mb-0">사업자등록번호</h6>
-                  </li>
                 </ul>
               </div>
                       <div class="row"></div>
@@ -169,19 +163,20 @@
                 </div>
                 <div class="input-form-backgroud row">
                 <div class="input-form col-md-12 mx-auto">
-                  <h4 class="mb-3">업주 등록</h4>
+                  <h4 class="mb-3">회원 탈퇴</h4>
                     <form method="post" class="validation-form" novalidate>
                       {% csrf_token %}
                       <div class="mb-3">
-                          <form method='post'>
-                    <div class='imgzip'>
-                        <input type="file" id="upload_file1" class = 'real-upload' accept="image/*" required multiple style="display: none;">
-                        <img src="{% static 'image/profile_img.jpg'%}" id="img_section1" class='upload img'></div>
-                    </form>
+                        <label for="password1">비밀번호</label>
+                        <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력해주세요." required>
+                        <div class="invalid-feedback">
+                            비밀번호를 입력해주세요.
+                        </div>
                       </div>
                       <div class="row"></div>
                       <div>
-                        <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank" onclick="window.open('업주용페이지');">업주등록</button>
+                          <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank" onclick="window.open('/authmanaged');">업주등록</button>
+
                       </div>
                     </form> 
                   </div>
@@ -189,7 +184,7 @@
             </div>  
           </div>
         </div>
-
+          
           
         <!-- 회원탈퇴 Modal HTML -->
         <div id="delete_modal" class="modal fade">
