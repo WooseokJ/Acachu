@@ -19,10 +19,8 @@ from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
-    path('', include('ImageSearchPage.urls')),
     path('', include('RecommendPage.urls')),
     path('',include('main.urls')),
-    path('', include('CategoryPage.urls')),
     path('', include('ChoicePage.urls')),
     path('', include('AuthManagedPage.urls')),
     
