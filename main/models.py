@@ -1,17 +1,18 @@
+from distutils.command.upload import upload
 from django.db import models
 
 # Create your models here.
 class Auth(models.Model):
-    auth_id = models.IntegerField(db_column='Auth_id', primary_key=True)  # Field name made lowercase.
+    auth_id = models.AutoField(db_column='Auth_id', primary_key=True)  # Field name made lowercase.
     auth_name = models.CharField(db_column='Auth_name', max_length=10)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'auth'
 
 
 class AuthBoard(models.Model):
-    ab_num = models.IntegerField(db_column='Ab_num', primary_key=True)  # Field name made lowercase.
+    ab_id = models.AutoField(db_column='Ab_id', primary_key=True)  # Field name made lowercase.
     ab_title = models.CharField(db_column='Ab_title', max_length=255)  # Field name made lowercase.
     ab_content = models.CharField(db_column='Ab_content', max_length=3000)  # Field name made lowercase.
     ab_reg_date = models.DateTimeField(db_column='Ab_reg_date')  # Field name made lowercase.
@@ -19,44 +20,44 @@ class AuthBoard(models.Model):
     user_id = models.IntegerField(db_column='User_id')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'auth_board'
 
 
 class Bookmark(models.Model):
-    bookmark_id = models.IntegerField(db_column='Bookmark_id', primary_key=True)  # Field name made lowercase.
+    bookmark_id = models.AutoField(db_column='Bookmark_id', primary_key=True)  # Field name made lowercase.
     user_id = models.IntegerField(db_column='User_id')  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'bookmark'
 
 
 class Cafepicture(models.Model):
-    cafepicture_id = models.IntegerField(db_column='Cafepicture_id', primary_key=True)  # Field name made lowercase.
+    cafepicture_id = models.AutoField(db_column='Cafepicture_id', primary_key=True)  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
     cafepicture_url = models.CharField(db_column='Cafepicture_url', max_length=1000)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cafepicture'
 
 
 class Reply(models.Model):
-    reply_id = models.IntegerField(db_column='Reply_id', primary_key=True)  # Field name made lowercase.
+    reply_id = models.AutoField(db_column='Reply_id', primary_key=True)  # Field name made lowercase.
     reply_content = models.CharField(db_column='Reply_content', max_length=300)  # Field name made lowercase.
     reply_date = models.DateTimeField(db_column='Reply_date')  # Field name made lowercase.
     user_id = models.IntegerField(db_column='User_id')  # Field name made lowercase.
-    ab_num = models.IntegerField(db_column='Ab_num')  # Field name made lowercase.
+    ab_id = models.IntegerField(db_column='Ab_id')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'reply'
 
 
 class Review(models.Model):
-    review_id = models.IntegerField(db_column='Review_id', primary_key=True)  # Field name made lowercase.
+    review_id = models.AutoField(db_column='Review_id', primary_key=True)  # Field name made lowercase.
     user_id = models.IntegerField(db_column='User_id')  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
     review_content = models.CharField(db_column='Review_content', max_length=300)  # Field name made lowercase.
@@ -64,12 +65,12 @@ class Review(models.Model):
     review_mod_date = models.DateTimeField(db_column='Review_mod_date', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'review'
 
 
 class Store(models.Model):
-    store_id = models.IntegerField(db_column='Store_id', primary_key=True)  # Field name made lowercase.
+    store_id = models.AutoField(db_column='Store_id', primary_key=True)  # Field name made lowercase.
     store_name = models.CharField(db_column='Store_name', max_length=50)  # Field name made lowercase.
     store_content = models.CharField(db_column='Store_content', max_length=1000, blank=True, null=True)  # Field name made lowercase.
     store_businesshour = models.CharField(db_column='Store_businesshour', max_length=50, blank=True, null=True)  # Field name made lowercase.
@@ -79,51 +80,66 @@ class Store(models.Model):
     store_roadnum = models.CharField(db_column='Store_roadnum', max_length=50)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'store'
 
 
 class StoreAuth(models.Model):
-    store_auth = models.IntegerField(db_column='Store_Auth', primary_key=True)  # Field name made lowercase.
+    store_auth_id = models.IntegerField(db_column='Store_Auth_id', primary_key=True)  # Field name made lowercase.
     user_id = models.IntegerField(db_column='User_id')  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'store_auth'
 
 
 class StoreTag(models.Model):
-    store_tag_id = models.IntegerField(db_column='Store_Tag_id', primary_key=True)  # Field name made lowercase.
+    store_tag_id = models.AutoField(db_column='Store_Tag_id', primary_key=True)  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
     tag_id = models.IntegerField(db_column='Tag_id')  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'store_tag'
 
 
 class Tag(models.Model):
-    tag_id = models.IntegerField(db_column='Tag_id', primary_key=True)  # Field name made lowercase.
+    tag_id = models.AutoField(db_column='Tag_id', primary_key=True)  # Field name made lowercase.
     tag_name = models.CharField(db_column='Tag_name', max_length=20)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tag'
 
 
 class User(models.Model):
-    user_num = models.IntegerField(db_column='User_num', primary_key=True)  # Field name made lowercase.
-    user_id = models.CharField(db_column='User_id', max_length=20)  # Field name made lowercase.
+    user_id = models.AutoField(db_column='User_id', primary_key=True)  # Field name made lowercase.
+    user_account = models.CharField(db_column='User_account', max_length=20)  # Field name made lowercase.
     user_password = models.CharField(db_column='User_password', max_length=20)  # Field name made lowercase.
     user_nickname = models.CharField(db_column='User_nickname', max_length=20)  # Field name made lowercase.
     user_email = models.CharField(db_column='User_email', max_length=50, blank=True, null=True)  # Field name made lowercase.
     user_profileurl = models.CharField(db_column='User_profileurl', max_length=1000, blank=True, null=True)  # Field name made lowercase.
     auth_id = models.IntegerField(db_column='Auth_id')  # Field name made lowercase.
+    
+
+    
 
     def __str__(self):
-        return self.user_id
+        return self.user_account
     
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user'
+        
+class Adj(models.Model):
+    adj_id = models.AutoField(primary_key=True)
+    first = models.CharField(max_length=10, null=False)
+    class Meta:
+        db_table = 'adj'
+        
+class Noun(models.Model):
+    noun_id = models.AutoField(primary_key = True)
+    second = models.CharField(max_length=10, null=False)
+    class Meta:
+        db_table = 'noun'
