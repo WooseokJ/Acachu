@@ -1,4 +1,4 @@
-
+{}
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
     center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -12,7 +12,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('제주 제주시 구좌읍 일주동로 2806 2층', function(result, status) {
+geocoder.addressSearch(addr, function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
@@ -27,7 +27,7 @@ geocoder.addressSearch('제주 제주시 구좌읍 일주동로 2806 2층', func
 
     // 인포윈도우로 장소에 대한 설명을 표시합니다
     var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">점포명</div>'
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">'+ storename+ '</div>'
     });
     infowindow.open(map, marker);
 
