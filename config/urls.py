@@ -18,7 +18,6 @@ from django.urls import path,include
 from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ImageSearchPage.urls')),
     path('', views.main, name='main'),
     path('', include('RecommendPage.urls')),
     path('',include('main.urls')),
