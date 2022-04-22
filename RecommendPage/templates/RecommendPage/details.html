@@ -40,7 +40,8 @@
   <!-- ScrollMagic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
-  
+  <script type="text/javascript"> var storename = '{{store.store_name}}'</script>
+  <script type="text/javascript"> var addr = '{{store.store_roadnum}}'</script>
   <script>history.scrollRestoration = "manual"</script>
   <script defer src="{% static 'js/common.js'%}"></script>
   <script defer src="{% static 'js/details.js'%}"></script>
@@ -58,21 +59,11 @@
       <div class="inner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
+            {% for image in images %}
             <div class="swiper-slide">
-              <img src="{% static 'image\cp1.jpg'%}" alt=""/>
+              <img src='{% static "image/KT본사.jpg" %}' alt=""/>
             </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp2.jpg'%}" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp3.jpg'%}" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp4.jpg'%}" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp5.jpg'%}" alt=""/>
-            </div>        
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -80,7 +71,9 @@
   
     <section class="cafe-info">
       <div class="title">
-        <div class="store-name">점포명</div>
+        <div class="store-name">
+          {{store.store_name}}
+        </div>
         <div class="bookmark">
           <div class="material-icons">star</div>
         </div>
@@ -88,11 +81,11 @@
       <div class="row">
         <div class="store-info">
           <div class="address">
-            제주 제주시 구좌읍 일주동로 2806 2층
+            {{store.store_roadnum}}
           </div>
           <hr>
           <div class="business-hour">
-            10:00 - 18:00, 정기휴무 : 토, 일
+            {{store.store_businesshour}}
           </div>
           <hr>
           <div class="cafe-tag">
@@ -100,7 +93,7 @@
           </div>
           <hr>
           <div class="content">
-            카페설명 ~~~
+            {{store.store_content}}
           </div>
         </div>
         <div id="map"></div>
@@ -115,37 +108,16 @@
       <div class="review-title">Review</div>
       <div class="div-center">
         <div class="review-write">
-          <form action="">
-            <textarea name="" id="" cols="30" rows="5"></textarea>
+          <form action="{% url 'details'%}" method="post" id="replyform" >
+            <textarea name="reply_content" id="" cols="30" rows="5"></textarea>
             <div class="submit accbtn">리뷰등록</div>
           </form>
         </div>
         <div class="review-board">
-          <div>댓글댓글</div>
+          {% for review in reviews %}
+          <div>{{review.review_content}}</div>
           <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          <div>댓글댓글</div>
-          <hr>
-          
+          {% endfor %}
         </div>
       </div>
     </section>

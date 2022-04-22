@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import CharField
 
 # Create your models here.
 class Auth(models.Model):
@@ -25,6 +24,7 @@ class AuthBoard(models.Model):
 
 
 class Bookmark(models.Model):
+    bookmark_id = models.IntegerField(db_column='Bookmark_id', primary_key=True)  # Field name made lowercase.
     user_id = models.IntegerField(db_column='User_id')  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
 
@@ -34,8 +34,9 @@ class Bookmark(models.Model):
 
 
 class Cafepicture(models.Model):
+    cafepicture_id = models.IntegerField(db_column='Cafepicture_id', primary_key=True)  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
-    cafepictrue_url = models.CharField(db_column='Cafepictrue_url', max_length=1000)  # Field name made lowercase.
+    cafepicture_url = models.CharField(db_column='Cafepicture_url', max_length=1000)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -75,7 +76,7 @@ class Store(models.Model):
     store_sinum = models.CharField(db_column='Store_sinum', max_length=10)  # Field name made lowercase.
     store_sggnum = models.CharField(db_column='Store_sggnum', max_length=10)  # Field name made lowercase.
     store_emdnum = models.CharField(db_column='Store_emdnum', max_length=10)  # Field name made lowercase.
-    store_roadnum = models.CharField(db_column='Store_roadnum', max_length=10)  # Field name made lowercase.
+    store_roadnum = models.CharField(db_column='Store_roadnum', max_length=50)  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -83,6 +84,7 @@ class Store(models.Model):
 
 
 class StoreAuth(models.Model):
+    store_auth = models.IntegerField(db_column='Store_Auth', primary_key=True)  # Field name made lowercase.
     user_id = models.IntegerField(db_column='User_id')  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
 
@@ -92,6 +94,7 @@ class StoreAuth(models.Model):
 
 
 class StoreTag(models.Model):
+    store_tag_id = models.IntegerField(db_column='Store_Tag_id', primary_key=True)  # Field name made lowercase.
     store_id = models.IntegerField(db_column='Store_id')  # Field name made lowercase.
     tag_id = models.IntegerField(db_column='Tag_id')  # Field name made lowercase.
 

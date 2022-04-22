@@ -3,5 +3,5 @@ from RecommendPage import views
 
 urlpatterns = [
     path('recommendlist/', views.recommendList),
-    path('details/', views.details),
+    path('details/', views.details, name='details'),
 ]
