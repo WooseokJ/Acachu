@@ -23,3 +23,6 @@ bookmark.addEventListener('click', function(){
         bookmark.classList.remove('active')
     }
 });
+
+document.querySelector('#reviewForm input[name=store_id]').value = store_id
+document.querySelector('#reviewForm input[name=user_id]').value = user_id
