@@ -63,7 +63,8 @@
             referrerpolicy="no-referrer"></script>
 
         <script defer="defer" src="{% static 'js/common.js'%}"></script>
-
+        <script defer="defer" src="{% static 'js/send.js'%}"></script>
+        <script defer="defer" src="{% static 'js/receive.js'%}"></script>
     </head>
     <body>
         <!-- HEADER -->
@@ -78,25 +79,39 @@
         </div>
 
         <!-- 기본 카테고리-->
-        <form method='post'>
-            <div class='imgzip'>
-                <div class='cp-tag' onclick="location.href='www.google.com'">
+        <form method='get' style='justify-content: center;display:flex;'>
+            <div class='imgzip' style='width: 1000px;display:flex; flex-flow:wrap; '>
+                <div class='cp-tag' onclick="test('자연 친화적(natural)')">
                     자연 친화적(natural)
                 </div>
-                <div class='cp-tag' onclick="location.href='www.google.com'">
+                <div class='cp-tag' onclick="test('모던 빈티지')">
                     모던 빈티지
                 </div>
-                <div class='cp-tag' onclick="location.href='www.google.com'">
+                <div class='cp-tag' onclick="test('인더스트리얼 빈티지')">
                     인더스트리얼 빈티지
                 </div>
-                <div class='cp-tag' onclick="location.href='www.google.com'">
+                <div class='cp-tag' onclick="test('클래식')">
                     클래식
                 </div>
-                <div class='cp-tag' onclick="location.href='www.google.com'">
+                <div class='cp-tag' onclick="test('기타 이색 카페')">
                     기타 이색 카페
+                </div>
+                <div class='cp-tag' onclick="test('유아동반')">
+                    유아동반
+                </div>
+                <div class='cp-tag' onclick="test('애견동반')">
+                    애견동반
+                </div>
+                <div class='cp-tag' onclick="test('카공')">
+                    카공
+                </div>
+                <div class='cp-tag' onclick="test('디저트')">
+                    디저트
                 </div>
             </div>
         </form>
+
+        <script type="text/javascript" src="{% static 'js/send.js' %}"></script>
 
         <!-- FOOTER -->
         {% include 'main/footer.html' %}

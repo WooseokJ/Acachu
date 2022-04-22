@@ -121,6 +121,9 @@ class User(models.Model):
     user_profileurl = models.CharField(db_column='User_profileurl', max_length=1000, blank=True, null=True)  # Field name made lowercase.
     auth_id = models.IntegerField(db_column='Auth_id')  # Field name made lowercase.
 
+    def __str__(self):
+        return self.user_id
+    
     class Meta:
         managed = False
         db_table = 'user'
