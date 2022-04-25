@@ -13,7 +13,7 @@ class Auth(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(db_column='User_id', primary_key=True)  # Field name made lowercase.
-    user_name = models.CharField(db_column='User_account', max_length=20)  # Field name made lowercase.
+    user_account = models.CharField(db_column='User_account', max_length=20)  # Field name made lowercase.
     user_password = models.CharField(db_column='User_password', max_length=20)  # Field name made lowercase.
     user_nickname = models.CharField(db_column='User_nickname', max_length=20)  # Field name made lowercase.
     user_email = models.CharField(db_column='User_email', max_length=50, blank=True, null=True)  # Field name made lowercase.

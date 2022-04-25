@@ -51,90 +51,15 @@
     <hr>
     <div class="recommendlist">
       <div class="row">
+        {% for store in stores %}
         <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
+          <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
+          <div class="content">
+            <div class="cafename">{{store.store_name}}</div>
+            <p>{{store.store_content}}</p>
+          </div>
         </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
-        <div class="container">
-            <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
-            <div class="content">
-              <div class="cafename">카페이름</div>
-              <p >카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명카페 설명</p>
-            </div>
-        </div>
+        {% endfor %}
         
       </div>
     </div>

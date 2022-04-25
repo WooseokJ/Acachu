@@ -40,10 +40,18 @@
   <!-- ScrollMagic -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   
-  <script type="text/javascript"> var storename = '{{store.store_name}}'; </script>
-  <script type="text/javascript"> var addr = '{{store.store_roadnum}}'; </script>
-  <script type="text/javascript"> var store_id = '{{store.store_id}}'; </script>
-  <script type="text/javascript"> var user_id = 1; </script>
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+  <script type="text/javascript"> 
+    var storename = '{{store.store_name}}'; 
+    var addr = '{{store.store_roadnum}}'; 
+    var store_id = '{{store.store_id}}'; 
+    var user_id = 1;
+    var reg_url = '{% url "reg_bookmark"%}';
+    var del_url = '{% url "del_bookmark"%}';
+  </script>
+  <script type="text/javascript">  </script>
   <script defer src="{% static 'js/common.js'%}"></script>
   <script defer src="{% static 'js/details.js'%}"></script>
 
@@ -101,7 +109,11 @@
           </div>
           <hr>
           <div class="cafe-tag">
-            태그1, 태그2, 태그3
+            {% for tag in tags %}
+            <div class="tagname">
+              {{tag.tag.tag_name}}
+            </div>
+            {% endfor %}
           </div>
           <hr>
           <div class="content">
