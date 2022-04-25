@@ -34,7 +34,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script defer src="{% static 'js/common.js'%}"></script>
-        <script defer="defer" src="{% static 'js/receive.js'%}"></script>
+        <script defer="defer" src="{% static 'js/send.js'%}"></script>
     </head>
 <body>
 	<!-- HEADER -->
@@ -48,92 +48,77 @@
         <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
     </div>
 
-    <form method='post'>
-        <div class='imgzip'>
-            <input type="file" id="upload_file1" class = 'real-upload' accept="image/*" required multiple style="display: none;">
-            <img src="{% static 'img/uppic.png'%}" id="img_section1" class='upload img'>
-            
-            <!-- 다중 이미지-->
-            <input type="file" id="upload_file2" class = 'real-upload1' accept="image/*" required multiple style="display: none;">
-            <img src="{% static 'img/uppic.png'%}" id="img_section2" class='upload1 img'>
+    <form action='/recommendlist/' method='get' enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- 이미지 세개 다채워야 함-->
+        <!-- 주소 -->
+        <input type='hidden' id='sido' name='sido' value="{{ sido }}">
+        <input type='hidden' id='sigg' name='sigg' value="{{ sigg }}">
+        <input type='hidden' id='emdong' name='emdong' value="{{ emdong }}">
+        <input type='hidden' id="adress" name='adress' value="{{ road_address }}">
 
-            <input type="file" id="upload_file3" class = 'real-upload2' accept="image/*" required multiple style="display: none;">
-            <img src="{% static 'img/uppic.png'%}" id="img_section3" class='upload2 img'>
+        <!-- 이미지 -->
+        <input type="file" id="upload_file1" class = 'real-upload' accept="image/*" required multiple style="display: none;">
+        <img src="{% static 'img/uppic.png'%}" id="img_section1" class='upload img'>
+        <input id='img' name='img'>
 
-            <script>
-                const realUpload = document.querySelector('.real-upload');
-                const realUpload1 = document.querySelector('.real-upload1');
-                const realUpload2 = document.querySelector('.real-upload2');
+        <!-- 파일 선택 및 미리보기-->
+        <script>
+            const realUpload = document.querySelector('.real-upload');
+            const upload = document.querySelector('.upload');
+            var test = document.querySelector('#img');
+            // 파일이 이미지가 아니면 경고
+            upload.addEventListener('click', () => realUpload.click());
+            const reader = new FileReader();
 
-                const upload = document.querySelector('.upload');
-                const upload1 = document.querySelector('.upload1');
-                const upload2 = document.querySelector('.upload2');
-            
-                // 파일이 이미지가 아니면 경고
-                
+            // 첫 번째 사진
+            reader.onload = (readerEvent) => {
+                document.querySelector("#img_section1").setAttribute("src", readerEvent.target.result);
+                //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+            };
+    
+            document.querySelector("#upload_file1").addEventListener("change", (changeEvent) => {
+                //upload_file 에 이벤트리스너를 장착
+    
+                const imgFile = changeEvent.target.files[0];
+                reader.readAsDataURL(imgFile);
+                //업로드한 이미지의 URL을 reader에 등록
+            });
+        </script>
 
-                upload.addEventListener('click', () => realUpload.click());
-                upload1.addEventListener('click', () => realUpload1.click());
-                upload2.addEventListener('click', () => realUpload2.click());
-            </script>
-            
-            <!-- 파일 선택 및 미리보기-->
-            <script>
-                const reader = new FileReader();
-                const reader1 = new FileReader();
-                const reader2 = new FileReader();
-
-                // 첫 번째 사진
-                reader.onload = (readerEvent) => {
-                    document.querySelector("#img_section1").setAttribute("src", readerEvent.target.result);
-                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
-                };
-        
-                document.querySelector("#upload_file1").addEventListener("change", (changeEvent) => {
-                    //upload_file 에 이벤트리스너를 장착
-        
-                    const imgFile = changeEvent.target.files[0];
-                    reader.readAsDataURL(imgFile);
-                    //업로드한 이미지의 URL을 reader에 등록
-                })
-
-                // 두 번째 사진
-                reader1.onload = (readerEvent) => {
-                    document.querySelector("#img_section2").setAttribute("src", readerEvent.target.result);
-                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
-                };
-        
-                document.querySelector("#upload_file2").addEventListener("change", (changeEvent) => {
-                    //upload_file 에 이벤트리스너를 장착
-        
-                    const imgFile = changeEvent.target.files[0];
-                    reader1.readAsDataURL(imgFile);
-                    //업로드한 이미지의 URL을 reader에 등록
-                })
-
-                //세 번째 사진
-                reader2.onload = (readerEvent) => {
-                    document.querySelector("#img_section3").setAttribute("src", readerEvent.target.result);
-                    //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
-                };
-        
-                document.querySelector("#upload_file3").addEventListener("change", (changeEvent) => {
-                    //upload_file 에 이벤트리스너를 장착
-        
-                    const imgFile = changeEvent.target.files[0];
-                    reader2.readAsDataURL(imgFile);
-                    //업로드한 이미지의 URL을 reader에 등록
-                })
-            </script>
-        </div>
-
+        <!-- 이미지 검색-->
         <div class='is-btn_div'>
-            <div class="is-btn is-btn--black">
-                <div class="send">카페 검색</div>
-            </div>
+            <input type="submit" class="is-btn is-btn--black" type="button" value='카페 검색'>
         </div>
     </form>
+        
+    <div class="container">
+        <div class="image-upload" id="image-upload">
 
+            <form method="post" enctype="multipart/form-data">
+                <div class="button">
+                    <label for="chooseFile">
+                        👉 CLICK HERE! 👈
+                    </label>
+                </div>
+                <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+            </form>
+
+            <div class="fileContainer">
+                <div class="fileInput">
+                    <p>FILE NAME: </p>
+                    <p id="fileName"></p>
+                </div>
+                <div class="buttonContainer">
+                    <div class="submitButton" id="submitButton">SUBMIT</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="image-show" id="image-show"></div>
+    </div>
+
+    <script src="js/img.js"></script>
     <!-- FOOTER -->
     {% include 'main/footer.html' %}
 </body>
