@@ -1,20 +1,14 @@
-var address;
-
-// 주소 검색
-function search_cat(){
-    address = document.getElementById("address_now").text;
-    location.href = `category?${address}`;
+function test(url){ // 위치
+  var send = document.cateory_form;
+  send.action=url;
+  send.method='post';
+  send.submit();
 }
 
-function search_img(){
-    address = document.getElementById("address_now").text;
-    console.log(address); // 주소 값
-
-    location.href = `imagesearch?${address}`;
-}
-
-function test(tt){
-  console.log(address); // 주소 값
-  //location.href = `/../recommendlist/?${tt+address}`;
-  //window.location.href = `/./choice/imagesearch?${tt+'/'+address}`; // test
+function SendVal(val){
+  var send = document.cateory_form;
+  document.getElementById("category").value = val;
+  send.action='/recommendlist/'
+  send.method='post';
+  send.submit();
 }
