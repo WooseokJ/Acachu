@@ -38,11 +38,6 @@ def main(request):
                                     user_nickname=nick)
                 user.save()
                 return render(request,'main/index.html')
-            
-        
-        
-        
-        
     else:
         return render(request,'main/index.html')
 
