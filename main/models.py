@@ -13,7 +13,7 @@ class Auth(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(db_column='User_id', primary_key=True)  # Field name made lowercase.
-    user_name = models.CharField(db_column='User_account', max_length=20)  # Field name made lowercase.
+    user_account = models.CharField(db_column='User_account', max_length=20)  # Field name made lowercase.
     user_password = models.CharField(db_column='User_password', max_length=20)  # Field name made lowercase.
     user_nickname = models.CharField(db_column='User_nickname', max_length=20)  # Field name made lowercase.
     user_email = models.CharField(db_column='User_email', max_length=50, blank=True, null=True)  # Field name made lowercase.
@@ -133,3 +133,18 @@ class Bookmark(models.Model):
     class Meta:
         managed = True
         db_table = 'bookmark'
+
+class Adj(models.Model):
+    adj_id = models.AutoField(primary_key=True)
+    first = models.CharField(max_length=10, null=False)
+    class Meta:
+        db_table = 'adj'
+        managed = True
+
+
+class Noun(models.Model):
+    noun_id = models.AutoField(primary_key = True)
+    second = models.CharField(max_length=10, null=False)
+    class Meta:
+        db_table = 'noun'
+        managed = True
