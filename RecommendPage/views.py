@@ -17,7 +17,7 @@ def recommendList(request):
 def details(request):
     if request.method == 'GET':
         store_id = request.GET.get('store_id','0')
-        user_id = request.GET.get('user_id', '0')
+        user_id = request.session['user_id']
         store = Store.objects.get(store_id = store_id)
         user = User.objects.get(user_id=user_id)
         review = Review.objects.filter(store_id = store_id)
@@ -31,6 +31,7 @@ def details(request):
 
         return render(request,'RecommendPage/details.html',
                       {'store':store,
+                       'user':user,
                       'reviews':review,
                       'images':images,
                       'formreview':formreview,
@@ -51,7 +52,7 @@ def new_review(request):
                                 review_reg_date = datetime.now(),
                                 review_mod_date = datetime.now())
 
-    return redirect('/details/?store_id=' + form.data['store'] + '&user_id=' + form.data['user'])
+    return redirect('/details/?store_id=' + form.data['store'])
 
 @csrf_exempt
 def reg_bookmark(request):
