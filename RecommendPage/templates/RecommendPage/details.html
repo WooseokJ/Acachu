@@ -80,9 +80,15 @@
         <div class="store-name">
           {{store.store_name}}
         </div>
+        {% if bookmark == True %}
+        <div class="bookmark active">
+          <div class="material-icons">star</div>
+        </div>
+        {% else %}
         <div class="bookmark">
           <div class="material-icons">star</div>
         </div>
+        {% endif %}
       </div>
       <div class="row">
         <div class="store-info">
@@ -116,8 +122,8 @@
         <div class="review-write">
           <form action="{% url 'new_review' %}" method="post" id="reviewForm">
             {% csrf_token %}
-            {{formreview.store_id.as_hidden}}
-            {{formreview.user_id.as_hidden}}
+            {{formreview.store.as_hidden}}
+            {{formreview.user.as_hidden}}
             <textarea name="review_content" id="" cols="30" rows="5"></textarea>
             <button type="submit" class="submit accbtn">리뷰등록</button>
           </form>
