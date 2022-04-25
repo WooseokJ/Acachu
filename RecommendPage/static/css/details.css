@@ -112,6 +112,24 @@
     margin-top: 15px;
 }
 
+.cafe-info .store-info .cafe-tag{
+    display: flex;
+    flex-flow: row wrap;
+    height: auto;
+}
+
+.cafe-info .store-info .cafe-tag .tagname{
+    background-color: aliceblue;
+    height: 40px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 15px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 5px rgb(107, 107, 107);
+
+}
+
+
 .cafe-info #map{
     border: 2px solid black;
     border-radius: 15px;

@@ -107,13 +107,16 @@
         <script type="text/javascript" src="{% static 'js/map.js' %}"></script>
 
         <!-- 기본 카테고리-->
-        <div id = 'category_id'class='imgzip' style = "display:none">
-            <div id='re_cat' class='cop-tag' onclick="search_cat()">
-                카테고리 추천
-            </div>
-            <div id='re_cat' class='cop-tag' onclick="search_img()">
-                이미지 추천
-            </div>
+        <div id = 'category_id' class='imgzip' style = "display:none ">
+            <form name= 'cateory_form' style='width: 1000px;display:flex; flex-flow:wrap; justify-content: center'>
+                {% csrf_token %}
+                <input type='hidden' id='sido' name='sido'>
+                <input type='hidden' id='sigg' name='sigg'>
+                <input type='hidden' id='emdong' name='emdong'>
+                <input type='hidden' id='road_address' name='road_address'>
+                <Button class = 'cp-tag' onclick="test('category/')">카테고리 추천</Button>
+                <Button class = 'cp-tag' onclick="test('imagesearch/')">이미지 추천</Button>
+            </form>
         </div>
 
         <!-- FOOTER -->

@@ -19,11 +19,8 @@ def main(request):
         if login_id !=None:
             try:
                 m = User.objects.get(user_account=login_id, user_password=login_pw)
-                request.session['user_account'] = m.user_account
-                re_login_id=request.session.get('login_id')
-                re_login_pw=request.session.get('login_pw')
-                if (login_id==re_login_id) and (login_pw==re_login_pw):
-                    return render(request, 'main/mypage.html')
+                request.session['user_id'] = m.user_id
+                return render(request, 'main/mypage.html')
             except User.DoesNotExist as e:
                 return render(request,  'main/index.html')
         if account !=None:
