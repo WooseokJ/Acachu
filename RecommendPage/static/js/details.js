@@ -24,5 +24,5 @@ bookmark.addEventListener('click', function(){
     }
 });
 
-document.querySelector('#reviewForm input[name=store_id]').value = store_id
-document.querySelector('#reviewForm input[name=user_id]').value = user_id
+document.querySelector('#reviewForm input[name=store]').value = store_id
+document.querySelector('#reviewForm input[name=user]').value = user_id

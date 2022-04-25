@@ -122,8 +122,6 @@ class StoreTag(models.Model):
         db_table = 'store_tag'
 
 
-
-
 class Bookmark(models.Model):
     bookmark_id = models.AutoField(db_column='Bookmark_id', primary_key=True)  # Field name made lowercase.
     
@@ -133,6 +131,7 @@ class Bookmark(models.Model):
     class Meta:
         managed = True
         db_table = 'bookmark'
+
 
 class Adj(models.Model):
     adj_id = models.AutoField(primary_key=True)
