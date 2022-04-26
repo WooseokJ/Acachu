@@ -38,6 +38,9 @@
 
         <!--mypage-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>        
+
+   
+
 </head>
 
 <body>
@@ -83,10 +86,6 @@
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 class="mb-0">아이디</h6>
                       <span class="text-secondary">{{user_info.user_account}}</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                      <h6 class="mb-0">패스워드</h6>
-                      <span class="text-secondary">{{user_info.user_password}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0">이메일</h6>
@@ -157,33 +156,24 @@
 
         <!--업주등록 modal-->
         <div id="crn_modal" class="modal fade">
-          <div class="modal-dialog modal-login">
-            <div class="modal-content">
-                <div class="modal-header">				    
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div class="modal-dialog modal-newsletter">
+          <div class="modal-content">
+            <form action="/examples/actions/confirmation.php" method="post">
+              <div class="modal-header justify-content-center">
+                <div class="icon-box">
+                  <i class="material-icons">&#xE151;</i>
                 </div>
-                <div class="input-form-backgroud row">
-                <div class="input-form col-md-12 mx-auto">
-                  <h4 class="mb-3">업주 등록</h4>
-                    <!--<form method="post" class="validation-form" novalidate>-->
-                    
-                      <div class="mb-3">
-                        <label for="password1">비밀번호</label>
-                        <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력해주세요." required>
-                        <div class="invalid-feedback">
-                            비밀번호를 입력해주세요.
-                        </div>
-                      </div>
-                      <div class="row"></div>
-                      <div>
-                          <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank" onclick="window.open('/authmanaged');">업주등록</button>
-                      </div>
-                    <!--</form>--> 
-                  </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
               </div>
-            </div>  
+              <div class="modal-body text-center">
+                <h4>운영중인 지점이 없습니다.</h4>	
+                <p>현재 로그인하신 계정에 연결된 지점이 없습니다.</p>
+                <p>보다 자세한 사항은 aivle.kt.co.kr 로 문의해주세요.</p>
+              </div>
+            </form>			
           </div>
         </div>
+      </div>
           
           
         <!-- 회원탈퇴 Modal HTML -->
@@ -223,6 +213,7 @@
             </div>  
           </div>
         </div>
+      </div>
 
         
 
@@ -240,10 +231,7 @@
                 <div class="">
                   {% for bbookmark in bookmark_info %}
                   <hr class="mp-hr">
-                      <a class = "mp-link" href="/details/?store_id={{bbookmark.store_id}}">
-                            {{bbookmark.store.store_name}}
-                            
-                      </a> 
+                      <a class = "mp-link"  href="/details/?store_id={{bbookmark.store_id}}">{{bbookmark.store.store_name}}</a> 
                   {% endfor %}
                   
               </div>
@@ -261,7 +249,7 @@
                   
                   {% for review in review_info %}
                    <hr class="mp-hr">
-                    <a class = "mp-link" href="/details/?store_id={{review.store_id}}">
+                    <a class = "mp-link" style="display:inline-block; width:500px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" href="/details/?store_id={{review.store_id}}">
                           {{review.store.store_name}}) {{review.review_content}} 
                     </a>
                   {% endfor %}
