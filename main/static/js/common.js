@@ -76,20 +76,20 @@ loginbtn.addEventListener('click', function(){
     });
 })
 
-const signupbtn = document.getElementById('signup_btn')
-loginbtn.addEventListener('click', function(){
-    param = {
-        'csrfmiddlewaretoken': csrftoken,
-    }
-    $.ajax({
-        type: "POST",
-        url: 'logout',
-        data: JSON.stringify(param),
-        success: function (data) {
-            console.log("success")
-        },
-        error: function (e) {
-            console.log("error", e);
-        }
-    });
-})
+// const signupbtn = document.getElementById('signup_btn')
+// loginbtn.addEventListener('click', function(){
+//     param = {
+//         'csrfmiddlewaretoken': csrftoken,
+//     }
+//     $.ajax({
+//         type: "POST",
+//         url: 'logout',
+//         data: JSON.stringify(param),
+//         success: function (data) {
+//             console.log("success")
+//         },
+//         error: function (e) {
+//             console.log("error", e);
+//         }
+//     });
+// })
