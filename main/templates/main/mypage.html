@@ -123,7 +123,7 @@
                         <div class="input-group">
                             <input type="text"  class="form-control" id="User_nickname" name="User_nickname" placeholder="닉네임" required="required">
                         </div>
-                    </div>
+                       </div>
                     <div class="form-group">
                         <div class="input-group">
                             <input type="text" class="form-control"id="User_account" name="User_account" placeholder="아이디" required="required">
@@ -164,9 +164,9 @@
                 </div>
                 <div class="input-form-backgroud row">
                 <div class="input-form col-md-12 mx-auto">
-                  <h4 class="mb-3">회원 탈퇴</h4>
-                    <form method="post" class="validation-form" novalidate>
-                      {% csrf_token %}
+                  <h4 class="mb-3">업주 등록</h4>
+                    <!--<form method="post" class="validation-form" novalidate>-->
+                    
                       <div class="mb-3">
                         <label for="password1">비밀번호</label>
                         <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력해주세요." required>
@@ -177,9 +177,8 @@
                       <div class="row"></div>
                       <div>
                           <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank" onclick="window.open('/authmanaged');">업주등록</button>
-
                       </div>
-                    </form> 
+                    <!--</form>--> 
                   </div>
               </div>
             </div>  
@@ -205,6 +204,12 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                             <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="Password" required="required">
+                        </div>
+                        <label for="text">정말로삭제를 원하시면 삭제를 입력하세요.</label>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="text"  class="form-control"id="delete_confirm" name="delete_confirm" placeholder="삭제" required="required">
                         </div>
                     </div>
                       </div>
@@ -233,22 +238,17 @@
                   <!--즐겨찾기 리스트-->
                 </div>
                 <div class="">
-                  
                   {% for bbookmark in bookmark_info %}
                   <hr class="mp-hr">
                       <a class = "mp-link" href="/details/?store_id={{bbookmark.store_id}}">
-                            {{bbookmark.store_id}}
+                            {{bbookmark.store.store_name}}
                             
                       </a> 
-                      
                   {% endfor %}
-                  {{store_info.store_id}}
+                  
               </div>
             </div>
-        
-        
         <br>
-        
             <div class="line-item hf-item-odd clearfix">
                 <div class="row">
                   <div class="row-8">리뷰내역</div>
@@ -262,7 +262,7 @@
                   {% for review in review_info %}
                    <hr class="mp-hr">
                     <a class = "mp-link" href="/details/?store_id={{review.store_id}}">
-                          {{review.review_content}} 
+                          {{review.store.store_name}}) {{review.review_content}} 
                     </a>
                   {% endfor %}
                 </div>
