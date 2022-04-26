@@ -63,24 +63,45 @@ def signup(request):
 
 def mypage(request):
     user_id=request.session.get('user_id','0')
-    if request.method=='POST':
+    if request.method=='POST': # 회원탈퇴
         print('=========================')
-        password=request.POST.get('User_password')
-        try: 
+        account=request.POST.get('User_account',None)
+        password=request.POST.get('User_password',None)
+        nickname=request.POST.get('User_nickname',None)
+        email=request.POST.get('User_email',None)
+        delete=request.POST.get('delete_confirm',None)
+        
+        auth_id=request.POST.get('auth_id',None)
+        if auth_id==2:
+            auth_yes=True
+        
+        
+        if delete==None and email!=None: # 회원정보수정
+            try: 
+                user_info=User.objects.get(user_id=user_id)                
+                user_info.user_account=account
+                user_info.user_password=password
+                user_info.user_nickname=nickname
+                user_info.user_email=email
+                user_info.save()
+                redirect('/mypage')
+            except:
+                redirect('/mypage')
+            return redirect('/mypage')
+        else: #회원삭제
             user_info=User.objects.get(user_id=user_id)
-            if user_info.user_password==password:
+            if user_info.user_password==password and delete == '삭제':
                 user_info.delete()
                 request.session.flush()
-
-        except:
-            redirect('/mypage')
-        return redirect('/')
-    
-    else:  
+                return redirect('/')
+            else:
+                return redirect('/mypage')
+                
+    else:                                           # 즐겨찾기랑, 리뷰내역보는거 
         user_info=User.objects.get(user_id=user_id)
         bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
         store_info=Store.objects.all()
-        print(store_info)
+        
         review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
         return render(request,'main/mypage.html',{'user_info':user_info,
                                                 'bookmark_info':bookmark_info,
