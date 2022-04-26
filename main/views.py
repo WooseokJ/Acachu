@@ -31,6 +31,7 @@ def login(request):
     return redirect('main')
             
 
+
 def logout(request):
     request.session.flush()
     return redirect('/')
@@ -41,7 +42,6 @@ def signup(request):
         email=request.POST.get('User_email',None)
         password=request.POST.get('User_password',None)
         re_password=request.POST.get('User_re_password',None)          
-
         if account !=None:
             if password !=re_password:
                 return render(request, 'main/index.html')
@@ -62,4 +62,31 @@ def signup(request):
 
 
 def mypage(request):
-    return render(request,'main/mypage.html',{})
+    user_id=request.session.get('user_id','0')
+    if request.method=='POST':
+        print('=========================')
+        password=request.POST.get('User_password')
+        try: 
+            user_info=User.objects.get(user_id=user_id)
+            if user_info.user_password==password:
+                user_info.delete()
+                request.session.flush()
+
+        except:
+            redirect('/mypage')
+        return redirect('/')
+    
+    else:  
+        user_info=User.objects.get(user_id=user_id)
+        bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
+        store_info=Store.objects.all()
+        print(store_info)
+        review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
+        return render(request,'main/mypage.html',{'user_info':user_info,
+                                                'bookmark_info':bookmark_info,
+                                                'review_info':review_info,
+                                                'store_info':store_info})
+
+
+    
+    

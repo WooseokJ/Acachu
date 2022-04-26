@@ -78,20 +78,19 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0">닉네임</h6>
-                      <span class="text-secondary">익명의수달</span>
-                      
+                      <span class="text-secondary">{{user_info.user_nickname}}</span>        
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 class="mb-0">아이디</h6>
-                      <span class="text-secondary">a011030</span>
+                      <span class="text-secondary">{{user_info.user_account}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <h6 class="mb-0">패스워드</h6>
-                      <span class="text-secondary">1234567</span>
+                      <span class="text-secondary">{{user_info.user_password}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0">이메일</h6>
-                      <span class="text-secondary">kt@aivle.kt.co.kr</span>
+                      <span class="text-secondary">{{user_info.user_email}}</span>
                   </li>
 
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -118,28 +117,31 @@
                 <div class="input-form-backgroud row">
                 <div class="input-form col-md-12 mx-auto">
                   <h4 class="mb-3">회원 정보 수정</h4>
-                    <form method="post" class="validation-form" novalidate>
+                    <form method="post" action="." enctype="multipart/form-data">
                       {% csrf_token %}
-                      <div class="mb-3">
-                        <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0">닉네임</h6>
-                    
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                      <h6 class="mb-0">아이디</h6>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                      <h6 class="mb-0">패스워드</h6>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                        <h6 class="mb-0">이메일</h6>
-                  </li>
-                </ul>
-              </div>
-                      <div class="row"></div>
-                      <div>
-                        <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank" onclick="window.open('업주용페이지');">회원정보수정</button>
+                       <div class="form-group">
+                        <div class="input-group">
+                            <input type="text"  class="form-control" id="User_nickname" name="User_nickname" placeholder="닉네임" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control"id="User_account" name="User_account" placeholder="아이디" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="패스워드" required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="email"  class="form-control"id="User_email" name="User_email" placeholder="이메일" required="required">
+                        </div>
+                    </div>        
+                      <div class='form-group'>
+                        {% comment %} <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank" onclick="window.open('업주용페이지');">회원정보수정</button> {% endcomment %}
+                        <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank">회원정보수정</button>
                       </div>
                     </form> 
                   </div>
@@ -195,14 +197,16 @@
                 <div class="input-form-backgroud row">
                 <div class="input-form col-md-12 mx-auto">
                   <h4 class="mb-3">회원 탈퇴</h4>
-                    <form method="post" class="validation-form" novalidate>
+                    <form method="post" action="." enctype="multipart/form-data">
                       {% csrf_token %}
                       <div class="mb-3">
-                        <label for="password1">비밀번호</label>
-                        <input type="password" class="form-control" name="password" placeholder="비밀번호를 입력해주세요." required>
-                        <div class="invalid-feedback">
-                            비밀번호를 입력해주세요.
+                        <label for="password">비밀번호</label>
+                        <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="Password" required="required">
                         </div>
+                    </div>
                       </div>
                       <div class="row"></div>
                       <div>
@@ -219,46 +223,53 @@
 
         <!--즐겨찾기 및 댓글-->
         <div class="col-md-8">
-        <article>
+        
             <div class="line-item hf-item-odd clearfix">
                <div class="row">
                   <div class="row-8">  즐겨찾기</div>
-                  <div class="col-md-10" align="right">
+                  <div class="col-md-8" align="right">
                       <a class="mp-more" href="/member/more/board/" >more+</a>
                   </div>
                   <!--즐겨찾기 리스트-->
+                </div>
+                <div class="">
                   
-                  <!--<hr class="mp-hr">
-                  {% for bbookmark in bbookmark_list %}
-                        <a class = "mp-link" href="/board_real/board_view/?id={{bbookmark.board.board_id}}">
-                              {{bbookmark.board.board_title}} 
-                        </a>
-                  {% endfor %}-->
+                  {% for bbookmark in bookmark_info %}
+                  <hr class="mp-hr">
+                      <a class = "mp-link" href="/details/?store_id={{bbookmark.store_id}}">
+                            {{bbookmark.store_id}}
+                            
+                      </a> 
+                      
+                  {% endfor %}
+                  {{store_info.store_id}}
               </div>
             </div>
-            
-        </article>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-         <article>
+        
+        
+        <br>
+        
             <div class="line-item hf-item-odd clearfix">
                 <div class="row">
                   <div class="row-8">리뷰내역</div>
-                  <div class="col-md-10" align="right">
+                  <div class="col-md-8" align="right">
                       <a class="mp-more" href="/member/more/bbookmark" >more+</a>
                   </div>
                   <!--리뷰 내역 리스트-->
+                </div>
+                <div class="">
                   
+                  {% for review in review_info %}
                    <hr class="mp-hr">
-                  <!--  {% for rbookmark in rbookmark_list %}
-                    <a class = "mp-link" href="/board_real/board_view/?id={{rbookmark.reply.board.board_id}}">
-                          {{rbookmark.reply.reply_content}} 
+                    <a class = "mp-link" href="/details/?store_id={{review.store_id}}">
+                          {{review.review_content}} 
                     </a>
-                  {% endfor %}-->
+                  {% endfor %}
                 </div>
               </div>
           </div>
        
-        </article>
+      
             </div>
           </div>
 
