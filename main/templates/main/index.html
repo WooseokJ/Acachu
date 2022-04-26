@@ -51,6 +51,12 @@
 </head>
 
 <body>
+  {% if messages %}
+    {% for message in messages%}
+      {{ message.message }}
+    {% endfor %}
+  {% endif %}
+
   <!-- HEADER -->
   {% include "main/header.html" %}
   <!-- SIDEBAR -->
