@@ -1,28 +1,47 @@
+from asyncio.windows_events import NULL
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
-
+from django.contrib import messages
 from django.contrib.auth.hashers import make_password # 
 from .models import *
+from .forms import *
 import random
-from django.contrib.auth import authenticate, login
+import json
 
 def main(request):
-    if request.method=='POST': # 요청이 POST형식이면 if문안의 내용실행
+        return render(request,'main/index.html')
 
+
+def mypage(request):
+    return render(request,'main/mypage.html',{})
+
+
+def login(request):
+    if request.method=='POST':
+        user_account = request.POST.get('login_id', None)
+        user_password = request.POST.get('login_pw', None)
+        try:
+            user = User.objects.get(user_account=user_account, user_password=user_password)
+            request.session['user_id'] = user.user_id
+            return redirect('mypage')
+        except:
+            messages.warning(request, "아이디나 비밀번호를 확인하세요")
+            return redirect('main')
+    messages.warning(request, "아이디나 비밀번호를 확인하세요")
+    return redirect('main')
+            
+
+def logout(request):
+    request.session.flush()
+    return redirect('/')
+
+def signup(request):
+    if request.method=='POST': # 요청이 POST형식이면 if문안의 내용실행
         account=request.POST.get('user_account',None)
         email=request.POST.get('User_email',None)
         password=request.POST.get('User_password',None)
         re_password=request.POST.get('User_re_password',None)          
-        
-        login_id=request.POST.get('login_id',None)
-        login_pw=request.POST.get('login_pw',None)
-        if login_id !=None:
-            try:
-                m = User.objects.get(user_account=login_id, user_password=login_pw)
-                request.session['user_id'] = m.user_id
-                return render(request, 'main/mypage.html')
-            except User.DoesNotExist as e:
-                return render(request,  'main/index.html')
+
         if account !=None:
             if password !=re_password:
                 return render(request, 'main/index.html')

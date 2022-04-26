@@ -10,50 +10,54 @@
         </div>
 
 
-
-   
+        {% if request.session.user_id == NULL %}
         <div class="btns">
             <a href="#myModal" class="accbtn login" data-toggle="modal">Login</a>
             <a href="#myModal_signup" class="accbtn signup" data-toggle="modal">Signup</a>
         </div>
+        {% else %}
+        <div class="btns">
+            <a href='{% url "logout" %}' class="accbtn logout">Logout</a>
+        </div>
+        {% endif %}
 
 
         <!-- Modal HTML -->
         <div id="myModal" class="modal fade">
             <div class="modal-dialog modal-login">
                 <div class="modal-content">
-                <div class="modal-header">				
-                    <h4 class="modal-title">로그인</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form action="." method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text" id="login_id" class="form-control" name="login_id" placeholder="id" required="required">
-                        </div>
+                    <div class="modal-header">				
+                        <h4 class="modal-title">로그인</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="text" id="login_pw" class="form-control" name="login_pw" placeholder="Password" required="required">
-                        </div>
+                    <div class="modal-body">
+                        <form action={% url 'login' %} method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" id="login_id" class="form-control" name="login_id" placeholder="id" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="password" id="login_pw" class="form-control" name="login_pw" placeholder="Password" required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block btn-lg" id ="login_btn">로그인</button>
+                            </div>
+                            
+                            <!--
+                            <div class="login_api">
+                                <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"><img src="/image/kakao_login_button.png"></a>
+                            </div> -->
+                            
+                            {% comment %} <p class="hint-text"><a href="#">패스워드 찾기</a></p> {% endcomment %}
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">로그인</button>
-                    </div>
-                    
-                    <!--
-                    <div class="login_api">
-                        <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"><img src="/image/kakao_login_button.png"></a>
-                    </div> -->
-                    
-                    {% comment %} <p class="hint-text"><a href="#">패스워드 찾기</a></p> {% endcomment %}
-                </form>
-                </div>
-                <div class="modal-footer">계정이 없나요? <a href="#myModal_signup" data-toggle="modal">회원가입</a></div>
+                    <div class="modal-footer">계정이 없나요? <a href="#myModal_signup" data-toggle="modal">회원가입</a></div>
                 </div>
             </div>
         </div>  
@@ -62,56 +66,49 @@
         <div id ="myModal_signup" class="modal fade">
             <div  class="modal-dialog signup-form">	
                 <div class="modal-content">
-                <div class="modal-header">				
-                    <h4 class="modal-title">회원가입</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                
-                <div>
-                    {% comment %} <form id="user-signup" enctype="multipart/form-data"> {% endcomment %}
+                    <div class="modal-header">				
+                        <h4 class="modal-title">회원가입</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
 
-                    <form method="post" action="." enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input type="text"  class="form-control" id="user_account" name="user_account" placeholder="id" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-                            <input type="email" class="form-control"id="User_email" name="User_email" placeholder="Email Address" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="Password" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                             <span class="input-group-addon">
-                                <i class="fa fa-lock"></i>
-                                <i class="fa fa-check"></i>
-                            </span> 
-                            <input type="password" class="form-control"id="User_re_password" name="User_re_password" placeholder="Confirm Password" required="required">
-                        </div>
-                    </div>        
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
-                    </div>
-                    
-                </div>
-                </form>
-             
-            </div>  
-        </div> 
-    
+                        {% comment %} <form id="user-signup" enctype="multipart/form-data"> {% endcomment %}
 
-        
-        
+                    <form method="post" action= {% url 'signup' %} enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text"  class="form-control" id="user_account" name="user_account" placeholder="id" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                                <input type="email" class="form-control"id="User_email" name="User_email" placeholder="Email Address" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="Password" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                    <i class="fa fa-check"></i>
+                                </span> 
+                                <input type="password" class="form-control"id="User_re_password" name="User_re_password" placeholder="Confirm Password" required="required">
+                            </div>
+                        </div>        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" id ="signup_btn">Sign Up</button>
+                        </div>
+                    </form>
+                </div>  
+            </div> 
+        </div>
     </div>
 </header>
 
