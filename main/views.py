@@ -1,3 +1,4 @@
+from this import d
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 
@@ -9,18 +10,18 @@ from django.contrib.auth import authenticate, login
 def main(request):
     if request.method=='POST': # 요청이 POST형식이면 if문안의 내용실행
 
-        account=request.POST.get('user_account',None)
+        account=request.POST.get('User_account',None)
         email=request.POST.get('User_email',None)
         password=request.POST.get('User_password',None)
         re_password=request.POST.get('User_re_password',None)          
         
-        login_id=request.POST.get('login_id',None)
-        login_pw=request.POST.get('login_pw',None)
+        login_id=request.POST.get('Login_id',None)
+        login_pw=request.POST.get('Login_pw',None)
         if login_id !=None:
             try:
                 m = User.objects.get(user_account=login_id, user_password=login_pw)
                 request.session['user_id'] = m.user_id
-                return render(request, 'main/mypage.html')
+                return redirect('/')  
             except User.DoesNotExist as e:
                 return render(request,  'main/index.html')
         if account !=None:
@@ -43,4 +44,31 @@ def main(request):
 
 
 def mypage(request):
-    return render(request,'main/mypage.html',{})
+    user_id=request.session.get('user_id','0')
+    if request.method=='POST':
+        print('=========================')
+        password=request.POST.get('User_password')
+        try: 
+            user_info=User.objects.get(user_id=user_id)
+            if user_info.user_password==password:
+                user_info.delete()
+                request.session.flush()
+
+        except:
+            redirect('/mypage')
+        return redirect('/')
+    
+    else:  
+        user_info=User.objects.get(user_id=user_id)
+        bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
+        store_info=Store.objects.all()
+        print(store_info)
+        review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
+        return render(request,'main/mypage.html',{'user_info':user_info,
+                                                'bookmark_info':bookmark_info,
+                                                'review_info':review_info,
+                                                'store_info':store_info})
+
+
+    
+    
