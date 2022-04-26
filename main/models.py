@@ -13,7 +13,7 @@ class Auth(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(db_column='User_id', primary_key=True)  # Field name made lowercase.
-    user_account = models.CharField(db_column='User_account', max_length=20)  # Field name made lowercase.
+    user_account = models.CharField(db_column='User_account', max_length=20, unique=True)  # Field name made lowercase.
     user_password = models.CharField(db_column='User_password', max_length=20)  # Field name made lowercase.
     user_nickname = models.CharField(db_column='User_nickname', max_length=20)  # Field name made lowercase.
     user_email = models.CharField(db_column='User_email', max_length=50, blank=True, null=True)  # Field name made lowercase.
@@ -34,7 +34,7 @@ class Store(models.Model):
     store_sggnum = models.CharField(db_column='Store_sggnum', max_length=10)  # Field name made lowercase.
     store_emdnum = models.CharField(db_column='Store_emdnum', max_length=10)  # Field name made lowercase.
     store_roadnum = models.CharField(db_column='Store_roadnum', max_length=50)  # Field name made lowercase.
-
+    store_image = models.CharField(db_column='Store_image', max_length=255)
     class Meta:
         managed = True
         db_table = 'store'

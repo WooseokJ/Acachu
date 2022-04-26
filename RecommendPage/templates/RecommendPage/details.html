@@ -129,6 +129,9 @@
   
     <!-- REVIEW -->
     <section class="review">
+      {% if request.session.user_id == NULL %}
+      <div class="review-title">Review 기능은 로그인 회원만 사용 가능합니다.</div>
+      {% else %}
       <div class="review-title">Review</div>
       <div class="div-center">
         <div class="review-write">
@@ -147,6 +150,7 @@
           {% endfor %}
         </div>
       </div>
+      {% endif %}
     </section>
   </div>
   <!-- FOOTER -->
