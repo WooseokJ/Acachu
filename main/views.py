@@ -57,3 +57,9 @@ def signup(request):
                                     user_nickname=nick)
                 user.save()
                 return render(request,'main/index.html')
+    else:
+        return render(request,'main/index.html')
+
+
+def mypage(request):
+    return render(request,'main/mypage.html',{})
