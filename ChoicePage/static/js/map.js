@@ -130,7 +130,7 @@ window.onload = function(){
                 document.getElementById("emdong").value = addr[3]; // 읍면동
             }
 
-            document.getElementById("address_send").value = data.address; // 입력값에 넣을 현재위치
+            document.getElementById("road_address").value = data.address; // 입력값에 넣을 현재위치
             document.getElementById("address_now").text = data.address; // 현재 위치에 주소 넣기
 
              // 검색 위치 지도 마커 표시

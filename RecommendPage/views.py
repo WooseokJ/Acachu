@@ -1,4 +1,5 @@
 from datetime import datetime
+from unicodedata import category
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -10,33 +11,51 @@ from main.models import *
 
 # Create your views here.
 def recommendList(request):
-    stores = Store.objects.all()
+    if request.method == 'POST':
+        cate_name = request.POST.get('category', '')
+        sido = request.POST.get('sido')
+        sigg = request.POST.get('sigg')
+        emdong = request.POST.get('emdong')
+        # tmp = Store.objects.filter(store_sinum=sido, 
+        #                               store_sggnum=sigg)
+        # tag = Tag.objects.get(tag_name=cate_name)
+        storetags = StoreTag.objects.filter(tag__tag_name=cate_name,
+                                            store__store_sinum=sido, 
+                                            store__store_sggnum=sigg)
     return render(request,'RecommendPage/recommendList.html',
-                  {'stores':stores})
+                  {'storetags':storetags})
 
 def details(request):
     if request.method == 'GET':
         store_id = request.GET.get('store_id','0')
-        user_id = request.session['user_id']
-        store = Store.objects.get(store_id = store_id)
-        user = User.objects.get(user_id=user_id)
-        review = Review.objects.filter(store_id = store_id)
-        images = Cafepicture.objects.filter(store_id = store_id)
-        tags = StoreTag.objects.filter(store=store)
-        bookmark = False
-        if Bookmark.objects.filter(user=user, store=store).exists():
-            bookmark = True
-        
+        try:
+            user_id = request.session['user_id']
+            store = Store.objects.get(store_id = store_id)
+            user = User.objects.get(user_id=user_id)
+            review = Review.objects.filter(store_id = store_id)
+            images = Cafepicture.objects.filter(store_id = store_id)
+            tags = StoreTag.objects.filter(store=store)
+            bookmark = False
+            if Bookmark.objects.filter(user=user, store=store).exists():
+                bookmark = True
+        except: 
+            user_id = 0
+            store = Store.objects.get(store_id = store_id)
+            user = User.objects.filter(user_id=user_id)
+            review = Review.objects.filter(store_id = store_id)
+            images = Cafepicture.objects.filter(store_id = store_id)
+            tags = StoreTag.objects.filter(store=store)
+            bookmark = False
+            
         formreview = ReviewForm()
-
         return render(request,'RecommendPage/details.html',
-                      {'store':store,
-                       'user':user,
-                      'reviews':review,
-                      'images':images,
-                      'formreview':formreview,
-                      'tags':tags,
-                      'bookmark':bookmark})
+                    {'store':store,
+                    'user':user,
+                    'reviews':review,
+                    'images':images,
+                    'formreview':formreview,
+                    'tags':tags,
+                    'bookmark':bookmark})
     
 def new_review(request):
     form = ReviewForm(request.POST)
