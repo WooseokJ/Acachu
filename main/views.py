@@ -68,7 +68,7 @@ def mypage(request):
     if request.method=='POST': # 회원탈퇴
         print('=========================')
         account=request.POST.get('User_account',None)
-        password=request.POST.get('User_password',None)
+        password=PasswordHasher().hash(request.POST.get('User_password',None))
         nickname=request.POST.get('User_nickname',None)
         email=request.POST.get('User_email',None)
         delete=request.POST.get('delete_confirm',None)
@@ -76,8 +76,6 @@ def mypage(request):
         auth_id=request.POST.get('auth_id',None)
         if auth_id==2:
             auth_yes=True
-        
-        
         if delete==None and email!=None: # 회원정보수정
             try: 
                 user_info=User.objects.get(user_id=user_id)                
@@ -85,6 +83,7 @@ def mypage(request):
                 user_info.user_password=password
                 user_info.user_nickname=nickname
                 user_info.user_email=email
+                
                 user_info.save()
                 redirect('/mypage')
             except:
