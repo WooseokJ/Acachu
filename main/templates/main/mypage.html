@@ -97,17 +97,30 @@
                         <h6 class="mb-0">이메일</h6>
                       <span class="text-secondary">{{user_info.user_email}}</span>
                   </li>
-
+                  {% if auth_yn  %}
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                       <div class="row-10">
                       {% comment %} <button class="btn btn-primary"><div class="send">수정</div></button> {% endcomment %}
                       {% comment %} <button class="btn btn-primary" target="__blank" onclick="window.open('업주용페이지');">업주등록</button> {% endcomment %}
                       {% comment %} <button class="btn btn-primary" target="__blank" onclick="window.open('delete');">회원탈퇴</button> {% endcomment %}
+                      {% comment %} <button class="btn btn-primary" target="__blank" ><a href='/authmanaged' style="color:white;">업주보기</button></a> {% endcomment %}
+
+                      <button class="btn btn-primary" target="__blank" data-toggle="modal" data-target="#modify_modal"><div class="send">수정</div></button>
+                      
+                      <button class="btn btn-primary" target="__blank" ><a href='/authmanaged' style="color:white;">업주보기</button></a>
+                      <button class="btn btn-primary" target="__blank" data-toggle="modal" data-target="#delete_modal">회원탈퇴</button>
+                    </div>
+                  </li>
+                  {% else %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                      <div class="row-10">
                       <button class="btn btn-primary" target="__blank" data-toggle="modal" data-target="#modify_modal"><div class="send">수정</div></button>
                       <button class="btn btn-primary" target="__blank" data-toggle="modal" data-target="#crn_modal"><div class="send">업주등록</div></button>
                       <button class="btn btn-primary" target="__blank" data-toggle="modal" data-target="#delete_modal">회원탈퇴</button>
                     </div>
                   </li>
+                  {%endif %}
+
                 </ul>
               </div>
             </div>
@@ -126,26 +139,25 @@
                       {% csrf_token %}
                        <div class="form-group">
                         <div class="input-group">
-                            <input type="text"  class="form-control" id="User_nickname" name="User_nickname" placeholder="닉네임" required="required">
+                            <input type="text"  class="form-control" id="User_nickname_mod" name="User_nickname_mod" placeholder="닉네임" required="required">
                         </div>
                        </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control"id="User_account" name="User_account" placeholder="아이디" required="required">
+                            <input type="text" class="form-control"id="User_account_mod" name="User_account_mod" placeholder="아이디" required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="패스워드" required="required">
+                            <input type="password"  class="form-control"id="User_password_mod" name="User_password_mod" placeholder="패스워드" required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="email"  class="form-control"id="User_email" name="User_email" placeholder="이메일" required="required">
+                            <input type="email"  class="form-control"id="User_email_mod" name="User_email_mod" placeholder="이메일" required="required">
                         </div>
                     </div>        
                       <div class='form-group'>
-                        {% comment %} <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank" onclick="window.open('업주용페이지');">회원정보수정</button> {% endcomment %}
                         <button class="btn btn-danger btn-lg btn-block dp-btn-del" target="__blank">회원정보수정</button>
                       </div>
                     </form> 
@@ -195,13 +207,13 @@
                     <form method="post" action="." enctype="multipart/form-data">
                       {% csrf_token %}
                       <div class="mb-3">
-                        <label for="password">비밀번호</label>
                         <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                            <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="Password" required="required">
                         </div>
-                        <label for="text">정말로삭제를 원하시면 삭제를 입력하세요.</label>
+                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input type="password"  class="form-control"id="User_password_del" name="User_password_del" placeholder="Password" required="required">
+                          
+                        <label for="text">정말로 삭제를 원하시면 <label style="color:red">삭제</label>를 입력하세요.</label>
                         <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>

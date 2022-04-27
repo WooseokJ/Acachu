@@ -1,13 +1,15 @@
 from asyncio.windows_events import NULL
+from audioop import reverse
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib import messages
 from argon2 import PasswordHasher
+from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 import random
 import json
-
+import time
 def main(request):
         return render(request,'main/index.html')
 
@@ -17,19 +19,23 @@ def mypage(request):
 
 
 def login(request):
+    login_yn=False #로그인실패
     if request.method=='POST':
         user_account = request.POST.get('login_id', None)
         user_password = request.POST.get('login_pw', None)
         try:
-            user = User.objects.get(user_account=user_account)
+            user = User.objects.get(user_account=user_account)    
             if PasswordHasher().verify(user.user_password, user_password):
                 request.session['user_id'] = user.user_id
-                return redirect('mypage')
+                login_yn=True #로그인성공
+                print(login_yn)
+                return render(request,'main/index.html',{'login_yn':login_yn})
         except:
-            messages.warning(request, "아이디나 비밀번호를 확인하세요")
-            return redirect('main')
-    messages.warning(request, "아이디나 비밀번호를 확인하세요")
-    return redirect('main')
+            print(login_yn)
+            messages.warning(request,"로그인실패")
+            return redirect("/")
+    else:
+        return redirect('/')
             
 
 
@@ -67,47 +73,58 @@ def mypage(request):
     user_id=request.session.get('user_id','0')
     if request.method=='POST': # 회원탈퇴
         print('=========================')
-        account=request.POST.get('User_account',None)
-        password=PasswordHasher().hash(request.POST.get('User_password',None))
-        nickname=request.POST.get('User_nickname',None)
-        email=request.POST.get('User_email',None)
+        account=request.POST.get('User_account_mod',None)
+        password_mod=PasswordHasher().hash(request.POST.get('User_password_mod',"0"))
+        nickname=request.POST.get('User_nickname_mod',None)
+        email=request.POST.get('User_email_mod',None)
         delete=request.POST.get('delete_confirm',None)
-        
-        auth_id=request.POST.get('auth_id',None)
-        if auth_id==2:
-            auth_yes=True
-        if delete==None and email!=None: # 회원정보수정
-            try: 
-                user_info=User.objects.get(user_id=user_id)                
+        if delete==None and account!=None: # 회원수정
+            user_info=User.objects.get(user_id=user_id) 
+            try:             
                 user_info.user_account=account
-                user_info.user_password=password
+                user_info.user_password=password_mod
                 user_info.user_nickname=nickname
                 user_info.user_email=email
-                
                 user_info.save()
                 redirect('/mypage')
             except:
                 redirect('/mypage')
             return redirect('/mypage')
-        else: #회원삭제
-            user_info=User.objects.get(user_id=user_id)
-            if user_info.user_password==password and delete == '삭제':
-                user_info.delete()
-                request.session.flush()
-                return redirect('/')
-            else:
+        else: #회원삭제  
+            password_del=request.POST.get('User_password_del',"0")
+            user_info=User.objects.get(user_id=user_id) 
+            print(password_del)
+            print(user_info.user_password)
+            print(delete)
+            try:
+                if PasswordHasher().verify(user_info.user_password, password_del):
+                    if delete == '삭제':
+                        user_info.delete()
+                        request.session.flush()
+                        return render(request,'main/index.html')
+                    return redirect('/mypage')
+            except:
                 return redirect('/mypage')
-                
-    else:                                           # 즐겨찾기랑, 리뷰내역보는거 
+    else:                                           
         user_info=User.objects.get(user_id=user_id)
-        bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
-        store_info=Store.objects.all()
-        
-        review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
-        return render(request,'main/mypage.html',{'user_info':user_info,
-                                                'bookmark_info':bookmark_info,
-                                                'review_info':review_info,
-                                                'store_info':store_info})
+        auth_id=user_info.auth_id
+        if auth_id==1: #일반용
+            auth_yn=False 
+            user_info=User.objects.get(user_id=user_id)
+            bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
+            store_info=Store.objects.all()
+            review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
+            return render(request,'main/mypage.html',{'user_info':user_info,'bookmark_info':bookmark_info,
+                                                      'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
+        else:           # 업주용
+            auth_yn=True 
+            print(auth_yn)
+            user_info=User.objects.get(user_id=user_id)
+            bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
+            store_info=Store.objects.all()
+            review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
+            return render(request,'main/mypage.html',{'user_info':user_info,'bookmark_info':bookmark_info,
+                                                      'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
 
 
 def edit_userprofile(request):

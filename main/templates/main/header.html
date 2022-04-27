@@ -9,7 +9,7 @@
             <img src="{% static 'image\logo2.png'%}" alt="logo" onclick="location.href='{% url "main"%}'">
         </div>
 
-
+        
         {% if request.session.user_id == NULL %}
         <div class="btns">
             <a href="#myModal" class="accbtn login" data-toggle="modal">Login</a>
@@ -20,6 +20,7 @@
             <a href='{% url "logout" %}' class="accbtn logout">Logout</a>
         </div>
         {% endif %}
+
 
 
 
@@ -47,23 +48,27 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary btn-block btn-lg" id ="login_btn">로그인</button>
+                                <button class="btn btn-primary btn-block btn-lg" id ="login_btn" > 로그인</button>
                             </div>
-                            
-                            <!--
-                            <div class="login_api">
-                                <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"><img src="/image/kakao_login_button.png"></a>
-                            </div> -->
-                            
-                            {% comment %} <p class="hint-text"><a href="#">패스워드 찾기</a></p> {% endcomment %}
+                            <!--<div class="login_api">
+                                    <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"><img src="/image/kakao_login_button.png"></a>
+                                </div> 
+                            <p class="hint-text"><a href="#">패스워드 찾기</a></p> --> 
                         </form>
                     </div>
                     <div class="modal-footer">계정이 없나요? <a href="#myModal_signup" data-toggle="modal">회원가입</a></div>
                 </div>
             </div>
-        </div>  
+        </div> 
+                            
 
-        <!-- sign up modal -->
+
+    
+
+        
+        
+        <!-- modal 회원가입 -->
+        
         <div id ="myModal_signup" class="modal fade">
             <div  class="modal-dialog signup-form">	
                 <div class="modal-content">
