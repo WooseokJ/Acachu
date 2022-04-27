@@ -163,3 +163,8 @@
 }
 
 /*my page*/
+.mp-link{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
