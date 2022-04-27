@@ -17,13 +17,16 @@ class User(models.Model):
     user_password = models.CharField(db_column='User_password', max_length=255)  # Field name made lowercase.
     user_nickname = models.CharField(db_column='User_nickname', max_length=20)  # Field name made lowercase.
     user_email = models.CharField(db_column='User_email', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    user_profileurl = models.CharField(db_column='User_profileurl', max_length=1000, blank=True, null=True)  # Field name made lowercase.
+    user_profileurl = models.ImageField(db_column='User_profileurl', upload_to='images/', blank=True, null=True)  # Field name made lowercase.
     
     auth = models.ForeignKey(Auth, on_delete=models.CASCADE)  # Field name made lowercase.
 
     class Meta:
         managed = True
         db_table = 'user'
+        
+    def __str__(self):
+        return self.user_account
 
 class Store(models.Model):
     store_id = models.AutoField(db_column='Store_id', primary_key=True)  # Field name made lowercase.
@@ -35,9 +38,11 @@ class Store(models.Model):
     store_emdnum = models.CharField(db_column='Store_emdnum', max_length=10)  # Field name made lowercase.
     store_roadnum = models.CharField(db_column='Store_roadnum', max_length=50)  # Field name made lowercase.
     store_image = models.CharField(db_column='Store_image', max_length=255)
+    
     class Meta:
         managed = True
         db_table = 'store'
+        
         
 
 class AuthBoard(models.Model):
