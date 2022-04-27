@@ -127,5 +127,11 @@ def mypage(request):
                                                       'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
 
 
-    
-    
+def edit_userprofile(request):
+    if request.method == 'POST':
+        user_id = request.session.get('user_id')
+        img = request.FILES['upload_file1']
+        user = User.objects.get(user_id = user_id)
+        user.user_profileurl = img
+        user.save()
+        return redirect('/mypage')

@@ -18,3 +18,43 @@ document.querySelector("#upload_file1").addEventListener("change", (changeEvent)
     reader.readAsDataURL(imgFile);
     //업로드한 이미지의 URL을 reader에 등록
 })
+
+function getCookie(name) { 
+    var cookieValue = null; 
+    if (document.cookie && document.cookie !== '') {
+         var cookies = document.cookie.split(';'); 
+        for (var i = 0; i < cookies.length; i++) { 
+             var cookie = cookies[i].trim(); // Does this cookie string begin with the name we want? 
+            if (cookie.substring(0, name.length + 1) === (name + '=')) { 
+                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); 
+                 break; 
+            } 
+        } 
+    } 
+    
+    return cookieValue; 
+} 
+
+var csrftoken = getCookie('csrftoken');
+
+
+// sendbtn = document.getElementById('profile_send');
+// sendbtn.addEventListener("click", function(){
+//     param = {
+//         'user_id':user_id,
+//         'img':upload.src,
+//         'csrfmiddlewaretoken': csrftoken,
+//     }
+//     $.ajax({
+//         type: "POST",
+//         url: 'userprofile/',
+//         data: param,
+//         success: function (data) {
+//             console.log("success")
+//         },
+//         error: function (e) {
+//             console.log("error", e);
+//         }
+//     })
+
+// });
