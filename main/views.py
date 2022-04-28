@@ -11,7 +11,17 @@ import random
 import json
 import time
 def main(request):
-        return render(request,'main/index.html')
+    tags = Tag.objects.all()
+    result = []
+    for tag in tags:
+        try:
+            tmp = random.choice(StoreTag.objects.filter(tag=tag))
+            result.append(tmp)
+        except:
+            continue
+    print(result, 1)
+    return render(request,'main/index.html',
+                  {'storetags':result})
 
 
 def mypage(request):
