@@ -117,19 +117,21 @@
 .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 
 .au-review{
+    border-radius: 50px;
     display:flex;
     justify-content:left;
     align-items:left;
     background-color: rgb(255, 173, 107);
-    padding : 4px;
+    padding : 10px;
     margin: 2px;
 }
 
 .au-tag{
+    border-radius: 50px;
     display:flex;
     justify-content:left;
     align-items:left;
-    background-color: #ffffff;
+    background-color: rgb(245, 219, 186);
     margin: 2px;
-    padding : 4px;
+    padding : 10px;
 }
