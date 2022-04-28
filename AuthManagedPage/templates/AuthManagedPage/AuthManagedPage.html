@@ -76,6 +76,7 @@
                     <br>
                     <h2>업주 관리</h2>
                     <hr>
+                    <div onclick="location.href='/details/?store_id={{store_id}}'" class='is-btn is-btn--black' style='text-align:center'>우리 가게</div>
                 </nav>
 
                 <div class="row gutters-sm" style='justify-content:center; '>
@@ -86,12 +87,15 @@
                                     <div class="row-8">
                                         <b>최신 리뷰</b>
                                         <hr>
-                                    <div class="row">
-                                        {% for review in reviews %}
-                                            <div class = 'au-review'>{{review.review_content}}</div>
-                                        {% endfor %}
+                                        <div class="row">
+                                            {% for review in reviews %}
+                                                <a class = 'au-review' style="display:inline-block; width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                                    {{review.review_content}} 
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                        
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </article>
@@ -119,6 +123,7 @@
                     <div class="col-md-7">
                         <div class="card">
                             <div class="card-body" style='height:500px'>
+                                <br>
                                 <table class="table">
                                     <h4 style='text-align:center; margin-bottom:20px'>업장 수정 요청 게시판</h4>
                                     <thead class="thead-light">
@@ -129,7 +134,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for board in boards %}
+                                    {% for board in posts %}
                                     <tr class="text-center">
                                         <td>
                                             <a href="/post/{{ board.ab_id }}">
@@ -150,10 +155,28 @@
                                     {% endfor %}
                                     </tbody>
                                 </table>
-                                <div class="row">
-                                    <div class="col-auto mr-auto"></div>
-                                    
-                                    <div class="col-auto">
+                                <div style="text-align:center">
+                                    <div class="pagination">
+                                            <div style="width:35%; margin: 5px;">
+                                            {% if posts.has_previous %}
+                                                <a href="?store_id={{store_id}}&page={{posts.previous_page_number}}">이전</a>
+                                            {% endif %}
+                                            </div>
+                                            <div style="width:30%; margin: 5px;">
+                                            {% for p in posts.paginator.page_range %}
+                                                <a href="?store_id={{store_id}}&page={{p}}" class="mx-1">{{p}}</a>
+                                            {% endfor %}
+                                            </div>
+                                            <div style="width:35%; margin: 5px;">
+                                            {% if posts.has_next %}
+                                                    <a href="?store_id={{store_id}}&page={{posts.next_page_number}}">다음</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class='row'>
+                                    <div class="col-md-12" align="right">
                                         <a class="btn btn-primary" href="/post" role="button">글쓰기</a>
                                     </div>
                                 </div>
