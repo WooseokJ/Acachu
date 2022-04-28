@@ -72,60 +72,60 @@
 
         <div class="container"  style='margin-bottom:100px'>
             <div class="main-body">
-                <nav aria-label="breadcrumb" class="main-breadcrumb"  style='margin-bottom:50px'>
-                    <br>
+                <nav aria-label="breadcrumb" class="main-breadcrumb"  style='margin-bottom:50px; margin-top:80px'>
                     <h2>업주 관리</h2>
                     <hr>
                     <div onclick="location.href='/details/?store_id={{store_id}}'" class='is-btn is-btn--black' style='text-align:center'>우리 가게</div>
                 </nav>
 
                 <div class="row gutters-sm" style='justify-content:center; '>
-                    <div class="col-md-4" style='margin-right:20px;' >
-                        <article>
-                            <div class="line-item hf-item-odd clearfix">
-                                <div class="row">
-                                    <div class="row-8">
-                                        <b>최신 리뷰</b>
-                                        <hr>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body" style='height:500px;width:500px; padding:50px 10px 10px 50px'>
+                                    <div class="line-item hf-item-odd clearfix">
                                         <div class="row">
-                                            {% for review in reviews %}
-                                                <a class = 'au-review' style="display:inline-block; width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                                                    {{review.review_content}} 
-                                                </a>
-                                            {% endfor %}
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <br><br>
-                        <article>
-                            <div class="line-item hf-item-odd clearfix">
-                                <div class="row">
-                                    <div class="row-8">
-                                        <b>추천 태그</b>
-                                        <hr>
-                                        <div class="row">
-                                            {% for tag in tags %}
-                                            <div class= 'au-tag'>{{tag.tag.tag_name}}</div>
-                                            <hr>
-                                            {% endfor %}
+                                            <div class="row-8">
+                                                <b>최신 리뷰</b>
+                                                <hr style='width:450px'>
+                                                <div class="row" style='margin-left:10px'>
+                                                    {% for review in reviews %}
+                                                        <a style="display:inline-block; width:400px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left">
+                                                            {{review.review_content}}
+                                                            <hr>
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                                
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <br>
+                                    <div class="line-item hf-item-odd clearfix">
+                                        <div class="row">
+                                            <div class="row-8">
+                                                <b>추천 태그</b>
+                                                <hr style='width:450px'>
+                                                <div class="row" style='margin-left:10px'>
+                                                    {% for tag in tags %}
+                                                        <a class = 'au-tag' style="display:inline-block; width:150px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:center">
+                                                            {{tag.tag.tag_name}}
+                                                        </a>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
-                        </article>
-                        <br><br><br><br>
+                        </div>
                     </div>
 
                     <!--테이블 형태-->
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-body" style='height:500px'>
                                 <br>
                                 <table class="table">
-                                    <h4 style='text-align:center; margin-bottom:20px'>업장 수정 요청 게시판</h4>
+                                    <h5 style='text-align:center; margin-bottom:20px'>업장 수정 요청 게시판</h5>
                                     <thead class="thead-light">
                                     <tr class="text-center">
                                         <th scope="col">제목</th>
@@ -175,7 +175,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class='row'>
+                                <div class='row' style='margin-top:10px'>
                                     <div class="col-md-12" align="right">
                                         <a class="btn btn-primary" href="/post" role="button">글쓰기</a>
                                     </div>

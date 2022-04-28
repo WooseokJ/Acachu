@@ -11,10 +11,9 @@ def Aut(request):
     if request.method == 'GET':
         page = int(request.GET.get("page",1))
         user_id = request.session['user_id']
-        #store_id = request.GET.get('store_id','1')
         store_info = StoreAuth.objects.get(user_id = user_id)
         user_info=User.objects.get(user_id=user_id)
-        review = Review.objects.filter(store_id = store_info.store_id).order_by('-review_reg_date')[:5]
+        review = Review.objects.filter(store_id = store_info.store_id).order_by('-review_reg_date')[:3]
         tags = StoreTag.objects.filter(store_id = store_info.store_id)[:20]
         boards = AuthBoard.objects.filter(user_id = user_info.user_id).order_by('-ab_reg_date') #글
         paginator = Paginator(boards,5) # 글 5개
@@ -59,22 +58,25 @@ def contents(request, id): # 글 작성 후 확인
                         'replyform':Replyform
                     })
 
-def contents_delete(id): #삭제
+def contents_delete(request,id): #삭제
     del_post = AuthBoard.objects.get(pk=id)
     del_post.delete()
     return HttpResponseRedirect(reverse('board')) #수정
 
-# false 뜬다
 def new_reply(request,id):
     form = ReplyForm(request.POST)
+    ab = AuthBoard.objects.get(pk = id)
+
     if form.is_valid():
         user_id = request.session['user_id']
         content = form.data['reply_content']
+        AuthBoard.objects.update()
         Reply.objects.create(
                                 reply_content = content,
                                 reply_date = datetime.now(),
                                 user_id = user_id,
                                 authboard_id = id
                             )
-
+        ab.ab_reply_yn = 1
+        ab.save()
     return redirect('/post/'+str(id)) #수정
