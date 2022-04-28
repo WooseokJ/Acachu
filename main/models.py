@@ -129,10 +129,10 @@ class StoreTag(models.Model):
 
 class Bookmark(models.Model):
     bookmark_id = models.AutoField(db_column='Bookmark_id', primary_key=True)  # Field name made lowercase.
+    bookmark_reg_date = models.DateTimeField(db_column='Bookmark_reg_date', blank=True, null=True)  # Field name made lowercase.
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Field name made lowercase.
     store = models.ForeignKey(Store, on_delete=models.CASCADE)  # Field name made lowercase.
-
     class Meta:
         managed = True
         db_table = 'bookmark'

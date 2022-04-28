@@ -81,7 +81,10 @@ def reg_bookmark(request):
         store_id = jsonObject.get('store_id')
         user = User.objects.get(user_id = user_id)
         store = Store.objects.get(store_id = store_id)
-        Bookmark.objects.create(user = user, store = store)
+        Bookmark.objects.create(user = user, 
+                                store = store,
+                                bookmark_reg_date= datetime.now()
+                                )
         return JsonResponse(jsonObject)
 
 @csrf_exempt
