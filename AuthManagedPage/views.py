@@ -9,17 +9,22 @@ from django.core.paginator import Paginator
 # Create your views here.
 def Aut(request):
     if request.method == 'GET':
-        store_id = request.GET.get('store_id','0')
+        page = int(request.GET.get("page",1))
         user_id = request.session['user_id']
-        review = Review.objects.filter(store_id = store_id)
-        tags = StoreTag.objects.filter(store_id = store_id)
-        boards = AuthBoard.objects.filter(user_id = user_id)
+        #store_id = request.GET.get('store_id','1')
+        store_id = StoreAuth.objects.filter(user_id = user_id)
+        review = Review.objects.filter(store_id = store_id).order_by('-review_reg_date')[:5]
+        tags = StoreTag.objects.filter(store_id = store_id)[:20]
+        boards = AuthBoard.objects.filter(user_id = user_id).order_by('-ab_reg_date') #글
+        paginator = Paginator(boards,5) # 글 5개
+        posts = paginator.get_page(page) # url에 있는 현재 page값 get_page로 전달
         
         return render(request,'AuthManagedPage\AuthManagedPage.html',
-                      {
+                      {'store_id':store_id,
                        'reviews':review,
                        'tags':tags,
-                       'boards':boards
+                       'boards':boards,
+                       'posts':posts
                        }
                     )
 
@@ -36,7 +41,7 @@ def post(request): #글작성
                                     ab_reply_yn = ab_reply_yn,
                                     user_id = user_id
         )
-        return HttpResponseRedirect(reverse('board')) #수정
+        return HttpResponseRedirect(reverse('board'))
     return render(request,'AuthManagedPage\post.html')
 
 def contents(request, id): # 글 작성 후 확인
@@ -47,7 +52,8 @@ def contents(request, id): # 글 작성 후 확인
     except AuthBoard.DoesNotExist:
         raise Http404("Does not exist!")
     return render(request, 'AuthManagedPage\contents.html',
-                    {'board':board,
+                    {
+                        'board':board,
                         'replys':reply,
                         'replyform':Replyform
                     })
@@ -57,19 +63,17 @@ def contents_delete(id): #삭제
     del_post.delete()
     return HttpResponseRedirect(reverse('board')) #수정
 
-def new_reply(request):
+# false 뜬다
+def new_reply(request,id):
     form = ReplyForm(request.POST)
     if form.is_valid():
-        content = form.cleaned_data['reply_content']
-        user_id = form.data['user']
-        authboard_id = form.data['authboard']
-        user = User.objects.get(user_id = user_id)
-        authboard = Store.objects.get(authboard_id = authboard_id )
+        user_id = request.session['user_id']
+        content = form.data['reply_content']
         Reply.objects.create(
                                 reply_content = content,
                                 reply_date = datetime.now(),
-                                authboard = authboard,
-                                user = user
+                                user_id = user_id,
+                                authboard_id = id
                             )
 
-    return redirect('/post' + form.data['authboard'])
+    return redirect('/post/'+str(id)) #수정
