@@ -12,15 +12,16 @@ def Aut(request):
         page = int(request.GET.get("page",1))
         user_id = request.session['user_id']
         #store_id = request.GET.get('store_id','1')
-        store_id = StoreAuth.objects.filter(user_id = user_id)
-        review = Review.objects.filter(store_id = store_id).order_by('-review_reg_date')[:5]
-        tags = StoreTag.objects.filter(store_id = store_id)[:20]
-        boards = AuthBoard.objects.filter(user_id = user_id).order_by('-ab_reg_date') #글
+        store_info = StoreAuth.objects.get(user_id = user_id)
+        user_info=User.objects.get(user_id=user_id)
+        review = Review.objects.filter(store_id = store_info.store_id).order_by('-review_reg_date')[:5]
+        tags = StoreTag.objects.filter(store_id = store_info.store_id)[:20]
+        boards = AuthBoard.objects.filter(user_id = user_info.user_id).order_by('-ab_reg_date') #글
         paginator = Paginator(boards,5) # 글 5개
         posts = paginator.get_page(page) # url에 있는 현재 page값 get_page로 전달
-        
+
         return render(request,'AuthManagedPage\AuthManagedPage.html',
-                      {'store_id':store_id,
+                      {'store_id':store_info.store_id,
                        'reviews':review,
                        'tags':tags,
                        'boards':boards,
