@@ -82,7 +82,7 @@
                     </p>
                     <p style='text-align:right'><small class="text-muted">{{ board.ab_reg_date | date:"Y-m-d h:i" }}</small></p>
                     <hr>
-                    <p class="card-text"><small class="text-muted">{{ board.ab_content }}</small></p>
+                    <pre>{{ board.ab_content }}</pre>
                 </div>
             </div>
             <div class="row mt-3" style='margin-bottom:20px'>
@@ -97,23 +97,15 @@
                     <div class="div-center">
                         <!-- 답변 목록-->
                         <div class="review-write" style='margin-bottom:20px'>
-                            <!--댓글 수정
-                                <form action="" method="post" id="Replyform">
-                                    {% csrf_token %}
-                                    {{Replyform.authboard.as_hidden}}
-                                    {{Replyform.user.as_hidden}}
-                                    <textarea name="review_content" id="" cols="30" rows="5"></textarea>
-                                    <button type="submit" class="submit accbtn">리뷰등록</button>
-                                </form>
-                            -->
-                          <form action="">
-                            <textarea type="text" name="content" class="form-control" id="inputContent" style='height:100px;'></textarea>
+                          <form action="{% url 'new_reply' board.ab_id %}" method="post" id="Replyform">
+                            {% csrf_token %}
+                            <textarea type="text" name="reply_content" class="form-control" style='height:100px;'></textarea>
+                            <br>
+                            <div style='display: flex; justify-content: right'>
+                                <button type="submit" class="submit accbtn">답변 등록</button>
+                            </div>
                           </form>
                         </div>
-                        <div style='display: flex; justify-content: right'>
-                            <div class="submit accbtn">답변등록</div>
-                        </div>
-                        
                         <hr>
                         <div class="review-board">
                             {% for reply in replys %}
