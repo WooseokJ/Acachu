@@ -11,7 +11,17 @@ import random
 import json
 import time
 def main(request):
-        return render(request,'main/index.html')
+    main_yn=True
+    try:
+        user_id=request.session.get('user_id','0')
+        user_info=User.objects.get(user_id=user_id) 
+        auth_id=user_info.auth_id
+        if auth_id==2:
+            main_yn=False
+            return render(request,'main/index.html',{'main_yn':main_yn})
+        return render(request,'main/index.html',{'main_yn':main_yn}) 
+    except:
+        return render(request,'main/index.html',{'main_yn':main_yn}) 
 
 
 def mypage(request):
@@ -26,12 +36,18 @@ def login(request):
             user = User.objects.get(user_account=user_account)    
             if PasswordHasher().verify(user.user_password, user_password):
                 request.session['user_id'] = user.user_id
-                return render(request,'main/index.html',{})
+                auth_id=user.auth_id
+                auth_yn2=True
+                if auth_id==2:
+                    auth_yn2=False
+                    return render(request,'main/index.html',{'auth_yn2':auth_yn2})
+                return render(request,'main/index.html',{'auth_yn2':auth_yn2})
         except:
             
             messages.warning(request,"로그인실패")
             return redirect("/")
     else:
+        messages.warning(request,"로그인실패")
         return redirect('/')
             
 
@@ -101,8 +117,8 @@ def mypage(request):
                     if delete == '삭제':
                         user_info.delete()
                         request.session.flush()
-                        return render(request,'main/index.html')
-                    return redirect('/mypage')
+                        return render(request,'main/index.html')# render는 template 같이 보내는것.
+                    return redirect('/mypage')#redirect는 url만보는것.
             except:
                 return redirect('/mypage')
     else:                                           
@@ -114,15 +130,15 @@ def mypage(request):
             store_info=Store.objects.all()
             review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
             return render(request,'main/mypage.html',{'user_info':user_info,'bookmark_info':bookmark_info,
-                                                      'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
+                                                    'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
         else:           # 업주용
             auth_yn=True 
             print(auth_yn)
-            bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id).order_by('-bookmark_reg_date')[:5]
+            bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id).order_by('-bookmark_reg_date')[:1]
             store_info=Store.objects.all()
-            review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
+            review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:1]
             return render(request,'main/mypage.html',{'user_info':user_info,'bookmark_info':bookmark_info,
-                                                      'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
+                                                    'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
 
 
 def edit_userprofile(request):
@@ -134,12 +150,15 @@ def edit_userprofile(request):
         user.save()
         return redirect('/mypage')
     
-def more(request):
+def bookmark(request):
     user_id=request.session.get('user_id','0')
     user_info=User.objects.get(user_id=user_id)
-    auth_id=user_info.auth_id
-    bookmark_info=Bookmark.objects.all(user_id=user_info.user_id)
+    bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
     store_info=Store.objects.all()
-    review_info=Review.objects.all(user_id=user_info.user_id)
-    return render(request,'main/more.html',{'user_info':user_info,'bookmark_info':bookmark_info,
-                                                      'review_info':review_info,'store_info':store_info})
+    return render(request,'main/bookmark.html',{'user_info':user_info,'bookmark_info':bookmark_info, 'store_info':store_info})
+    
+def review(request):
+    user_id=request.session.get('user_id','0')
+    user_info=User.objects.get(user_id=user_id)
+    review_info=Review.objects.filter(user_id=user_info.user_id)
+    return render(request,'main/review.html',{'user_info':user_info, 'review_info':review_info})

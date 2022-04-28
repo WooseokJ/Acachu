@@ -1,6 +1,16 @@
 <!-- SIDE BAR -->
+
+
 <section class="sidebar">
-    <div class="leftmenu" onclick="location.href='{% url "mypage"%}'">마이 페이지</div>
-    <div class="leftmenu">업주 등록</div>
+    {%if main_yn %}
     <div class="leftmenu" onclick="location.href='{% url "choice"%}'">카페 추천</div>
+    {%elif auth_yn2 %}
+    <div class="leftmenu" onclick="location.href='{% url "mypage"%}'">마이 페이지</div>
+    <div class="leftmenu" onclick="location.href='{% url "choice"%}'">카페 추천</div>
+    
+    {%else%}
+    <div class="leftmenu" onclick="location.href='{% url "mypage"%}'">마이 페이지</div>
+    <div class="leftmenu" onclick="location.href='{% url "choice"%}'">카페 추천</div>
+    <div class="leftmenu" onclick="location.href='{% url "board"%}'">업장관리</div>
+    {%endif%}
 </section>

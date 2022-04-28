@@ -57,34 +57,14 @@
             <h2>My page</h2>
             <hr>
           </nav>
-
-        <!--즐겨찾기 및 댓글-->
+          <!--리뷰 내역 리스트-->
         <div class="col-md-8">
-        
-            <div class="line-item hf-item-odd clearfix">
-               <div class="row">
-                  <div class="row-8">  즐겨찾기</div>
-                  <div class="col-md-8" align="right">
-                      <a class="mp-more" href="/member/more/board/" >more+</a>
-                  </div>
-                  <!--즐겨찾기 리스트-->
-                </div>
-                <div class="">
-                  {% for bbookmark in bookmark_info %}
-                  <hr class="mp-hr">
-                      <a class = "mp-link"  href="/details/?store_id={{bbookmark.store_id}}">{{bbookmark.store.store_name}}</a> 
-                  {% endfor %}
-                  
-              </div>
-            </div>
-        <br>
             <div class="line-item hf-item-odd clearfix">
                 <div class="row">
                   <div class="row-8">리뷰내역</div>
                   <div class="col-md-8" align="right">
-                      <a class="mp-more" href="/mypage/more/" >more+</a>
                   </div>
-                  <!--리뷰 내역 리스트-->
+                  
                 </div>
                 <div class="">
                   {% for review in review_info %}
@@ -94,13 +74,14 @@
                     </a>
                   {% endfor %}
                 </div>
-              </div>
+            </div>
           </div>
             </div>
           </div>
 
         </div>
     </div>
+    
 
   <!-- FOOTER -->
   {% include "main/footer.html" %}
