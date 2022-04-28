@@ -110,16 +110,14 @@ def mypage(request):
         auth_id=user_info.auth_id
         if auth_id==1: #일반용
             auth_yn=False 
-            user_info=User.objects.get(user_id=user_id)
             bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
             store_info=Store.objects.all()
-            review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
+            review_info=Review.objects.filter(user_id=user_info.user_id)
             return render(request,'main/mypage.html',{'user_info':user_info,'bookmark_info':bookmark_info,
                                                       'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
         else:           # 업주용
             auth_yn=True 
             print(auth_yn)
-            user_info=User.objects.get(user_id=user_id)
             bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id)
             store_info=Store.objects.all()
             review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
@@ -135,3 +133,13 @@ def edit_userprofile(request):
         user.user_profileurl = img
         user.save()
         return redirect('/mypage')
+    
+def more(request):
+    user_id=request.session.get('user_id','0')
+    user_info=User.objects.get(user_id=user_id)
+    auth_id=user_info.auth_id
+    bookmark_info=Bookmark.objects.all(user_id=user_info.user_id)
+    store_info=Store.objects.all()
+    review_info=Review.objects.all(user_id=user_info.user_id)
+    return render(request,'main/more.html',{'user_info':user_info,'bookmark_info':bookmark_info,
+                                                      'review_info':review_info,'store_info':store_info})
