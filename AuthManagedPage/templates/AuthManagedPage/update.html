@@ -77,71 +77,34 @@
         <div class="container" style='margin-bottom:100px'>
             <div class="card">
                 <div class="card-body">
-                    <p>
-                        <h5>{{ board.ab_title }}</h5>
-                    </p>
-                    <p style='text-align:right'><small class="text-muted">{{ board.ab_reg_date | date:"Y-m-d h:i" }}</small></p>
-                    <hr>
-                    <pre>{{ board.ab_content }}</pre>
-                </div>
-                <div class="row mt-2" style='margin-bottom:20px;'>
-                    <div class=" mr-auto" style='width=150px'></div>
-                    <div class="col-auto mr-auto">
-                        <button id = "update" class="btn btn-primary" type = "button" onclick="fn_up();">수정</button>
-                    </div>
-                    <div class="col-auto mr-auto">
-                        <button id = "del" class="btn btn-danger" type = "button" onclick="fn_del();">삭제</button>
-                    </div>
-                </div>
-            </div>
-            
-            <br>
-            <div class="card">
-                <div class="card-body">
-                    <div class="div-center">
-                        <!-- 답변 목록-->
-                        <div class="review-write" style='margin-bottom:20px'>
-                          <form action="{% url 'new_reply' board.ab_id %}" method="post" id="Replyform">
-                            {% csrf_token %}
-                            <textarea type="text" name="reply_content" class="form-control" style='height:100px;'></textarea>
-                            <br>
-                            <div style='display: flex; justify-content: right'>
-                                <button type="submit" class="submit accbtn">답변 등록</button>
+                    <form action="/post" method="post">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="title" class="form-control" id="inputTitle">
                             </div>
-                          </form>
                         </div>
-                        <hr>
-                        <div class="review-board">
-                            {% for reply in replys %}
-                            <div>{{reply.reply_content}}</div>
-                            <hr>
-                            {% endfor %}
+                        <div class="form-group row">
+                            <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
+                            <div class="col-sm-10">
+                                <textarea type="text" name="content" class="form-control" id="inputContent"  style='height:300px'></textarea>
+                            </div>
+                            <label for="inputContent" class="col-sm-2 col-form-label"><strong>이미지 첨부</strong></label>
+                            <div class="col-sm-10">
+                            </div>
                         </div>
-                      </div>
-                </div>
-            </div>
-            <div style='display: flex; justify-content: center; margin-top:50px'>
-                <div onclick="location.href='/authmanaged/'" class='is-btn is-btn--black' style='text-align:center; width:150px'>
-                    뒤로 가기
+                        <div class="row">
+                            <div class="col-auto mr-auto"></div>
+                            <div class="col-auto">
+                                <input class="btn btn-primary" type="submit" role="button" value="작성">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        function fn_del(){
-            var res = confirm('게시글을 삭제하시겠습니까?');
-            if(res){
-              window.location.href = "{% url 'contents_delete' board.ab_id %}"
-              alert("삭제되었습니다.");
-            }
-          }
-
-          function fn_del(){
-              window.location.href = "{% url 'contents_update' board.ab_id %}"
-              alert("수정되었습니다.");
-          }
-    </script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <!-- FOOTER -->
     {% include 'main/footer.html' %}

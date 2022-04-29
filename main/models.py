@@ -49,6 +49,9 @@ class AuthBoard(models.Model):
     ab_id = models.AutoField(db_column='Ab_id', primary_key=True)  # Field name made lowercase.
     ab_title = models.CharField(db_column='Ab_title', max_length=255)  # Field name made lowercase.
     ab_content = models.CharField(db_column='Ab_content', max_length=3000)  # Field name made lowercase.
+    ab_img_fir = models.CharField(db_column='Ab_img_fir', max_length=1000,blank=True, null=True)  # Field name made lowercase.
+    ab_img_se = models.CharField(db_column='Ab_img_se', max_length=1000,blank=True, null=True)  # Field name made lowercase.
+    ab_img_thi = models.CharField(db_column='Ab_img_thi', max_length=1000,blank=True, null=True)  # Field name made lowercase.
     ab_reg_date = models.DateTimeField(db_column='Ab_reg_date')  # Field name made lowercase.
     ab_reply_yn = models.IntegerField(db_column='Ab_reply_YN')  # Field name made lowercase.
     
@@ -151,4 +154,11 @@ class Noun(models.Model):
     second = models.CharField(max_length=10, null=False)
     class Meta:
         db_table = 'noun'
+        managed = True
+
+class Searchpicture(models.Model):
+    searchpicture_id = models.AutoField(db_column='Searchpicture_id',primary_key = True)
+    searchpicture_url = models.CharField(db_column='Searchpicture_url', max_length=1000)
+    class Meta:
+        db_table = 'searchpicture'
         managed = True
