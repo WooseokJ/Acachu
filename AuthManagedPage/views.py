@@ -41,7 +41,7 @@ def post(request): #글작성
                                     ab_reply_yn = ab_reply_yn,
                                     user_id = user_id
         )
-        return HttpResponseRedirect(reverse('board'))
+        return redirect('/../authmanaged/')
     return render(request,'AuthManagedPage\post.html')
 
 def contents(request, id): # 글 작성 후 확인
@@ -58,10 +58,15 @@ def contents(request, id): # 글 작성 후 확인
                         'replyform':Replyform
                     })
 
+def contents_update(request,id): #수정
+    del_post = AuthBoard.objects.get(pk=id)
+    del_post.delete()
+    return redirect('/../authmanaged/')
+
 def contents_delete(request,id): #삭제
     del_post = AuthBoard.objects.get(pk=id)
     del_post.delete()
-    return HttpResponseRedirect(reverse('board')) #수정
+    return redirect('/../authmanaged/')
 
 def new_reply(request,id):
     form = ReplyForm(request.POST)
