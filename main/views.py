@@ -11,6 +11,15 @@ import random
 import json
 import time
 def main(request):
+    tags = Tag.objects.all()
+    result = []
+    for tag in tags:
+        try:
+            tmp = random.choice(StoreTag.objects.filter(tag=tag))
+            result.append(tmp)
+        except:
+            continue
+    print(result, 1)
     main_yn=True
     try:
         user_id=request.session.get('user_id','0')
@@ -18,10 +27,15 @@ def main(request):
         auth_id=user_info.auth_id
         if auth_id==2:
             main_yn=False
-            return render(request,'main/index.html',{'main_yn':main_yn})
-        return render(request,'main/index.html',{'main_yn':main_yn}) 
+            return render(request,'main/index.html',
+                        {'main_yn':main_yn,
+                           'storetags':result})
+        return render(request,'main/index.html',
+                        {'main_yn':main_yn,'storetags':result})
     except:
-        return render(request,'main/index.html',{'main_yn':main_yn}) 
+        return render(request,'main/index.html',
+                        {'main_yn':main_yn,
+                         'storetags':result})
 
 
 def mypage(request):
