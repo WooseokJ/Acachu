@@ -78,21 +78,17 @@
       <div class="inner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
+            {% for storetag in storetags%}
             <div class="swiper-slide">
-              <img src="{% static 'image\cp1.jpg'%}" alt=""/>
+              {% if storetag.store.store_image %}
+              <img src="{{storetag.store.store_image}}" alt=""/>
+              {% else %}
+              <img src="{% static 'image/no-image.png'%}" alt=""/>
+              {% endif %}
+              <div class="title">{{storetag.store.store_name}} ({{storetag.tag.tag_name}})</div>
+              <div class="content">{{storetag.store.store_content}}</div>
             </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp2.jpg'%}" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp3.jpg'%}" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp4.jpg'%}" alt=""/>
-            </div>
-            <div class="swiper-slide">
-              <img src="{% static 'image\cp5.jpg'%}" alt=""/>
-            </div>        
+            {% endfor %}
           </div>
         </div>
       </div>
