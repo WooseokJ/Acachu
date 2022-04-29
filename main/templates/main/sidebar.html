@@ -2,15 +2,13 @@
 
 
 <section class="sidebar">
-    {%if main_yn %}
-    <div class="leftmenu" onclick="location.href='{% url "choice"%}'">카페 추천</div>
-    {%elif auth_yn2 %}
-    <div class="leftmenu" onclick="location.href='{% url "mypage"%}'">마이 페이지</div>
-    <div class="leftmenu" onclick="location.href='{% url "choice"%}'">카페 추천</div>
     
-    {%else%}
-    <div class="leftmenu" onclick="location.href='{% url "mypage"%}'">마이 페이지</div>
     <div class="leftmenu" onclick="location.href='{% url "choice"%}'">카페 추천</div>
-    <div class="leftmenu" onclick="location.href='{% url "board"%}'">업장관리</div>
+    {%if request.session.user_id  %}
+    <div class="leftmenu" onclick="location.href='{% url "mypage"%}'">마이 페이지</div>
+    {%endif%}
+    {%if request.session.auth_id =='2'%}
+    <div class="leftmenu" onclick="location.href='{% url "mypage"%}'">마이 페이지</div>
     {%endif%}
 </section>
+
