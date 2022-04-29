@@ -22,6 +22,7 @@ from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
+    
     path('', include('RecommendPage.urls')),
     path('',include('main.urls')),
     path('', include('ChoicePage.urls')),
