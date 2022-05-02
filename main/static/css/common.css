@@ -172,6 +172,9 @@ footer {
     background-color: #101010;
     border-top: 1px solid #333;
     height: 200px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 footer .inner {
