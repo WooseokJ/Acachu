@@ -1,5 +1,5 @@
 body {
-    background-color: antiquewhite;
+    background-color: rgb(242, 240, 234);
     font-family: 'Varela Round', sans-serif;
     height: auto;
 
@@ -11,12 +11,13 @@ header {
 }
 
 header .inner {
-    width:1100px;    
+    width: 1100px;
     height: 200px;
     margin: 0 auto;
     position: relative;
 }
-header .inner .menu{
+
+header .inner .menu {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -24,12 +25,13 @@ header .inner .menu{
     border: 5px, solid, gray;
     cursor: pointer;
 }
-header .inner .menu .material-icons{
+
+header .inner .menu .material-icons {
     color: antiquewhite;
     font-size: 50px;
 }
 
-header .inner .logo{
+header .inner .logo {
     position: absolute;
     display: block;
     left: 50%;
@@ -38,12 +40,12 @@ header .inner .logo{
     height: 100px;
 }
 
-header .inner .logo img{
+header .inner .logo img {
     width: 350px;
     height: 200px;
 }
 
-header .inner .btns{
+header .inner .btns {
     position: absolute;
     display: flex;
     width: 300px;
@@ -51,37 +53,38 @@ header .inner .btns{
     top: 50%;
     transform: translateY(-50%);
 }
-header .inner .btns .accbtn{
+
+header .inner .btns .accbtn {
     position: relative;
     margin: 0 15px;
 }
 
-header .inner .btns .accbtn.logout{
-    position:absolute;
+header .inner .btns .accbtn.logout {
+    position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .sidebar {
-    width:300px;
-    position:absolute;
-    top:200px;
-    left:-300px;
-    width:300px;
-    height:1200px;
-    background-color:#101010;
-    transition:left 0.3s;
-    cursor:pointer;
+    width: 300px;
+    position: absolute;
+    top: 200px;
+    left: -300px;
+    width: 300px;
+    height: 1200px;
+    background-color: #101010;
+    transition: left 0.3s;
+    cursor: pointer;
     z-index: 9;
 }
 
 .sidebar.active {
-    left:0;
-    cursor:default;
+    left: 0;
+    cursor: default;
 }
 
-.sidebar .leftmenu{
+.sidebar .leftmenu {
     color: #fff;
     height: 120px;
     line-height: 120px;
@@ -91,14 +94,14 @@ header .inner .btns .accbtn.logout{
     transition: .4s;
 }
 
-.sidebar .leftmenu:hover{
+.sidebar .leftmenu:hover {
     background-color: antiquewhite;
     color: #101010;
 }
 
 .accbtn {
     width: 130px;
-    padding : 10px;
+    padding: 10px;
     border: 2px solid antiquewhite;
     border-radius: 4px;
     color: #101010;
@@ -113,7 +116,7 @@ header .inner .btns .accbtn.logout{
 
 }
 
-.accbtn:hover{
+.accbtn:hover {
     background-color: #101010;
     color: antiquewhite;
 }
@@ -128,7 +131,7 @@ header .inner .btns .accbtn.logout{
     background-color: antiquewhite;
 }
 
-.btn--more{
+.btn--more {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -136,15 +139,16 @@ header .inner .btns .accbtn.logout{
 
 }
 
-.accbtn .triger-btn-btn{
+.accbtn .triger-btn-btn {
     position: absolute;
 }
 
 img {
     display: block;
 }
+
 /* FOOTER */
-footer{
+footer {
     background-color: #101010;
     border-top: 1px solid #333;
 }
@@ -153,21 +157,21 @@ footer .inner {
     padding: 0px 0 60px 0;
 }
 
-footer .inner .logo{
+footer .inner .logo {
     width: 350px;
     height: 200px;
 }
 
 footer .menu {
     display: flex;
-    justify-content: center;    
+    justify-content: center;
 }
 
-footer .menu li{
+footer .menu li {
     position: relative;
 }
 
-footer .menu li::before{
+footer .menu li::before {
     content: "";
     width: 3px;
     height: 3px;
@@ -179,7 +183,7 @@ footer .menu li::before{
     margin: auto;
 }
 
-footer .menu li:last-child::before{
+footer .menu li:last-child::before {
     display: none;
 }
 
