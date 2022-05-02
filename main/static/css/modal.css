@@ -129,6 +129,15 @@
 
 .btn .btnprimary{
     width: 100%;
+    color: #9a6e41;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #c7a17a;
+    border-color: #c7a17a;
+    font-weight: bold;
+    
 }
 
 /*sign up modal*/
