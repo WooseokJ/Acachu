@@ -21,18 +21,22 @@ header .inner {
     position: relative;
 }
 
-header .inner .menu {
+header .inner .cafe_search{
     position: absolute;
+    width: 300px;
+    left: 0;
     top: 50%;
     transform: translateY(-50%);
-    margin: auto 0;
-    border: 5px, solid, gray;
-    cursor: pointer;
+    font-size: 20px;
+    margin: 0 15px;
+    color: #fff;
+    transition: all .3s ease-in;
+    text-decoration: underline;
+    text-decoration-color: #101010;
 }
 
-header .inner .menu .material-icons {
-    color: antiquewhite;
-    font-size: 50px;
+header .inner .cafe_search:hover{
+    text-decoration-color: white;
 }
 
 header .inner .logo {

@@ -2,13 +2,10 @@
 <!-- HEADER -->
 <header>
     <div class="inner">
-        <div class="menu" id="sidebarToggle">
-            <span class="material-icons">menu</span>
-        </div>
-            <div class="logo">
+        <a href="{% url 'choice'%}" class="cafe_search">카페검색</a>
+        <div class="logo">
             <img src="{% static 'image\logo2.png'%}" alt="logo" onclick="location.href='{% url "main"%}'">
         </div>
-
         
         {% if request.session.user_id == NULL %}
         <div class="btns">
@@ -17,8 +14,8 @@
         </div>
         {% else %} 
         <div class="btns">
-            <a href='{% url "mypage" %}' class="logout">Logout</a>
-            <a href='{% url "logout" %}' class="logout">Logout</a>
+            <a href='{% url "mypage" %}' class="login">Mypage</a>
+            <a href='{% url "logout" %}' class="signup">Logout</a>
         </div>
         {% endif %}
 
