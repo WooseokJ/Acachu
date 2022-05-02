@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.urls import reverse
 from django.http import HttpResponseRedirect,Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from main.models import *
 from .forms import *
 from django.core.paginator import Paginator
@@ -15,7 +15,7 @@ def Aut(request):
         user_info=User.objects.get(user_id=user_id)
         review = Review.objects.filter(store_id = store_info.store_id).order_by('-review_reg_date')[:3]
         tags = StoreTag.objects.filter(store_id = store_info.store_id)[:20]
-        boards = AuthBoard.objects.filter(user_id = user_info.user_id).order_by('-ab_reg_date') #글
+        boards = AuthBoard.objects.filter(user_id = user_info.user_id).order_by('-ab_id') #글
         paginator = Paginator(boards,5) # 글 5개
         posts = paginator.get_page(page) # url에 있는 현재 page값 get_page로 전달
 
@@ -32,14 +32,20 @@ def post(request): #글작성
     if request.method=='POST':
         ab_title = request.POST['title']
         ab_content = request.POST['content']
+        ab_img_fir = request.FILES.get('ab_img_fir')
+        ab_img_se = request.FILES.get('ab_img_se')
+        ab_img_thi = request.FILES.get('ab_img_thi')
         ab_reg_date = datetime.now()
         ab_reply_yn = 0
         user_id = request.session['user_id']
         AuthBoard.objects.create(ab_title=ab_title,
                                     ab_content=ab_content,
+                                    ab_img_fir = ab_img_fir,
+                                    ab_img_se = ab_img_se,
+                                    ab_img_thi = ab_img_thi,
                                     ab_reg_date=ab_reg_date,
                                     ab_reply_yn = ab_reply_yn,
-                                    user_id = user_id
+                                    user_id = user_id,
         )
         return redirect('/../authmanaged/')
     return render(request,'AuthManagedPage\post.html')
@@ -58,10 +64,11 @@ def contents(request, id): # 글 작성 후 확인
                         'replyform':Replyform
                     })
 
-def contents_update(request,id): #수정
-    del_post = AuthBoard.objects.get(pk=id)
-    del_post.delete()
-    return redirect('/../authmanaged/')
+def contents_update(request,id): #수정기능
+    board = get_object_or_404(AuthBoard, pk=id)
+    post.delete()
+    return render(request,'AuthManagedPage/update.html',{'board':post})
+
 
 def contents_delete(request,id): #삭제
     del_post = AuthBoard.objects.get(pk=id)
@@ -84,4 +91,4 @@ def new_reply(request,id):
                             )
         ab.ab_reply_yn = 1
         ab.save()
-    return redirect('/post/'+str(id)) #수정
+    return redirect('/post/'+str(id))

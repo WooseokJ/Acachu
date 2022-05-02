@@ -48,7 +48,7 @@
         <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
     </div>
 
-    <form action="/recommendlist/" method="POST" name= 'imgsearch_form' enctype="multipart/form-data">
+    <form action="/recommendlist/" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- 주소 -->
         <input type='hidden' id='sido' name='sido' value="{{ sido }}">
@@ -58,7 +58,7 @@
 
          <!-- 이미지 -->
         <div class='imgzip'>
-            <input type="file" class = 'real-upload' id="upload_file1" accept="image/*" name='img' required multiple style="display: none;">
+            <input type="file" class = 'real-upload' id="upload_file1" accept="image/*" name='upload_file1' style="display: none;">
             <img src="{% static 'img/uppic.png'%}" id="img_section1" class='upload img'>
         </div>
 
@@ -66,32 +66,31 @@
         <div class='is-btn_div'>
             <input type='submit' class = 'is-btn is-btn--black' value='카페 검색'>
         </div>
-
-        <!-- 파일 선택 및 미리보기-->
-        <script>
-            const realUpload = document.querySelector('.real-upload');
-            const upload = document.querySelector('.upload');
-            var test = document.querySelector('#img');
-            // 파일이 이미지가 아니면 경고
-            upload.addEventListener('click', () => realUpload.click());
-            const reader = new FileReader();
-
-            // 첫 번째 사진
-            reader.onload = (readerEvent) => {
-                document.querySelector("#img_section1").setAttribute("src", readerEvent.target.result);
-                //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
-            };
-    
-            document.querySelector("#upload_file1").addEventListener("change", (changeEvent) => {
-                //upload_file 에 이벤트리스너를 장착
-    
-                const imgFile = changeEvent.target.files[0];
-                reader.readAsDataURL(imgFile);
-                //업로드한 이미지의 URL을 reader에 등록
-            });
-        </script>
     </form>
-        
+    <!-- 파일 선택 및 미리보기-->
+    <script>
+        const realUpload = document.querySelector('.real-upload');
+        const upload = document.querySelector('.upload');
+        var test = document.querySelector('#img');
+        // 파일이 이미지가 아니면 경고
+        upload.addEventListener('click', () => realUpload.click());
+        const reader = new FileReader();
+
+        // 첫 번째 사진
+        reader.onload = (readerEvent) => {
+            document.querySelector("#img_section1").setAttribute("src", readerEvent.target.result);
+            //파일을 읽는 이벤트가 발생하면 img_section의 src 속성을 readerEvent의 결과물로 대체함
+        };
+
+        document.querySelector("#upload_file1").addEventListener("change", (changeEvent) => {
+            //upload_file 에 이벤트리스너를 장착
+
+            const imgFile = changeEvent.target.files[0];
+            reader.readAsDataURL(imgFile);
+            //업로드한 이미지의 URL을 reader에 등록
+        });
+    </script>
+
     <!-- FOOTER -->
     {% include 'main/footer.html' %}
 </body>

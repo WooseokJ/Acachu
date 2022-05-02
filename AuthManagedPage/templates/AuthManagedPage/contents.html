@@ -80,48 +80,75 @@
                     <p>
                         <h5>{{ board.ab_title }}</h5>
                     </p>
-                    <p style='text-align:right'><small class="text-muted">{{ board.ab_reg_date | date:"Y-m-d h:i" }}</small></p>
+                    <p style='text-align:right'>
+                        <small class="text-muted">{{ board.ab_reg_date | date:"Y-m-d h:i" }}</small>
+                    </p>
                     <hr>
                     <pre>{{ board.ab_content }}</pre>
+                    {% if board.ab_img_fir != '' %}
+                        <div style="width:110px; height:120px; float:left;">
+                            <a href='{{board.ab_img_fir.url}}' download="download"><img src='{{board.ab_img_fir.url}}' height='100' width='100'></a>
+                        </div>
+                    {% endif %}
+
+                    {% if board.ab_img_se != '' %}
+                        <div style="width:110px; height:120px;float:left;">
+                            <a href='{{board.ab_img_se.url}}' download="download"><img src='{{board.ab_img_se.url}}' height='100' width='100'></a>
+                        </div>
+                    {% endif %}
+
+                    {% if board.ab_img_thi != '' %}
+                        <div style="width:110px; height:120px;float:left;">
+                            <a href='{{board.ab_img_thi.url}}' download="download"><img src='{{board.ab_img_thi.url}}' height='100' width='100'></a>
+                        </div>
+                    {% endif %}
+
                 </div>
                 <div class="row mt-2" style='margin-bottom:20px;'>
                     <div class=" mr-auto" style='width=150px'></div>
                     <div class="col-auto mr-auto">
-                        <button id = "update" class="btn btn-primary" type = "button" onclick="fn_up();">수정</button>
+                        <button id="update" class="btn btn-primary" type="button" onclick="fn_up();">수정</button>
                     </div>
                     <div class="col-auto mr-auto">
-                        <button id = "del" class="btn btn-danger" type = "button" onclick="fn_del();">삭제</button>
+                        <button id="del" class="btn btn-danger" type="button" onclick="fn_del();">삭제</button>
                     </div>
                 </div>
             </div>
-            
+
             <br>
             <div class="card">
                 <div class="card-body">
                     <div class="div-center">
                         <!-- 답변 목록-->
                         <div class="review-write" style='margin-bottom:20px'>
-                          <form action="{% url 'new_reply' board.ab_id %}" method="post" id="Replyform">
-                            {% csrf_token %}
-                            <textarea type="text" name="reply_content" class="form-control" style='height:100px;'></textarea>
-                            <br>
-                            <div style='display: flex; justify-content: right'>
-                                <button type="submit" class="submit accbtn">답변 등록</button>
-                            </div>
-                          </form>
+                            <form action="{% url 'new_reply' board.ab_id %}" method="post" id="Replyform">
+                                {% csrf_token %}
+                                <textarea
+                                    type="text"
+                                    name="reply_content"
+                                    class="form-control"
+                                    style='height:100px;'></textarea>
+                                <br>
+                                <div style='display: flex; justify-content: right'>
+                                    <button type="submit" class="submit accbtn">답변 등록</button>
+                                </div>
+                            </form>
                         </div>
                         <hr>
                         <div class="review-board">
                             {% for reply in replys %}
-                            <div>{{reply.reply_content}}</div>
-                            <hr>
+                                <div>{{reply.reply_content}}</div>
+                                <hr>
                             {% endfor %}
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
             <div style='display: flex; justify-content: center; margin-top:50px'>
-                <div onclick="location.href='/authmanaged/'" class='is-btn is-btn--black' style='text-align:center; width:150px'>
+                <div
+                    onclick="location.href='/authmanaged/'"
+                    class='is-btn is-btn--black'
+                    style='text-align:center; width:150px'>
                     뒤로 가기
                 </div>
             </div>
@@ -129,18 +156,17 @@
     </div>
 
     <script>
-        function fn_del(){
+        function fn_del() {
             var res = confirm('게시글을 삭제하시겠습니까?');
-            if(res){
-              window.location.href = "{% url 'contents_delete' board.ab_id %}"
-              alert("삭제되었습니다.");
+            if (res) {
+                window.location.href = "{% url 'contents_delete' board.ab_id %}"
+                alert("삭제되었습니다.");
             }
-          }
+        }
 
-          function fn_del(){
-              window.location.href = "{% url 'contents_update' board.ab_id %}"
-              alert("수정되었습니다.");
-          }
+        function fn_up() {
+            window.location.href = "{% url 'contents_update' board.ab_id %}"
+        }
     </script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <!-- FOOTER -->
