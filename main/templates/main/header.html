@@ -12,12 +12,13 @@
         
         {% if request.session.user_id == NULL %}
         <div class="btns">
-            <a href="#myModal" class="accbtn login" data-toggle="modal">Login</a>
-            <a href="#myModal_signup" class="accbtn signup" data-toggle="modal">Signup</a>
+            <a href="#myModal" class="login" data-toggle="modal">Login</a>
+            <a href="#myModal_signup" class="signup" data-toggle="modal">Signup</a>
         </div>
         {% else %} 
         <div class="btns">
-            <a href='{% url "logout" %}' class="accbtn logout">Logout</a>
+            <a href='{% url "mypage" %}' class="logout">Logout</a>
+            <a href='{% url "logout" %}' class="logout">Logout</a>
         </div>
         {% endif %}
 

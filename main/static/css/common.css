@@ -2,6 +2,7 @@ body {
     background-color: rgb(242, 240, 234);
     font-family: 'Varela Round', sans-serif;
     height: auto;
+    padding-top: 100px;
 }
 
 header {
@@ -10,6 +11,7 @@ header {
     height: 100px;
     position: fixed;
     z-index: 2;
+    top: 0px;
 }
 
 header .inner {
@@ -56,18 +58,31 @@ header .inner .btns {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    
 }
 
-header .inner .btns .accbtn {
+header .inner .btns .login,
+header .inner .btns .signup {
     position: relative;
+    font-size: 20px;
     margin: 0 15px;
+    color: #fff;
+    transition: all .3s ease-in;
+    text-decoration: underline;
+    text-decoration-color: #101010;
 }
 
-header .inner .btns .accbtn.logout {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+header .inner .btns .login:hover,
+header .inner .btns .signup:hover {
+    text-decoration-color: white;
+}
+
+header .inner .btns .logout {
+position: absolute;
+right: 0;
+top: 50%;
+transform: translateY(-50%);
+color: #fff;
 }
 
 .sidebar {
