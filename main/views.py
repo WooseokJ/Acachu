@@ -42,7 +42,6 @@ def login(request):
             user = User.objects.get(user_account=user_account)    
             if PasswordHasher().verify(user.user_password, user_password):
                 request.session['user_id'] = user.user_id
-
                 return redirect('/')
         except:
             messages.warning(request,"로그인실패")
@@ -63,10 +62,16 @@ def signup(request):
         email=request.POST.get('User_email',None)
         password=request.POST.get('User_password',None)
         re_password=request.POST.get('User_re_password',None)  
+        
+        if User.objects.filter(user_account=account).exists():
+            messages.info(request,'이미있는 아이디입니다.')
+            
+        elif User.objects.filter(user_email=email).exists():
+            messages.info(request,'이미있는 이메일입니다.')
                 
-        if account !=None:
+        else:
             if password !=re_password:
-                return render(request, 'main/index.html')
+                return redirect('/')
 
             if password == re_password:
                 adj = random.choice(Adj.objects.all())
@@ -81,10 +86,11 @@ def signup(request):
                                 auth_id=1,
                                 user_nickname=nick)
                     user.save()
-                    return render(request,'main/index.html')
+                    return redirect('/')
                 except:
                     messages.warning(request,'회원가입실패')
                     return redirect('/')
+        return redirect('/')
             
     else:
         return render(request,'main/index.html')
