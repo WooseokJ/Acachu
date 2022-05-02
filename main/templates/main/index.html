@@ -79,7 +79,7 @@
         <div class="swiper-container">
           <div class="swiper-wrapper">
             {% for storetag in storetags%}
-            <div class="swiper-slide">
+            <div class="swiper-slide" onclick="location.href='{% url "details" %}?store_id={{storetag.store.store_id}}'">
               {% if storetag.store.store_image %}
               <img src="{{storetag.store.store_image}}" alt=""/>
               {% else %}

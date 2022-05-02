@@ -63,26 +63,6 @@
   {% include 'main/sidebar.html' %}
 
   <div class="w-background">
-    <!-- CAFE IMAGE -->
-    <section class="cafe-image">
-      <div class="inner">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            {% if images %}
-            {% for image in images %}
-            <div class="swiper-slide">
-              <img src= {{image.cafepicture_url}} alt=""/>
-            </div>
-            {% endfor %}
-            {% else %}
-            <img src= 'https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png' alt=""/>
-            {% endif %}
-
-          </div>
-        </div>
-      </div>
-    </section>
-  
     <section class="cafe-info">
       <div class="title">
         <div class="store-name">
@@ -127,6 +107,26 @@
       </div>
     </section>
   
+    <!-- CAFE IMAGE -->
+    <section class="cafe-image">
+      <div class="inner">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            {% if images %}
+            {% for image in images %}
+            <div class="swiper-slide">
+              <img src= {{image.cafepicture_url}} alt=""/>
+            </div>
+            {% endfor %}
+            {% else %}
+            <img src= 'https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png' alt=""/>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </section>
+      
     <!-- REVIEW -->
     <section class="review">
       {% if request.session.user_id == NULL %}
