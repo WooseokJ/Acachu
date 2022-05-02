@@ -84,6 +84,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="card mt-3">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -236,12 +237,14 @@
         
 
         <!--즐겨찾기 및 댓글-->
-        <div class="col-md-8">
-        
-            <div class="line-item hf-item-odd clearfix">
+         
+        <div class="col-md-8 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="line-item hf-item-odd clearfix">
                <div class="row">
-                  <div class="row-8">  즐겨찾기</div>
-                  <div class="col-md-8" align="right">
+                  <div class="row-10 col-3">북마크</div>
+                  <div class="col-md-12" align="right">
                       <a class="mp-more" href="/bookmark/" >more+</a>
                   </div>
                   <!--즐겨찾기 리스트-->
@@ -251,20 +254,23 @@
                   <hr class="mp-hr">
                       <a class = "mp-link"  href="/details/?store_id={{bbookmark.store_id}}">{{bbookmark.store.store_name}}</a> 
                   {% endfor %}
-                  
               </div>
             </div>
-        <br>
+          </div>
+        </div>
+
+        <div class="card md-3">
+          <div class="card">
+            <div class="card-body">
             <div class="line-item hf-item-odd clearfix">
-                <div class="row">
-                  <div class="row-8">리뷰내역</div>
-                  <div class="col-md-8" align="right">
+              <div class="row">
+                <div class="row-10 col-3">리뷰내역</div>
+                  <div class="col-md-12" align="right">
                       <a class="mp-more" href="/review/" >more+</a>
                   </div>
-                  <!--리뷰 내역 리스트-->
+                <!--리뷰 내역 리스트-->
                 </div>
-                <div class="">
-                  
+                <div class="">  
                   {% for review in review_info %}
                    <hr class="mp-hr">
                     <a class = "mp-link" style="display:inline-block; width:500px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" href="/details/?store_id={{review.store_id}}">
@@ -273,11 +279,11 @@
                   {% endfor %}
                 </div>
               </div>
-          </div>
-       
-      
+            </div>
             </div>
           </div>
+        </div>
+ 
 
         </div>
     </div>

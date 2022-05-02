@@ -54,15 +54,23 @@
     <div class="main-body">
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <br>
-            <h2>My page</h2>
+            <h2>Bookmark</h2>
             <hr>
+            <div class="col-md-12" align="right">
+                <button class="btn btn-primary" onclick="history.back()">Go Back</button>
+            </div>
+            <br>
           </nav>
 
         <!--즐겨찾기 및 댓글-->
-        <div class="col-md-8">
+        <div class="container" style='margin-bottom:100px'>
+
+        <!--<div class="col-md-8">-->
+          <div class="card">
+                <div class="card-body">
             <div class="line-item hf-item-odd clearfix">
                <div class="row">
-                  <div class="row-8">  즐겨찾기</div>
+                 <div class="row-10 col-3">북마크</div>
                   <div class="col-md-8" align="right">
                   </div>
                   <!--즐겨찾기 리스트-->
@@ -74,9 +82,9 @@
                   {% endfor %}
                   
               </div>
-            </div>
+            <!--</div>-->
         <br>
-
+          </div>
           </div>
             </div>
           </div>
