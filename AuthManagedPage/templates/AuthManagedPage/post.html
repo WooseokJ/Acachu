@@ -77,7 +77,7 @@
         <div class="container" style='margin-bottom:100px'>
             <div class="card">
                 <div class="card-body">
-                    <form action="/post" method="post">
+                    <form action="/post" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group row">
                             <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
@@ -90,8 +90,16 @@
                             <div class="col-sm-10">
                                 <textarea type="text" name="content" class="form-control" id="inputContent"  style='height:300px'></textarea>
                             </div>
+                            
+                        </div>
+                        <div class="form-group row">
                             <label for="inputContent" class="col-sm-2 col-form-label"><strong>이미지 첨부</strong></label>
                             <div class="col-sm-10">
+                                <input type="file" name="ab_img_fir" id='ab_img_fir' accept="image/*">
+                                <br><br>
+                                <input type="file" name="ab_img_se" id='ab_img_se' accept="image/*">
+                                <br><br>
+                                <input type="file" name="ab_img_thi" id='ab_img_thi' accept="image/*">
                             </div>
                         </div>
                         <div class="row">
