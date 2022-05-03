@@ -256,3 +256,40 @@ footer .logo {
     padding: 1.25rem;
     height: 350px;
 }
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 1.25rem;
+    margin-top: 20px;
+    padding-bottom:100px;
+}
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 1.25rem;
+}
+.card>.list-group:first-child {
+    border-top-width: 0;
+    border-top-left-radius: calc(2.25rem - 1px);
+    border-top-right-radius: calc(2.25rem - 1px);
+}
+.list-group {
+    display: -ms-flexbox;
+    -ms-flex-direction: column;
+    padding-left: 0;
+    margin-bottom: -80px;
+    border-radius: 2.25rem;
+    margin-top: 35px;
+}
