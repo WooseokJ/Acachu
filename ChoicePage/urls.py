@@ -4,5 +4,6 @@ from ChoicePage import views
 urlpatterns = [
     path('choice/', views.Cho, name="choice"),
     path('choice/category/', views.Cat, name="category"),
-    path('choice/imagesearch/', views.Img, name="imagesearch")
+    path('choice/imagesearch/', views.Img, name="imagesearch"),
+    path('imageadd/', views.Imgadd, name="imageadd")
 ]

@@ -48,7 +48,7 @@
         <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
     </div>
 
-    <form action="/recommendlist/" method="POST" enctype="multipart/form-data">
+    <form action="/imageadd/" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- 주소 -->
         <input type='hidden' id='sido' name='sido' value="{{ sido }}">
