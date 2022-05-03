@@ -188,6 +188,7 @@
     min-height: 38px;
     box-shadow: none !important;
     /* border-width: 0 0 1px 0; */
+    left:10px;
 }
 
 .signup-form .input-group-addon {
@@ -227,11 +228,13 @@
     font-size: 21px;
     position: relative;
     top: 8px;
+    right:7px;
 }
 
 .signup-form .fa-paper-plane {
     font-size: 17px;
     padding-right: 100;
+    right: 9px;
 }
 
 .signup-form .fa-check {
