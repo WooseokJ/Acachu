@@ -25,6 +25,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
   <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
   <link rel="stylesheet" href="{% static 'css/common.css'%}">
   <link rel="stylesheet" href="{% static 'css/modal.css'%}">
   <link rel="stylesheet" href="{% static 'css/details.css'%}">
@@ -51,7 +53,6 @@
     var reg_url = '{% url "reg_bookmark"%}';
     var del_url = '{% url "del_bookmark"%}';
   </script>
-  <script type="text/javascript">  </script>
   <script defer src="{% static 'js/common.js'%}"></script>
   <script defer src="{% static 'js/details.js'%}"></script>
 
@@ -59,10 +60,146 @@
 <body>
   <!-- HEADER -->
   {% include 'main/header.html' %}
-  <!-- SIDE BAR -->
-  {% include 'main/sidebar.html' %}
+
 
   <div class="w-background">
+    <div class="inner">
+      {% if store.store_image == NULL or store.store_image == "" %}
+      <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
+      {% else %}
+      <img src="{{store.store_image}}" alt="cafeimage">
+      {% endif %}
+
+      <!-- CAFE-INFO -->
+      <section class="cafe-info">
+        <div class="info-card">
+          <div class="cafe-name">
+            {{store.store_name}}
+          </div>
+          <div class="btns">
+            <div class="map-btn" id="mapbtn">
+              <div class="material-symbols-outlined">map</div>
+              <p>지도</p>
+            </div>
+            <div class="image-btn" id="imagebtn">
+              <div class="material-symbols-outlined">photo_library</div>
+              <p>사진</p>
+            </div>
+            <div class="review-btn" id="reviewbtn">
+              <div class="material-symbols-outlined">chat_bubble</div>
+              <p>리뷰</p>
+            </div>
+            {% if bookmark == True %}
+            <div class="bookmark active">
+              <div class="material-icons">favorite</div>
+            </div>
+            {% else %}
+            <div class="bookmark">
+              <div class="material-icons">favorite</div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+
+        <div class="details">
+          <p>상세정보</p>
+          <div class="address">
+            <span class="material-symbols-outlined">near_me</span>
+            {{store.store_roadnum}}
+          </div>
+          <div class="business-hour">
+            <span class="material-symbols-outlined">schedule</span>
+            {% if store.store_businesshour %}
+            {{store.store_businesshour}}
+            {% else %}
+            -
+            {% endif %}
+          </div>
+          <div class="cafe-tag">
+            <span class="material-symbols-outlined">sell</span>
+            {% if store.store_businesshour %}
+            {% for tag in tags %}
+            <div class="tagname">
+              {{tag.tag.tag_name}}
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="tagname">
+              -
+            </div>
+            {% endif %}
+          </div>
+          <div class="content">
+            <span class="material-symbols-outlined">description</span>
+            {% if store.store_content %}
+            {{store.store_content}}
+            {% else %}
+            -
+            {% endif %}
+          </div>
+        </div>
+      </section>
+
+      <!-- LOCATION -->
+      <section class="location" id="location">
+        <p>위치</p>
+        <div id="map"></div>          
+        <!-- 카카오지도 API -->
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e01062d22699cae4f1c9892e35ba0072&libraries=services"></script>
+        <script src="{% static 'js/detailsmap.js'%}"></script>
+      </section>
+
+      <!-- CAFE IMAGE -->
+      <section class="cafe-image" id="cafeimage">
+        <p>사진</p>
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            {% if images %}
+            {% for image in images %}
+            <div class="swiper-slide">
+              <img src= {{image.cafepicture_url}} alt=""/>
+            </div>
+            {% endfor %}
+            {% else %}
+            <img src= 'https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png' alt=""/>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+
+
+      <section class="review" id="review">
+        {% if request.session.user_id == NULL %}
+        <div class="review-title">Review 기능은 로그인 회원만 사용 가능합니다.</div>
+        {% else %}
+        <div class="review-title">이용자 후기</div>
+        <div class="div-center">
+          <div class="review-write">
+            <form action="{% url 'new_review' %}" method="post" id="reviewForm">
+              {% csrf_token %}
+              {{formreview.store.as_hidden}}
+              {{formreview.user.as_hidden}}
+              <textarea name="review_content" id="" cols="30" rows="5"></textarea>
+              <button type="submit" class="submit accbtn">리뷰등록</button>
+            </form>
+          </div>
+          <div class="review-board">
+            {% for review in reviews %}
+            <div>{{review.review_content}}</div>
+            <hr>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </section>
+    </div>
+  </div>
+
+
+
+
+{% comment %} 
     <section class="cafe-info">
       <div class="title">
         <div class="store-name">
@@ -152,7 +289,7 @@
       </div>
       {% endif %}
     </section>
-  </div>
+  </div> {% endcomment %}
   <!-- FOOTER -->
   {% include 'main/footer.html' %}
 </body>

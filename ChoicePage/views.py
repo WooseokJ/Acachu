@@ -46,8 +46,7 @@ def Imgadd(request):
         cate_name ='유아동반'                                   # 이부분 이미지  모델과 연결해서 cate_name 받을것
         Searchpicture.objects.create(searchpicture_url = img)
     
-        storetags = StoreTag.objects.filter(tag__tag_name=cate_name,
-                                            store__store_sinum=sido, 
-                                            store__store_sggnum=sigg)
+        stores = Store.objects.filter(store_sinum=sido,store_sggnum=sigg,store_emdnum=emdong)\
+                .prefetch_related('storetag_set').filter(storetag__tag__tag_name = cate_name)
         return render(request,'RecommendPage/recommendList.html',
-                    {'storetags':storetags})
+                    {'stores':stores})

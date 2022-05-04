@@ -1,124 +1,84 @@
-
-/* CAFE IMAGE */
-.cafe-image{
-    position: relative;
-    height: 620px;
-}
-
-.cafe-image .inner {
-    width: 1100px;
-    margin: 0 auto;
-    position: relative;
-}
-
-
-.cafe-image .inner .swiper-container{
-    width: 1100px;
-    height: 620px;
-    position: absolute;
+.inner{
+    width: 900px;
     overflow: hidden;
+    margin: 0 auto;
 }
 
-.cafe-image .inner .swiper-slide{
-    width: 1100px;
-    height: 620px;
-    opacity: 0;
-    transition: opacity .3s;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-} 
-.cafe-image .inner img{
-    width: 1100px;
-    height: 620px;
-    
-} 
-
-.cafe-image .inner .swiper-slide-active{
-    opacity: 1;
+.inner > img{
+    margin-top: 30px;
+    width: 900px;
+    height: 300px;
 }
 
-.cafe-image .inner .swiper-prev,
-.cafe-image .inner .swiper-next {
-    width: 42px;
-    height: 42px;
-    border: 2px solid #333;
-    border-radius: 50%;
-    top: calc(550px / 2);
-    /* transform: translateY(-50%); */
-    position: absolute;
-    z-index: 1;
-    cursor: pointer;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: .4s; 
-}
 
 /* CAFE-INFO */
-.cafe-info {
+.inner .cafe-info{
+    background-color: #fff;
+    height: auto;
     position: relative;
-    width: 1100px;
+    padding-top: 200px;
+}
+
+.inner .cafe-info .info-card{
+    position: absolute;
+    width: 700px;
+    height: 220px;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    margin: 0 auto;
+    box-shadow: 0 1px 2px rgb(219, 219, 219);
+}
+
+.inner .cafe-info .info-card .cafe-name{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.inner .cafe-info .info-card .material-symbols-outlined{
+    color: gray;
+    font-size: 35px;
+}
+
+.inner .cafe-info .info-card .btns{
+    display: flex;
+    justify-content: center;
+    width: 200px;
     margin: 0 auto;
 }
 
-.cafe-info .title{
-    width: 1100px;
-    height: 50px;
-    margin: 50px 0;
-}
-
-.cafe-info .store-name{
-    font-size: 40px;
-    width: fit-content;
-    float:left;
+.inner .cafe-info .info-card .btns .map-btn,
+.inner .cafe-info .info-card .btns .image-btn,
+.inner .cafe-info .info-card .btns .review-btn{
+    margin-left: 30px;
     margin-right: 30px;
+    cursor:pointer;
 }
 
-.cafe-info .bookmark{
-    color: gray;
-    cursor: pointer;
-    width: 40px;
-    float: left;
-    transition: color .4s;
+.inner .cafe-info .info-card .btns p{
+    text-align: center;
 }
 
-.cafe-info .bookmark.active{
-    color: rgb(255, 153, 0);
-    filter: 80%;
+.inner .cafe-info .details{
+    width: 700px;
+    height: auto;
+    margin: 0 auto;
+    padding-bottom: 50px;
 }
-
-
-.cafe-info .material-icons{
-    font-size: 40px;
+.inner .cafe-info .details p{
+    font-size: 25px;
+    margin-bottom: 30px;
 }
-
-.cafe-info .row{
-    justify-content: center;
-}
-
-.cafe-info .store-info{
-    height: 500px;
-    position: relative;
-    border: 2px solid black;
-    border-radius: 15px;
-    width: 40%;
-    margin-right: 5%;
-    background-color: #E6E6E6;
-}
-
-.cafe-info .store-info .address{
-    margin-top: 15px;
-}
-
-.cafe-info .store-info .cafe-tag{
+.inner .cafe-info .details .cafe-tag{
     display: flex;
     flex-flow: row wrap;
     height: auto;
 }
 
-.cafe-info .store-info .cafe-tag .tagname{
+.inner .cafe-info .details .cafe-tag .tagname{
     background-color: aliceblue;
     height: 40px;
     padding: 10px;
@@ -129,89 +89,111 @@
 
 }
 
+.cafe-info .bookmark{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: gray;
+    cursor: pointer;
+    width: 40px;
+    float: left;
+    transition: color .4s;
+}
 
-.cafe-info #map{
+.cafe-info .bookmark.active{
+    color: rgba(255, 0, 0, 0.658);
+}
+
+.cafe-info .bookmark div{   
+    font-size: 30px;
+}
+
+
+
+/* LOCATION */
+.inner .location{
+    margin-top: 25px;
+    background-color: #fff;
+    height: auto;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+.inner .location p{
+    display: block;
+    font-size: 25px;
+    margin-left: 100px;
+    align-content: center;
+    padding-top: 30px;
+}
+
+.inner .location #map{
     border: 2px solid black;
     border-radius: 15px;
-    width: 40%;
+    width: 700px;
     height: 500px;
     background-color: #E6E6E6;
+    margin: 30px auto;
 }
 
-/* REVIEW */
-.review{
+
+/* CAFE-IMAGE */
+.inner .cafe-image{
+    margin-top: 25px;
+    background-color: #fff;
+    height: auto;
     position: relative;
-    height: fit-content;
-    width: 1100px;
+}
+
+.inner .cafe-image p{
     display: block;
-    margin: 0 auto 100px;
+    font-size: 25px;
+    margin-left: 100px;
+    align-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
-.review .review-title{
-    font-size: 40px;
-    margin: 50px 0;
-}
-
-.review .div-center{
-    display: block;
-    justify-content: center;
-}
-.review .review-write{
-    position: relative;
-    width: 935px;
-    height: fit-content;
-    border: 2px solid black;
-    border-radius: 15px;
-    background-color: #E6E6E6;
-    margin: 0 auto 30px;
-    align-items: center;
-} 
-
-.review .review-write textarea{
-    border-radius: 5px;
-    margin-left: 5px;
-    margin-top: 3px;
-    width: 85%;
-}
-
-.review .review-write .submit{
-    position: absolute;
-    right: 6px;
-    top: 3px;
-    width: 125px;
-    height: 85px;
-    padding : 10px;
-    border: 2px solid #101010;
-    border-radius: 4px;
-    color: #101010;
-    background-color: rgb(255, 153, 0);
-    font-size: 16px;
-    font-weight: 700;
-    text-align: center;
-    cursor: pointer;
-    box-sizing: border-box;
-    display: block;
-    transition: .4s;
-    line-height: 85px;
-    padding: 0;
-}
-
-.review .review-write .submit:hover{
-    background-color: antiquewhite;
-}
-
-.review .review-board{
-    width: 935px;
-    height: fit-content;
-    left: 82px;
-    border: 2px solid black;
-    border-radius: 15px;
-    background-color: #E6E6E6;
-    margin: 0 auto;
+.inner .cafe-image .swiper-container{
+    width: 400px;
+    height: 300px;
     
 }
 
 
-.review .review-board div{
-    margin: 15px;
+.inner .cafe-image .swiper-slide{
+    width: 900px;
+    height: 300px;
+    opacity: 1;
+    transition: opacity .3s;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+} 
+.inner .cafe-image  img{
+    width: 300px;
+    height: 200px;
+    
+} 
+
+.inner .cafe-image .swiper-slide-active{
+    opacity: 1;
+}
+
+
+/* REVIEW */
+.inner .review{
+    margin-top: 25px;
+    background-color: #fff;
+    position: relative;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.inner .review .review-title{
+    display: block;
+    font-size: 25px;
+    margin-left: 100px;
+    align-content: center;
+    padding-top: 30px;
 }
