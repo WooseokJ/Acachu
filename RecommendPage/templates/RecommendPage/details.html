@@ -168,7 +168,7 @@
         </div>
       </section>
 
-
+      <!-- REVIEW -->
       <section class="review" id="review">
         {% if request.session.user_id == NULL %}
         <div class="review-title">Review 기능은 로그인 회원만 사용 가능합니다.</div>
@@ -180,13 +180,27 @@
               {% csrf_token %}
               {{formreview.store.as_hidden}}
               {{formreview.user.as_hidden}}
-              <textarea name="review_content" id="" cols="30" rows="5"></textarea>
+              <div class="textLengthWrap"> 
+                <p class="textCount">0 </p>
+                 <p class="textTotal">/ 200</p> </div>
+
+              <textarea name="review_content" id="review_wc" maxlength="300" rows="5"></textarea>
               <button type="submit" class="submit accbtn">리뷰등록</button>
             </form>
           </div>
           <div class="review-board">
             {% for review in reviews %}
-            <div>{{review.review_content}}</div>
+            <div class="row">
+              {% if review.user.user_profileurl or review.user.user_profileurl == ""%}
+              <img src="/media/{{review.user.user_profileurl}}" class ="review-image" alt="image">
+              {% else %}
+              <img src="{% static 'image/profile_img.jpg'%}" class ="review-image" class='upload img'>
+              {% endif %}
+              <div class="content">
+                <div class="review-content">{{review.review_content}}</div>
+                <div class="review-writer">{{review.user.user_nickname}}</div>
+              </div>
+            </div>
             <hr>
             {% endfor %}
           </div>

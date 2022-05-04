@@ -1,3 +1,4 @@
+
 .inner{
     width: 900px;
     overflow: hidden;
@@ -8,6 +9,7 @@
     margin-top: 30px;
     width: 900px;
     height: 300px;
+
 }
 
 
@@ -196,4 +198,53 @@
     margin-left: 100px;
     align-content: center;
     padding-top: 30px;
+}
+
+.inner .review .div-center{
+    width: 700px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.inner .review .div-center .review-write{
+    width: 700px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.inner .review .div-center .review-write textarea{
+    width: 700px;
+    margin-top: 30px;
+    resize: none;
+}
+.inner .review .div-center .review-write .submit.accbtn{
+    width: 100px;
+    margin-left: 600px;
+}
+.inner .review .div-center .review-board{
+    margin-top: 50px;
+}
+.inner .review .div-center .review-board .row{
+    display: flex;
+    flex-flow: row;
+}
+
+.inner .review .div-center .review-board img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 20px;
+    box-shadow: 0 1px 2px rgb(219, 219, 219);
+}
+.inner .review .div-center .review-board .row .content{
+    margin-left: 15px;
+    padding: 20px;
+}
+.inner .review .div-center .review-board .row .content .review-writer{
+    margin-top: 15px;
+    color:gray;
+    font-size: small;
+}
+.inner .review .div-center .review-board hr{
+    height: 1px;
 }

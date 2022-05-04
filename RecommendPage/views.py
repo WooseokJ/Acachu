@@ -63,7 +63,7 @@ def details(request):
             user_id = request.session['user_id']
             store = Store.objects.get(store_id = store_id)
             user = User.objects.get(user_id=user_id)
-            review = Review.objects.filter(store_id = store_id)
+            review = Review.objects.filter(store_id = store_id).order_by('-review_id')
             images = Cafepicture.objects.filter(store_id = store_id)
             tags = StoreTag.objects.filter(store=store)
             bookmark = False
