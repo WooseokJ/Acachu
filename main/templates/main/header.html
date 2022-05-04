@@ -2,18 +2,23 @@
 <!-- HEADER -->
 <header>
     <div class="inner">
-        <a href="{% url 'choice'%}" class="cafe_search">카페검색</a>
+        <div class="left-btns">
+            <a href="{% url 'choice'%}" class="cafe-search">카페검색</a>
+            {%if request.session.auth_id == 2%}
+            <a href="{% url 'board'%}" class="store-manage">업장 관리</a>
+            {%endif%}
+        </div>
         <div class="logo">
             <img src="{% static 'image\logo2.png'%}" alt="logo" onclick="location.href='{% url "main"%}'">
         </div>
         
         {% if request.session.user_id == NULL %}
-        <div class="btns">
+        <div class="right-btns">
             <a href="#myModal" class="login" data-toggle="modal">Login</a>
             <a href="#myModal_signup" class="signup" data-toggle="modal">Signup</a>
         </div>
         {% else %} 
-        <div class="btns">
+        <div class="right-btns">
             <a href='{% url "mypage" %}' class="login">Mypage</a>
             <a href='{% url "logout" %}' class="signup">Logout</a>
         </div>

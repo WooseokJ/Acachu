@@ -289,3 +289,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django,visualstudiocode,windows
 settings.py
+nlp/*

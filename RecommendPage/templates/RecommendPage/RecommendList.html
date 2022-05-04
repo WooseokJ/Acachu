@@ -44,30 +44,45 @@
 <body>
 	<!-- HEADER -->
   {% include 'main/header.html' %}
-  <!-- SIDE BAR -->
-  {% include 'main/sidebar.html' %}
+  
   <div class="inner" id="recommendinner">
     <div class="title">카페 리스트</div>
     <hr>
     <div class="recommendlist">
       <div class="row">
-        {% for storetag in storetags %}
-        <div class="container" onclick="location.href='{% url "details" %}?store_id={{storetag.store.store_id}}'">
-          {% if storetag.store.store_image == NULL %}
+        {% for store in stores %}
+        <div class="container" onclick="location.href='{% url "details" %}?store_id={{store.store_id}}'">
+          {% if store.store_image == NULL or store.store_image == "" %}
           <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
           {% else %}
-          <img src="{{storetag.store.store_image}}" alt="cafeimage">
+          <img src="{{store.store_image}}" alt="cafeimage">
           {% endif %}
           <div class="content">
-            <div class="cafename">{{storetag.store.store_name}}</div>
-            <p>{{storetag.store.store_content}}</p>
+            <div class="cafename">{{store.store_name}}</div>
+            <p>{{store.store_content}}</p>
           </div>
         </div>
         {% endfor %}
         
       </div>
     </div>
-    <div class="accbtn btn--more">더보기</div>
+    <form action="{% url 'recommendlist' %}" method="post" class="more">
+      {% csrf_token %}
+      <input type="hidden" id="category" name='category' value="{{category}}">
+      <input type='hidden' id='sido' name='sido' value="{{ sido }}">
+      <input type='hidden' id='sigg' name='sigg' value="{{ sigg }}">
+      <input type='hidden' id='emdong' name='emdong' value="{{ emdong }}">
+      <input type='hidden' id="adress" name='adress' value="{{ adress }}">
+      {% if size == '1' %}
+      <input type="hidden" id="size" name='size' value="2">
+      {% endif %}
+      {% if size == '2' %}
+      <input type="hidden" id="size" name='size' value="3">
+      {% endif %}
+      {% if size != '3' %}
+      <button type="submit" class="accbtn btn--more">더보기</button>
+      {% endif %}
+    </form>
   </div>
   
   <!-- FOOTER -->

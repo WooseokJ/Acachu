@@ -21,24 +21,6 @@ header .inner {
     position: relative;
 }
 
-header .inner .cafe_search{
-    position: absolute;
-    width: 300px;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-    margin: 0 15px;
-    color: #fff;
-    transition: all .3s ease-in;
-    text-decoration: underline;
-    text-decoration-color: #101010;
-}
-
-header .inner .cafe_search:hover{
-    text-decoration-color: white;
-}
-
 header .inner .logo {
     position: absolute;
     display: block;
@@ -55,9 +37,20 @@ header .inner .logo img {
     height: 150px;
 }
 
-header .inner .btns {
+header .inner .left-btns {
     position: absolute;
     display: flex;
+    width: 300px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
+
+header .inner .right-btns {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
     width: 300px;
     right: 0;
     top: 50%;
@@ -65,23 +58,47 @@ header .inner .btns {
     
 }
 
-header .inner .btns .login,
-header .inner .btns .signup {
+header .inner .left-btns .cafe-search,
+header .inner .left-btns .store-manage {
     position: relative;
+    left: 0;
+    width: 100px;
+    top: 50%;
     font-size: 20px;
     margin: 0 15px;
     color: #fff;
     transition: all .3s ease-in;
     text-decoration: underline;
     text-decoration-color: #101010;
+    text-align: center;
 }
 
-header .inner .btns .login:hover,
-header .inner .btns .signup:hover {
+
+header .inner .left-btns .cafe-search:hover,
+header .inner .left-btns .store-manage:hover  {
     text-decoration-color: white;
 }
 
-header .inner .btns .logout {
+
+header .inner .right-btns .login,
+header .inner .right-btns .signup {
+    position: relative;
+    width: 100px;
+    font-size: 20px;
+    margin: 0 15px;
+    color: #fff;
+    transition: all .3s ease-in;
+    text-decoration: underline;
+    text-decoration-color: #101010;
+    text-align: center;
+}
+
+header .inner .right-btns .login:hover,
+header .inner .right-btns .signup:hover {
+    text-decoration-color: white;
+}
+
+header .inner .right-btns .logout {
 position: absolute;
 right: 0;
 top: 50%;
@@ -186,6 +203,7 @@ footer .inner {
 footer .inner .logo {
     width: 300px;
     height: 150px;
+    margin: 0 auto;
 }
 
 footer .menu {
@@ -193,43 +211,11 @@ footer .menu {
     justify-content: center;
 }
 
-footer .menu li {
-    position: relative;
-}
-
-footer .menu li::before {
-    content: "";
-    width: 3px;
-    height: 3px;
-    background-color: #555;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: -1px;
-    margin: auto;
-}
-
-footer .menu li:last-child::before {
-    display: none;
-}
-
-footer .menu li a {
-    color: #ccc;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 15px;
-    display: block;
-}
-
 footer .copyright {
     color: #999;
     font-size: 12px;
     text-align: center;
     margin-top: 12px;
-}
-
-footer .logo {
-    margin: 0 auto;
 }
 
 #to-top {

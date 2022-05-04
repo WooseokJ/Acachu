@@ -16,14 +16,45 @@ def recommendList(request):
         sido = request.POST.get('sido')
         sigg = request.POST.get('sigg')
         emdong = request.POST.get('emdong')
-        # tmp = Store.objects.filter(store_sinum=sido, 
-        #                               store_sggnum=sigg)
-        # tag = Tag.objects.get(tag_name=cate_name)
-        storetags = StoreTag.objects.filter(tag__tag_name=cate_name,
-                                            store__store_sinum=sido, 
-                                            store__store_sggnum=sigg)
-    return render(request,'RecommendPage/recommendList.html',
-                  {'storetags':storetags})
+        size = request.POST.get('size', 0)
+        road_address = request.POST.get('adress')
+        if cate_name == '전체':
+            if size == '2':
+                stores = Store.objects.filter(store_sinum=sido,
+                                                store_sggnum=sigg)
+                
+            elif size == '3':
+                stores = Store.objects.filter(store_sinum=sido)
+                
+            else:
+                size = '1'
+                stores = Store.objects.filter(store_sinum=sido,
+                                                store_sggnum=sigg,
+                                                store_emdnum=emdong)
+        else:
+            if size == '2':
+                stores = Store.objects.filter(store_sinum=sido,store_sggnum=sigg)\
+                    .prefetch_related('storetag_set').filter(storetag__tag__tag_name = cate_name)
+                
+            elif size == '3':
+                stores = Store.objects.filter(store_sinum=sido)\
+                    .prefetch_related('storetag_set').filter(storetag__tag__tag_name = cate_name)
+            
+            else:
+                size = '1'
+                stores = Store.objects.filter(store_sinum=sido,store_sggnum=sigg,store_emdnum=emdong)\
+                    .prefetch_related('storetag_set').filter(storetag__tag__tag_name = cate_name)
+        
+        
+        print(size, cate_name)
+        return render(request,'RecommendPage/recommendList.html',
+                  {'stores':stores,
+                   'size':size,
+                   'category':cate_name,
+                   'sido':sido,
+                   'sigg':sigg,
+                   'emdong':emdong,
+                   'adress':road_address})
 
 def details(request):
     if request.method == 'GET':
