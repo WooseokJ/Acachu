@@ -65,55 +65,92 @@
     <body>
         <!-- HEADER -->
         {% include "main/header.html" %}
-
-        <!-- SIDE BAR -->
-        {% include "main/sidebar.html" %}
-
+        
         <div style='margin-bottom:50px'>
-            <div class="title">글 수정</div>
+            <div class="title">업장 수정 내용</div>
             <hr style='width:400px'>
         </div>
 
         <div class="container" style='margin-bottom:100px'>
             <div class="card">
-                <div class="card-body">
-                    <form action="/post" method="POST" enctype="multipart/form-data">
+                <div class="card-body" style='height:auto'>
+                    <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group row">
                             <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
                             <div class="col-sm-10">
-                                <input type="text" name="title" class="form-control" id="inputTitle" value="{{board.ab_title}}">
+                                <input type="text" name="title" class="form-control" id="inputTitle" value="{{board.ab_title}}" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
                             <div class="col-sm-10">
-                                <textarea type="text" name="content" class="form-control" id="inputContent"  style='height:300px'>{{board.ab_content}}</textarea>
+                                <textarea type="text" name="content" class="form-control" id="inputContent"  style='height:300px' required>{{board.ab_content}}</textarea>
                             </div>
                             
                         </div>
                         <div class="form-group row">
                             <label for="inputContent" class="col-sm-2 col-form-label"><strong>이미지 첨부</strong></label>
                             <div class="col-sm-10">
-                                <input type="file" name="ab_img_fir" id='ab_img_fir' accept="image/*">
-                                <br><br>
-                                <input type="file" name="ab_img_se" id='ab_img_se' accept="image/*">
-                                <br><br>
-                                <input type="file" name="ab_img_thi" id='ab_img_thi' accept="image/*">
+                                <input type="hidden" name="check" id='check' value="0"> <!--이미지 변경여부-->
+                                <input type="file" name="ab_img" id='ab_img' accept="image/*" onchange="show_img(event);" multiple>
+                                <div class="col" style='height:auto'>
+                                    <div id="img_zip" style="width:auto; height:auto; float:left; margin-top:20px">
+                                        {% for img in imgs %}
+                                            <img src='{{img.authpicture_img.url}}' height='100' width='100' style='float:left;margin-left:10px;margin-top:10px'>
+                                        {%endfor%}
+                                    </div>
+                                </div>
                             </div>
+                            
                         </div>
                         <div class="row">
                             <div class="col-auto mr-auto"></div>
                             <div class="col-auto">
-                                <input class="btn btn-primary" type="submit" role="button" value="수정">
+                                <input class="btn btn-primary" type="submit" role="button" value="작성">
                             </div>
                         </div>
                     </form>
+                    <div class="row" style='margin-top:10px'>
+                        <div class="col-auto mr-auto"></div>
+                        <div class="col-auto" >
+                            <button class="btn btn-danger" onclick="location.href='/post/{{board.ab_id}}'">취소</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+        function show_img(event) {
+            for (var image of event.target.files) {
+                if (!image.type.match("image/.*")) {
+                    alert('이미지 파일만 업로드가 가능합니다.');
+                    $("#ab_img").val("");
+                    return
+                } else {
+                    $('#img_zip').empty(); // 기존 사진 제거
+                    $("#check").val(""); // 이미지 변경
+
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        var img = document.createElement("img");
+                        var max_width = 100; // 이미지의 가로 최대 크기
+                        var max_height = 100; // 이미지의 세로 최대 크기
+                        img.width = max_width;
+                        img.height = max_height;
+                        img.setAttribute("src", event.target.result);
+                        img.setAttribute('style','float:left;margin-left:10px;margin-top:10px');
+                        document
+                            .querySelector("div#img_zip")
+                            .appendChild(img);
+                    };
+                    reader.readAsDataURL(image);
+                }
+            }
+        }
+    </script>
     <!-- FOOTER -->
     {% include 'main/footer.html' %}
 </body>
