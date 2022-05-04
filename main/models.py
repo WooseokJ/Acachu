@@ -1,5 +1,6 @@
 from distutils.command.upload import upload
 from django.db import models
+from django.test import tag
 
 # Create your models here.
 
@@ -11,6 +12,15 @@ class Auth(models.Model):
         managed = True
         db_table = 'auth'
 
+class Tag(models.Model):
+    tag_id = models.AutoField(db_column='Tag_id', primary_key=True)  # Field name made lowercase.
+    tag_name = models.CharField(db_column='Tag_name', max_length=20)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        db_table = 'tag'
+        
+        
 class User(models.Model):
     user_id = models.AutoField(db_column='User_id', primary_key=True)  # Field name made lowercase.
     user_account = models.CharField(db_column='User_account', max_length=20, unique=True)  # Field name made lowercase.
@@ -37,7 +47,9 @@ class Store(models.Model):
     store_sggnum = models.CharField(db_column='Store_sggnum', max_length=10)  # Field name made lowercase.
     store_emdnum = models.CharField(db_column='Store_emdnum', max_length=10)  # Field name made lowercase.
     store_roadnum = models.CharField(db_column='Store_roadnum', max_length=50)  # Field name made lowercase.
-    store_image = models.CharField(db_column='Store_image', max_length=255)
+    store_image = models.ImageField(db_column='Store_image', max_length=255)
+    
+    tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, null=True)  # Field name made lowercase.
     
     class Meta:
         managed = True
@@ -112,13 +124,6 @@ class StoreAuth(models.Model):
         db_table = 'store_auth'
 
 
-class Tag(models.Model):
-    tag_id = models.AutoField(db_column='Tag_id', primary_key=True)  # Field name made lowercase.
-    tag_name = models.CharField(db_column='Tag_name', max_length=20)  # Field name made lowercase.
-
-    class Meta:
-        managed = True
-        db_table = 'tag'
 
 
 class StoreTag(models.Model):
