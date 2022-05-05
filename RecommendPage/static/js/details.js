@@ -16,37 +16,41 @@ $('#reviewbtn').click(function(){
     $('html').animate({scrollTop : offset.top}, 100);
 });
 
-$('#review-wc').keyup(function (e) { 
-    let content = $(this).val(); // 글자수 세기 
-    if (content.length == 0 || content == '') { 
-        $('.textCount').text('0 '); 
-    } 
-    else { 
-        $('.textCount').text(content.length + ' ');
-    }
-    // 글자수 제한 
-    if (content.length > 300) { // 200자 부터는 타이핑 되지 않도록 
-        $(this).val($(this).val().substring(0, 300)); // 200자 넘으면 알림창 뜨도록 
-        alert('글자수는 300자까지 입력 가능합니다.');
-    };
+var textCount = document.querySelector('.textCount'); 
+
+var review_wc = document.getElementById('review_wc');
+review_wc.addEventListener('keyup', event =>{
+    var count = review_wc.value.length;
+    textCount.innerHTML = count;
 });
-
-
 
 new Swiper('.cafe-image .swiper-container', {
-    slidesPerView: 1,   //한번에 보여줄 슬라이드 개수
-    spaceBetween: 50,   //슬라이드 사이 여백
+    slidesPerView: 3,   //한번에 보여줄 슬라이드 개수
+    spaceBetween: 30,   //슬라이드 사이 여백
     centeredSlides: true,
-    loop: true,
-    autoplay: {
-        delay: 5000
-    },
+    loop: false,
     navigation: {
-        prevEl: '.cafe-image .inner .swiper-prev',
-        nextEl: '.cafe-image .inner .swiper-next'
+        prevEl: '.inner .cafe-image .swiper-prev',
+        nextEl: '.inner .cafe-image .swiper-next'
     }
 
 });
+
+const prevbtn = document.querySelector('.arrows .swiper-prev');
+const nextbtn = document.querySelector('.arrows .swiper-next');
+const currentcnt = document.querySelector('.cnts .current-cnt')
+const totalcnt = document.querySelector('.cnts .total-cnt')
+prevbtn.addEventListener('click', function(){
+    if(parseInt(currentcnt.innerHTML) != 1)
+    currentcnt.innerHTML -= 1;
+    
+});
+
+nextbtn.addEventListener('click', function(){
+    if(parseInt(currentcnt.innerHTML) < parseInt(totalcnt.innerHTML))
+        currentcnt.innerHTML = parseInt(currentcnt.innerHTML) + 1;
+});
+
 
 const bookmark = document.querySelector('.bookmark')
 
