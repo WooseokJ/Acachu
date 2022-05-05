@@ -162,13 +162,26 @@
             </div>
             {% endfor %}
             {% else %}
-            <img src= 'https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png' alt=""/>
+            <img src= 'https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png' class="center" alt=""/>
             {% endif %}
           </div>
         </div>
+        <div class="arrows">
+          <div class="swiper-prev">
+            <div class="material-icons">arrow_back</div>
+          </div>
+          <div class="swiper-next">
+            <div class="material-icons">arrow_forward</div>
+          </div>
+        </div>
+        <div class="cnts">
+          <div class="current-cnt">1</div>
+          <div>/</div>
+          <div class="total-cnt">{{images | length}}</div>
+        </div>
       </section>
 
-
+      <!-- REVIEW -->
       <section class="review" id="review">
         {% if request.session.user_id == NULL %}
         <div class="review-title">Review 기능은 로그인 회원만 사용 가능합니다.</div>
@@ -180,13 +193,27 @@
               {% csrf_token %}
               {{formreview.store.as_hidden}}
               {{formreview.user.as_hidden}}
-              <textarea name="review_content" id="" cols="30" rows="5"></textarea>
+              <div class="textLengthWrap"> 
+                <p class="textCount">0 </p>
+                <p class="textTotal">/300</p> 
+              </div>
+              <textarea name="review_content" id="review_wc" maxlength="300" rows="5"></textarea>
               <button type="submit" class="submit accbtn">리뷰등록</button>
             </form>
           </div>
           <div class="review-board">
             {% for review in reviews %}
-            <div>{{review.review_content}}</div>
+            <div class="row">
+              {% if not review.user.user_profileurl or review.user.user_profileurl == "" %}
+              <img src="{% static 'image/profile_img.jpg'%}" class ="review-image">
+              {% else %}
+              <img src="/media/{{review.user.user_profileurl}}" class ="review-image" alt="image">
+              {% endif %}
+              <div class="content">
+                <div class="review-content">{{review.review_content}}</div>
+                <div class="review-writer">{{review.user.user_nickname}}</div>
+              </div>
+            </div>
             <hr>
             {% endfor %}
           </div>
@@ -195,101 +222,6 @@
       </section>
     </div>
   </div>
-
-
-
-
-{% comment %} 
-    <section class="cafe-info">
-      <div class="title">
-        <div class="store-name">
-          {{store.store_name}}
-        </div>
-        {% if bookmark == True %}
-        <div class="bookmark active">
-          <div class="material-icons">star</div>
-        </div>
-        {% else %}
-        <div class="bookmark">
-          <div class="material-icons">star</div>
-        </div>
-        {% endif %}
-      </div>
-      <div class="row">
-        <div class="store-info">
-          <div class="address">
-            {{store.store_roadnum}}
-          </div>
-          <hr>
-          <div class="business-hour">
-            {{store.store_businesshour}}
-          </div>
-          <hr>
-          <div class="cafe-tag">
-            {% for tag in tags %}
-            <div class="tagname">
-              {{tag.tag.tag_name}}
-            </div>
-            {% endfor %}
-          </div>
-          <hr>
-          <div class="content">
-            {{store.store_content}}
-          </div>
-        </div>
-        <div id="map"></div>
-        <!-- 카카오지도 API -->
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e01062d22699cae4f1c9892e35ba0072&libraries=services"></script>
-        <script src="{% static 'js/detailsmap.js'%}"></script>
-      </div>
-    </section>
-  
-    <!-- CAFE IMAGE -->
-    <section class="cafe-image">
-      <div class="inner">
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            {% if images %}
-            {% for image in images %}
-            <div class="swiper-slide">
-              <img src= {{image.cafepicture_url}} alt=""/>
-            </div>
-            {% endfor %}
-            {% else %}
-            <img src= 'https://usagi-post.com/wp-content/uploads/2020/05/no-image-found-360x250-1.png' alt=""/>
-            {% endif %}
-
-          </div>
-        </div>
-      </div>
-    </section>
-      
-    <!-- REVIEW -->
-    <section class="review">
-      {% if request.session.user_id == NULL %}
-      <div class="review-title">Review 기능은 로그인 회원만 사용 가능합니다.</div>
-      {% else %}
-      <div class="review-title">Review</div>
-      <div class="div-center">
-        <div class="review-write">
-          <form action="{% url 'new_review' %}" method="post" id="reviewForm">
-            {% csrf_token %}
-            {{formreview.store.as_hidden}}
-            {{formreview.user.as_hidden}}
-            <textarea name="review_content" id="" cols="30" rows="5"></textarea>
-            <button type="submit" class="submit accbtn">리뷰등록</button>
-          </form>
-        </div>
-        <div class="review-board">
-          {% for review in reviews %}
-          <div>{{review.review_content}}</div>
-          <hr>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-    </section>
-  </div> {% endcomment %}
   <!-- FOOTER -->
   {% include 'main/footer.html' %}
 </body>

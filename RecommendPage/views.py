@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import *
+from nlp.caffe_nlp_pipeline import tags
 import json
 
 from main.models import *
@@ -63,7 +64,7 @@ def details(request):
             user_id = request.session['user_id']
             store = Store.objects.get(store_id = store_id)
             user = User.objects.get(user_id=user_id)
-            review = Review.objects.filter(store_id = store_id)
+            review = Review.objects.filter(store_id = store_id).order_by('-review_id')
             images = Cafepicture.objects.filter(store_id = store_id)
             tags = StoreTag.objects.filter(store=store)
             bookmark = False
@@ -101,6 +102,9 @@ def new_review(request):
                                 review_content = content,
                                 review_reg_date = datetime.now(),
                                 review_mod_date = datetime.now())
+        reviews = Review.objects.filter(store_id=store_id).values_list('review_content',flat=True)
+        
+        print(tags(reviews))
 
     return redirect('/details/?store_id=' + form.data['store'])
 

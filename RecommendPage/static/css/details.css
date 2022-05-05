@@ -1,3 +1,4 @@
+
 .inner{
     width: 900px;
     overflow: hidden;
@@ -8,6 +9,7 @@
     margin-top: 30px;
     width: 900px;
     height: 300px;
+
 }
 
 
@@ -141,7 +143,7 @@
 .inner .cafe-image{
     margin-top: 25px;
     background-color: #fff;
-    height: auto;
+    height: 350px;
     position: relative;
 }
 
@@ -155,32 +157,78 @@
 }
 
 .inner .cafe-image .swiper-container{
-    width: 400px;
-    height: 300px;
+    width: 900px;
+    height: 180px;
+    margin: 0 auto;
+    overflow: hidden;
     
 }
 
+.inner .cafe-image .swiper-container .swiper-wrapper{
+    width: fit-content;
+    height: 200px;
+}
 
 .inner .cafe-image .swiper-slide{
-    width: 900px;
-    height: 300px;
+    width: 322px;
+    height: 200px;
     opacity: 1;
     transition: opacity .3s;
     position: relative;
-    left: 50%;
-    transform: translate(-50%);
 } 
 .inner .cafe-image  img{
-    width: 300px;
-    height: 200px;
+    width: 250px;
+    height: 180px;
     
 } 
+.inner .cafe-image  img.center{
+    margin-left: 325px;
+}
 
 .inner .cafe-image .swiper-slide-active{
     opacity: 1;
 }
 
+.inner .cafe-image .swiper-prev,
+.inner .cafe-image .swiper-next {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 30px;
+    z-index: 1;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .4s; 
+}
 
+.inner .cafe-image .swiper-prev{
+    left: 300px;
+}
+
+.inner .cafe-image .swiper-next {
+    right: 300px;
+}
+
+.inner .cafe-image .cnts{
+    width: fit-content;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    display: flex;
+}
+
+.inner .cafe-image .cnts div{
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
 /* REVIEW */
 .inner .review{
     margin-top: 25px;
@@ -196,4 +244,59 @@
     margin-left: 100px;
     align-content: center;
     padding-top: 30px;
+}
+
+.inner .review .div-center{
+    width: 700px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.inner .review .div-center .review-write{
+    width: 700px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.inner .review .div-center .review-write .textLengthWrap{
+    position: absolute;
+    display: flex;
+    right: 100px;
+}
+
+.inner .review .div-center .review-write textarea{
+    width: 700px;
+    margin-top: 30px;
+    resize: none;
+}
+.inner .review .div-center .review-write .submit.accbtn{
+    width: 100px;
+    margin-left: 600px;
+}
+.inner .review .div-center .review-board{
+    margin-top: 50px;
+}
+.inner .review .div-center .review-board .row{
+    display: flex;
+    flex-flow: row;
+}
+
+.inner .review .div-center .review-board img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 20px;
+    box-shadow: 0 1px 2px rgb(219, 219, 219);
+}
+.inner .review .div-center .review-board .row .content{
+    margin-left: 15px;
+    padding: 20px;
+}
+.inner .review .div-center .review-board .row .content .review-writer{
+    margin-top: 15px;
+    color:gray;
+    font-size: small;
+}
+.inner .review .div-center .review-board hr{
+    height: 1px;
 }

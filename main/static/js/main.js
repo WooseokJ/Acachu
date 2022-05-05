@@ -4,7 +4,7 @@ new Swiper('.cafe-image .swiper-container', {
     centeredSlides: true,
     loop: true,
     autoplay: {
-        delay: 3000
+        delay: 5000
     },
     navigation: {
         prevEl: '.cafe-image .swiper-prev',
