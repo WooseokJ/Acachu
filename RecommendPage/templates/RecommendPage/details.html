@@ -106,14 +106,20 @@
           <p>상세정보</p>
           <div class="address">
             <span class="material-symbols-outlined">near_me</span>
-            {{store.store_roadnum}}
+            <div class="info-content">
+              {{store.store_roadnum}}
+            </div>
           </div>
           <div class="business-hour">
             <span class="material-symbols-outlined">schedule</span>
             {% if store.store_businesshour %}
-            {{store.store_businesshour}}
+            <div class="info-content">
+              {{store.store_businesshour}}
+            </div>
             {% else %}
-            -
+            <div>
+              -
+            </div>
             {% endif %}
           </div>
           <div class="cafe-tag">
@@ -133,9 +139,13 @@
           <div class="content">
             <span class="material-symbols-outlined">description</span>
             {% if store.store_content %}
-            {{store.store_content}}
+            <div class="info-content">
+              {{store.store_content}}
+            </div>
             {% else %}
-            -
+            <div class="info-content">
+              -
+            </div>
             {% endif %}
           </div>
         </div>
