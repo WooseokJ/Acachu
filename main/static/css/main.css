@@ -2,12 +2,13 @@
 .recommend-store {
     background-image: url("../image/recommend_back.jpg");
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-position-y: -50px;
+    background-size:cover;
+    height: 700px;
 }
 
 .recommend-store .inner {
-    height: 800px;
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
