@@ -7,6 +7,7 @@ from .forms import *
 import json
 
 from .task import tags
+from .task import PredictTask
 
 from main.models import *
 
