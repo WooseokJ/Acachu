@@ -118,13 +118,20 @@
             </div>
             {% else %}
             <div>
-              -
+              <div class="info-content">
+                -
+              </div>
             </div>
             {% endif %}
           </div>
           <div class="cafe-tag">
             <span class="material-symbols-outlined">sell</span>
-            {% if store.store_businesshour %}
+            {% if store.tag and store.tag != "" %}
+            <div class="tagname">
+              {{store.tag.tag_name}}
+            </div>
+            {% endif %}
+            {% if tags %}
             {% for tag in tags %}
             <div class="tagname">
               {{tag.tag.tag_name}}

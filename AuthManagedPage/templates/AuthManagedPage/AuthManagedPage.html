@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="{% static 'css/modal.css'%}">
         <link rel="stylesheet" href="{% static 'css/style.css'%}">
         <script defer src="{% static 'js/common.js'%}"></script>
+        <script defer src="{% static 'js/authmanagedpage.js'%}"></script>
         <!-- LODASH -->
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
@@ -61,6 +62,12 @@
             integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"></script> 
+
+
+
+        <script type="text/javascript"> 
+            var gif = "{% static 'image/loadingImg.gif'%}";
+        </script>
 
     </head>
     <body>
@@ -89,126 +96,131 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <form method='POST' action={% url 'storeprofile' %} enctype="multipart/form-data" style='auto'>
+                                <form id='imageform' method='POST' action={% url 'storeprofile' %} enctype="multipart/form-data" style='auto'>
                                     <div class='imgzip' style='height:230px'>
                                         {% csrf_token %}
                                         <input type="file" id="upload_file1" class='real-upload' name='upload_file1' accept="image/*" required="required" multiple="multiple" style="display: none;">
                                         {% if store.store_image %}
-                                            <img src="{{store.store_image}}" id="img_section1" class='upload img'></div>
+                                            <img src="/media/{{store.store_image}}" id="img_section1" class='upload img'></div>
                                         {% else %}
-                                        <img src="{% static 'image/profile_img.jpg'%}" id="img_section1" class='upload img'></div>
+                                        <img src="{% static 'image/no-image.png'%}" id="img_section1" class='upload img'></div>
                                         {% endif %}
-                                <div class="mt-3">
-                                    <br>
-                                    <h5>{{store.store_name}}</h5>
-                                    <button type="submit"class="btn btn-primary" style='margin-top:10px' id="profile_send">가게 이미지 수정</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card" style='padding:20px 10px 10px 30px'>
-                    <div class="line-item hf-item-odd clearfix">
-                        <div class="row" style='width:300px'>
-                            <div class="row-8">
-                                <b>추천 태그</b>
-                                <hr style='width:320px'>
-                                <div class="row" style='margin-left:5px;margin-right:5px;'>
-                                    {% for tag in tags %}
-                                        <a class='au-tag'  style="display:inline-block; overflow:hidden; text-overflow:ellipsis; text-align:center; margin:5px; padding: 15px">
-                                            {{tag.tag.tag_name}}
-                                        </a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="line-item hf-item-odd clearfix">
-                            <div class="row">
-                                <div class="row-10 col-3">
-                                    <b>최신 리뷰</b>
-                                </div>
-                            </div>
-                            <div class="">
-                                <hr style='width:auto'>
-                                <div class="row" style='margin-left:10px'>
-                                    {% for review in reviews %}
-                                        <a
-                                            style="display:inline-block; width:670px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left">
-                                            {{review.review_content}}
-                                            <hr style='width:auto'>
-                                        </a>
-                                        
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body" style='height:auto'>
-                        <br>
-                        <table class="table">
-                            <h5 style='text-align:center; margin-bottom:20px'>업장 수정 요청 게시판</h5>
-                            <br>
-                            <thead class="thead-light">
-                                <tr class="text-center">
-                                    <th scope="col">제목</th>
-                                    <th scope="col">작성일</th>
-                                    <th scope="col">답변여부</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for board in posts %}
-                                    <tr class="text-center">
-                                        <td>
-                                            <a href="/post/{{ board.ab_id }}">
-                                                <span>{{ board.ab_title }}</span>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <span>{{ board.ab_reg_date | date:"Y-m-d h:i" }}</span>
-                                        </td>
-                                        <td>
-                                            {% if board.ab_reply_yn == 0 %}
-                                                <span>N</span>
-                                                <!-- 답변여부-->
-                                            {% elif board.ab_reply_yn == 1%}
-                                                <span>Y</span>
-                                                <!-- 답변여부-->
-                                                {% endif%}
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <div style="text-align:center">
-                                <div class="pagination">
-                                    <div style="width:35%; margin: 5px;">
-                                        {% if posts.has_previous %}
-                                            <a href="?store_id={{store_id}}&page={{posts.previous_page_number}}">이전</a>
-                                        {% endif %}
+                                    <div class="mt-3">
+                                        <br>
+                                        <h5>{{store.store_name}}</h5>
+                                        <button type="submit"class="btn btn-primary" style='margin-top:10px' id="profile_send">가게 이미지 수정</button>
                                     </div>
-                                    <div style="width:30%; margin: 5px;">
-                                        {% for p in posts.paginator.page_range %}
-                                            <a href="?store_id={{store_id}}&page={{p}}" class="mx-1">{{p}}</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style='padding:20px 10px 10px 30px'>
+                        <div class="line-item hf-item-odd clearfix">
+                            <div class="row" style='width:300px'>
+                                <div class="row-8">
+                                    <b>추천 태그</b>
+                                    <hr style='width:320px'>
+                                    <div class="row" style='margin-left:5px;margin-right:5px;'>
+                                        {% if store.tag and store.tag != ""%}
+                                        <a class='au-tag'  style="display:inline-block; overflow:hidden; text-overflow:ellipsis; text-align:center; margin:5px; padding: 15px">
+                                            {{store.tag.tag_name}}
+                                        </a>
+                                        {% endif %}
+                                        {% for tag in tags %}
+                                            <a class='au-tag'  style="display:inline-block; overflow:hidden; text-overflow:ellipsis; text-align:center; margin:5px; padding: 15px">
+                                                {{tag.tag.tag_name}}
+                                            </a>
                                         {% endfor %}
                                     </div>
-                                    <div style="width:35%; margin: 5px;">
-                                        {% if posts.has_next %}
-                                            <a href="?store_id={{store_id}}&page={{posts.next_page_number}}">다음</a>
-                                        {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="line-item hf-item-odd clearfix">
+                                <div class="row">
+                                    <div class="row-10 col-3">
+                                        <b>최신 리뷰</b>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <hr style='width:auto'>
+                                    <div class="row" style='margin-left:10px'>
+                                        {% for review in reviews %}
+                                            <a
+                                                style="display:inline-block; width:670px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:left">
+                                                {{review.review_content}}
+                                                <hr style='width:auto'>
+                                            </a>
+                                            
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body" style='height:auto'>
+                            <br>
+                            <table class="table">
+                                <h5 style='text-align:center; margin-bottom:20px'>업장 수정 요청 게시판</h5>
+                                <br>
+                                <thead class="thead-light">
+                                    <tr class="text-center">
+                                        <th scope="col">제목</th>
+                                        <th scope="col">작성일</th>
+                                        <th scope="col">답변여부</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for board in posts %}
+                                        <tr class="text-center">
+                                            <td>
+                                                <a href="/post/{{ board.ab_id }}">
+                                                    <span>{{ board.ab_title }}</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <span>{{ board.ab_reg_date | date:"Y-m-d h:i" }}</span>
+                                            </td>
+                                            <td>
+                                                {% if board.ab_reply_yn == 0 %}
+                                                    <span>N</span>
+                                                    <!-- 답변여부-->
+                                                {% elif board.ab_reply_yn == 1%}
+                                                    <span>Y</span>
+                                                    <!-- 답변여부-->
+                                                    {% endif%}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div style="text-align:center">
+                                    <div class="pagination">
+                                        <div style="width:35%; margin: 5px;">
+                                            {% if posts.has_previous %}
+                                                <a href="?store_id={{store_id}}&page={{posts.previous_page_number}}">이전</a>
+                                            {% endif %}
+                                        </div>
+                                        <div style="width:30%; margin: 5px;">
+                                            {% for p in posts.paginator.page_range %}
+                                                <a href="?store_id={{store_id}}&page={{p}}" class="mx-1">{{p}}</a>
+                                            {% endfor %}
+                                        </div>
+                                        <div style="width:35%; margin: 5px;">
+                                            {% if posts.has_next %}
+                                                <a href="?store_id={{store_id}}&page={{posts.next_page_number}}">다음</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
 
                             <div class='row' style='margin-top:10px'>
                                 <div class="col-md-12" align="right">

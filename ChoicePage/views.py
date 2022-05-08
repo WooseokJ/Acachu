@@ -48,7 +48,6 @@ def Imgadd(request):
         
         pic = Searchpicture.objects.create(searchpicture_url = img)
         tags = img_predict(pic.searchpicture_url)
-
         cn = {'modern':'모던빈티지', 
               'eco_friendly':'자연 친화적(natural)', 
               'vintage':'인더스트리얼 빈티지', 
@@ -56,14 +55,15 @@ def Imgadd(request):
         cate_names = []
         for tag in tags:
             cate_names.append(cn[tag])
-        print(cate_names)
         stores = Store.objects.filter(store_sinum=sido,store_sggnum=sigg,store_emdnum=emdong)\
             .prefetch_related('storetag_set')\
                 .filter(Q(storetag__store__tag__tag_name = cate_names[0])|Q(storetag__store__tag__tag_name = cate_names[1]))\
                     .order_by('storetag__store__store_id').distinct()
+        cate_names = ','.join(cate_names)
+        print(cate_names)
         return render(request,'RecommendPage/recommendList.html',
                     {'stores':stores,
-                    'size':1,
+                    'size':'1',
                     'category':cate_names,
                     'sido':sido,
                     'sigg':sigg,

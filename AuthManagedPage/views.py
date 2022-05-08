@@ -7,6 +7,8 @@ from main.models import *
 from .forms import *
 from django.core.paginator import Paginator
 
+from imagemodel.image_predict import img_predict
+
 # Create your views here.
 def Aut(request):
     if request.method == 'GET':
@@ -123,4 +125,15 @@ def edit_storeprofile(request):
         img = request.FILES['upload_file1']
         store.store_image = img
         store.save()
+        tags = img_predict(store.store_image)
+        cn = {'modern':'모던빈티지', 
+              'eco_friendly':'자연 친화적(natural)', 
+              'vintage':'인더스트리얼 빈티지', 
+              'classic':'클래식'}
+        cate_names = []
+        for tag in tags:
+            cate_names.append(cn[tag])
+        store.tag = Tag.objects.get(tag_name=cate_names[0])
+        store.save()
+        print(cate_names[0])
         return redirect('/authmanaged')

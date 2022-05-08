@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import *
 from nlp.caffe_nlp_pipeline import tags
 import json
-
+from django.db.models import Q
 from main.models import *
 
 
@@ -19,6 +19,7 @@ def recommendList(request):
         emdong = request.POST.get('emdong')
         size = request.POST.get('size', 0)
         road_address = request.POST.get('adress')
+        imgcate = ['모던빈티지', '자연 친화적(natural)', '인더스트리얼 빈티지', 'classic']
         if cate_name == '전체':
             if size == '2':
                 stores = Store.objects.filter(store_sinum=sido,
@@ -32,6 +33,35 @@ def recommendList(request):
                 stores = Store.objects.filter(store_sinum=sido,
                                                 store_sggnum=sigg,
                                                 store_emdnum=emdong)
+                
+        elif ',' in cate_name:
+            cate_names = str.split(cate_name, ',')
+            if size == '2': 
+                stores = Store.objects.filter(Q(store_sinum=sido,store_sggnum=sigg, tag__tag_name=cate_names[0])|\
+                    Q(store_sinum=sido,store_sggnum=sigg, tag__tag_name=cate_names[1]))
+            
+            elif size == '3':
+                stores = Store.objects.filter(Q(store_sinum=sido,tag__tag_name=cate_names[0])|\
+                    Q(store_sinum=sido,store_sggnum=sigg, tag__tag_name=cate_names[1]))
+            
+            else:
+                size = '1'
+                stores = Store.objects.filter(Q(store_sinum=sido,store_sggnum=sigg,store_emdnum=emdong,tag__tag_name=cate_names[0])|\
+                    Q(store_sinum=sido,store_sggnum=sigg, tag__tag_name=cate_names[1]))
+            print(cate_names[0], cate_names[1])
+            cate_name = ','.join(cate_names)
+        
+        elif cate_name in imgcate:
+            if size == '2':
+                stores = Store.objects.filter(store_sinum=sido,store_sggnum=sigg, tag__tag_name=cate_name)
+                
+            elif size == '3':
+                stores = Store.objects.filter(store_sinum=sido,tag__tag_name=cate_name)
+            
+            else:
+                size = '1'
+                stores = Store.objects.filter(store_sinum=sido,store_sggnum=sigg,store_emdnum=emdong,tag__tag_name=cate_name)
+        
         else:
             if size == '2':
                 stores = Store.objects.filter(store_sinum=sido,store_sggnum=sigg)\

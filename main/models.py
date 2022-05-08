@@ -47,7 +47,7 @@ class Store(models.Model):
     store_sggnum = models.CharField(db_column='Store_sggnum', max_length=10)  # Field name made lowercase.
     store_emdnum = models.CharField(db_column='Store_emdnum', max_length=10)  # Field name made lowercase.
     store_roadnum = models.CharField(db_column='Store_roadnum', max_length=50)  # Field name made lowercase.
-    store_image = models.ImageField(db_column='Store_image', max_length=255)
+    store_image = models.ImageField(db_column='Store_image', upload_to='cafe_images/', max_length=255)
     
     tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, null=True)  # Field name made lowercase.
     
