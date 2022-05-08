@@ -66,17 +66,15 @@
         <!-- HEADER -->
         {% include "main/header.html" %}
 
-        <!-- SIDE BAR -->
-        {% include "main/sidebar.html" %}
-
         <div style='margin-bottom:50px'>
             <div class="title">업장 수정 내용</div>
             <hr style='width:400px'>
         </div>
 
-        <div class="container" style='margin-bottom:100px'>
-            <div class="card">
-                <div class="card-body">
+        <div class="container" style='margin-bottom:100px;'>
+            
+            <div class="card" style='height:auto'>
+                <div class="card-body" style='height:auto'>
                     <p>
                         <h5>{{ board.ab_title }}</h5>
                     </p>
@@ -84,40 +82,34 @@
                         <small class="text-muted">{{ board.ab_reg_date | date:"Y-m-d h:i" }}</small>
                     </p>
                     <hr>
+                    <br>
                     <pre>{{ board.ab_content }}</pre>
-                    {% if board.ab_img_fir != '' %}
-                        <div style="width:110px; height:120px; float:left;">
-                            <a href='{{board.ab_img_fir.url}}' download="download"><img src='{{board.ab_img_fir.url}}' height='100' width='100'></a>
-                        </div>
-                    {% endif %}
-
-                    {% if board.ab_img_se != '' %}
-                        <div style="width:110px; height:120px;float:left;">
-                            <a href='{{board.ab_img_se.url}}' download="download"><img src='{{board.ab_img_se.url}}' height='100' width='100'></a>
-                        </div>
-                    {% endif %}
-
-                    {% if board.ab_img_thi != '' %}
-                        <div style="width:110px; height:120px;float:left;">
-                            <a href='{{board.ab_img_thi.url}}' download="download"><img src='{{board.ab_img_thi.url}}' height='100' width='100'></a>
-                        </div>
-                    {% endif %}
+                    <br>
+                    <hr>
+                    {% for img in imgs %}
+                    <div style="width:110px; height:120px; float:left; margin-top:10px">
+                        <a href='{{img.authpicture_img.url}}' download="download">
+                            <img src='{{img.authpicture_img.url}}' height='100' width='100'>
+                        </a>
+                    </div>
+                    {%endfor%}
 
                 </div>
                 <div class="row mt-2" style='margin-bottom:20px;'>
-                    <div class=" mr-auto" style='width=150px'></div>
-                    <div class="col-auto mr-auto">
-                        <button id="update" class="btn btn-primary" type="button" onclick="fn_up();">수정</button>
+                    <div class=" mr-auto" style='width:480px'></div>
+                    <div class="col-auto mr-auto" style='display:block;margin:auto;'>
+                        <a href="{% url 'contents_update' board.ab_id %}" class='btn btn-primary'>수정</a>
                     </div>
-                    <div class="col-auto mr-auto">
+                    <div class="col-auto mr-auto" style='display:block;margin:auto'>
                         <button id="del" class="btn btn-danger" type="button" onclick="fn_del();">삭제</button>
                     </div>
+                    <div class=" mr-auto" style='width:480px'></div>
                 </div>
             </div>
 
             <br>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style='height:auto;'>
                     <div class="div-center">
                         <!-- 답변 목록-->
                         <div class="review-write" style='margin-bottom:20px'>
@@ -149,7 +141,7 @@
                     onclick="location.href='/authmanaged/'"
                     class='is-btn is-btn--black'
                     style='text-align:center; width:150px'>
-                    뒤로 가기
+                    목록으로
                 </div>
             </div>
         </div>
@@ -162,10 +154,6 @@
                 window.location.href = "{% url 'contents_delete' board.ab_id %}"
                 alert("삭제되었습니다.");
             }
-        }
-
-        function fn_up() {
-            window.location.href = "{% url 'contents_update' board.ab_id %}"
         }
     </script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>

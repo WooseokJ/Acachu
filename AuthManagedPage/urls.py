@@ -8,4 +8,5 @@ urlpatterns = [
     path('post/<int:id>/update',views.contents_update, name="contents_update"),
     path('post/<int:id>/delete', views.contents_delete,name='contents_delete'),
     path('post/new_reply/<int:id>', views.new_reply, name='new_reply'),
+    path('authmanaged/storeprofile/', views.edit_storeprofile, name="storeprofile"),
 ]

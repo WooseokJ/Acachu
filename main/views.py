@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 from audioop import reverse
+from email import message
 from pickle import NONE
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -27,7 +28,7 @@ def main(request):
         user_info = User.objects.get(user_id=user_id)    
         request.session['auth_id'] = user_info.auth.auth_id
         return render(request,'main/index.html',{'storetags':result,'user_info':user_info})
-    except:   
+    except:
         return render(request,'main/index.html',{'storetags':result})
 
 def mypage(request):
@@ -62,35 +63,34 @@ def signup(request):
         email=request.POST.get('User_email',None)
         password=request.POST.get('User_password',None)
         re_password=request.POST.get('User_re_password',None)  
-        
-        if User.objects.filter(user_account=account).exists():
-            messages.info(request,'이미있는 아이디입니다.')
-            
-        elif User.objects.filter(user_email=email).exists():
-            messages.info(request,'이미있는 이메일입니다.')
-                
-        else:
-            if password !=re_password:
-                return redirect('/')
+        if password !=re_password:
+            return render(request,'main/index.html',{})
 
-            if password == re_password:
-                adj = random.choice(Adj.objects.all())
-                noun = random.choice(Noun.objects.all())
-                nick = adj.first + ' ' + noun.second
-                password=PasswordHasher().hash(request.POST.get('User_password',None))
+        elif password == re_password:
+            adj = random.choice(Adj.objects.all())
+            noun = random.choice(Noun.objects.all())
+            nick = adj.first + ' ' + noun.second
+            password=PasswordHasher().hash(request.POST.get('User_password',None))
+            try:
+                user=User.objects.create(user_account=account,
+                            user_email=email,
+                            user_password=password,
+                            auth_id=1,
+                            user_nickname=nick)
+                user.save()  
                 
-                try:
-                    user=User.objects.create(user_account=account,
-                                user_email=email,
-                                user_password=password,
-                                auth_id=1,
-                                user_nickname=nick)
-                    user.save()
+                return redirect('/')
+            except:
+                if User.objects.filter(user_account=account).exists():
                     return redirect('/')
-                except:
-                    messages.warning(request,'회원가입실패')
+                elif User.objects.filter(user_email=email).exists():
+                    
                     return redirect('/')
+                else:
+                    return redirect('/')
+            
         return redirect('/')
+
             
     else:
         return render(request,'main/index.html')
