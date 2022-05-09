@@ -2,7 +2,6 @@ from datetime import datetime
 from django.urls import reverse
 from django.http import HttpResponseRedirect,Http404
 from django.shortcuts import redirect, render,get_object_or_404
-from pymysql import NULL
 from main.models import *
 from .forms import *
 from django.core.paginator import Paginator
@@ -126,9 +125,9 @@ def edit_storeprofile(request):
         store.store_image = img
         store.save()
         tags = img_predict(store.store_image)
-        cn = {'modern':'모던빈티지', 
+        cn = {'modern':'모던', 
               'eco_friendly':'자연 친화적(natural)', 
-              'vintage':'인더스트리얼 빈티지', 
+              'vintage':'빈티지', 
               'classic':'클래식'}
         cate_names = []
         for tag in tags:

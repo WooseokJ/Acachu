@@ -19,7 +19,7 @@ def recommendList(request):
         emdong = request.POST.get('emdong')
         size = request.POST.get('size', 0)
         road_address = request.POST.get('adress')
-        imgcate = ['모던빈티지', '자연 친화적(natural)', '인더스트리얼 빈티지', 'classic']
+        imgcate = ['모던', '자연 친화적(natural)', '빈티지', '클래식']
         if cate_name == '전체':
             if size == '2':
                 stores = Store.objects.filter(store_sinum=sido,

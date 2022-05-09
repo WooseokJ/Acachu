@@ -48,9 +48,9 @@ def Imgadd(request):
         
         pic = Searchpicture.objects.create(searchpicture_url = img)
         tags = img_predict(pic.searchpicture_url)
-        cn = {'modern':'모던빈티지', 
+        cn = {'modern':'모던', 
               'eco_friendly':'자연 친화적(natural)', 
-              'vintage':'인더스트리얼 빈티지', 
+              'vintage':'빈티지', 
               'classic':'클래식'}
         cate_names = []
         for tag in tags:
