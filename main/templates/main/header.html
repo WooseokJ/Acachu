@@ -7,6 +7,9 @@
             {%if request.session.auth_id == 2%}
             <a href="{% url 'board'%}" class="store-manage">업장 관리</a>
             {%endif%}
+            {%if request.session.auth_id == 3%}
+            <a href="{% url 'managerboard'%}" class="store-manage">관리자</a>
+            {%endif%}
         </div>
         <div class="logo">
             <img src="{% static 'image\logo2.png'%}" alt="logo" onclick="location.href='{% url "main"%}'">

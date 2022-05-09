@@ -137,12 +137,22 @@
                 </div>
             </div>
             <div style='display: flex; justify-content: center; margin-top:50px'>
+                {%if request.session.auth_id == 2%}
                 <div
-                    onclick="location.href='/authmanaged/'"
-                    class='is-btn is-btn--black'
-                    style='text-align:center; width:150px'>
+                onclick="location.href='/authmanaged/'"
+                class='is-btn is-btn--black'
+                style='text-align:center; width:150px'>
                     목록으로
                 </div>
+                {%endif%}
+                {%if request.session.auth_id == 3%}
+                <div
+                onclick="location.href='{% url "managerboard"%}'"
+                class='is-btn is-btn--black'
+                style='text-align:center; width:150px'>
+                    목록으로
+                </div>
+                {%endif%}
             </div>
         </div>
     </div>
@@ -151,7 +161,12 @@
         function fn_del() {
             var res = confirm('게시글을 삭제하시겠습니까?');
             if (res) {
-                window.location.href = "{% url 'contents_delete' board.ab_id %}"
+                if({{request.session.auth_id}}==2){
+                    window.location.href = "{% url 'contents_delete1' board.ab_id %}"
+                }
+                else{
+                    window.location.href = "{% url 'contents_delete2' board.ab_id %}"
+                }
                 alert("삭제되었습니다.");
             }
         }
