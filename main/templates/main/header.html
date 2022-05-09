@@ -9,7 +9,7 @@
             {%endif%}
         </div>
         <div class="logo">
-            <img src="{% static 'image\logo2.png'%}" alt="logo" onclick="                "main"%}'">
+            <img src="{% static 'image\logo2.png'%}" alt="logo" onclick="location.href='{% url "main"%}'">
         </div>
         
         {% if request.session.user_id == NULL %}

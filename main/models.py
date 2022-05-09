@@ -47,7 +47,7 @@ class Store(models.Model):
     store_sggnum = models.CharField(db_column='Store_sggnum', max_length=10)  # Field name made lowercase.
     store_emdnum = models.CharField(db_column='Store_emdnum', max_length=10)  # Field name made lowercase.
     store_roadnum = models.CharField(db_column='Store_roadnum', max_length=50)  # Field name made lowercase.
-    store_image = models.ImageField(db_column='Store_image', max_length=255)
+    store_image = models.ImageField(db_column='Store_image', upload_to='cafe_images/', max_length=255)
     
     tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, null=True)  # Field name made lowercase.
     
@@ -61,11 +61,7 @@ class AuthBoard(models.Model):
     ab_id = models.AutoField(db_column='Ab_id', primary_key=True)  # Field name made lowercase.
     ab_title = models.CharField(db_column='Ab_title', max_length=255)  # Field name made lowercase.
     ab_content = models.CharField(db_column='Ab_content', max_length=3000)  # Field name made lowercase.
-
-    ab_img_fir = models.ImageField(db_column='Ab_img_fir', upload_to='ab_images/',blank=True, null=True)  # Field name made lowercase.
-    ab_img_se = models.ImageField(db_column='Ab_img_se', upload_to='ab_images/',blank=True, null=True)  # Field name made lowercase.
-    ab_img_thi = models.ImageField(db_column='Ab_img_thi', upload_to='ab_images/',blank=True, null=True)  # Field name made lowercase.
-
+    
     ab_reg_date = models.DateTimeField(db_column='Ab_reg_date')  # Field name made lowercase.
     ab_reply_yn = models.IntegerField(db_column='Ab_reply_YN')  # Field name made lowercase.
     
@@ -75,10 +71,19 @@ class AuthBoard(models.Model):
         managed = True
         db_table = 'auth_board'
 
+class Authpicture(models.Model):
+    authpicture_id = models.AutoField(db_column='Authpicture_id', primary_key=True)  # Field name made lowercase.
+    authpicture_img = models.ImageField(db_column='Authpicture_img', upload_to='ab_images/',blank=True, null=True)  # Field name made lowercase.
+
+    ab = models.ForeignKey(AuthBoard,on_delete=models.CASCADE)
+
+    class Meta:
+        managed = True
+        db_table = 'authpicture'
+
 class Cafepicture(models.Model):
     cafepicture_id = models.AutoField(db_column='Cafepicture_id', primary_key=True)  # Field name made lowercase.
     cafepicture_url = models.CharField(db_column='Cafepicture_url', max_length=1000)  # Field name made lowercase.
-    
     store = models.ForeignKey(Store, on_delete=models.CASCADE)  # Field name made lowercase.
 
     class Meta:
