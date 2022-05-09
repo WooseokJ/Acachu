@@ -3,6 +3,7 @@ from main import views
 import AuthManagedPage
 
 
+
 urlpatterns = [
     path('mypage/', views.mypage, name="mypage"),
     path('login/', views.login, name="login"),
@@ -10,5 +11,7 @@ urlpatterns = [
     path('signup/', views.signup, name="signup"),
     path('mypage/userprofile/', views.edit_userprofile, name="userprofile"),
     path('bookmark/',views.bookmark,name="bookmark"),    
-    path('review/',views.review,name="review"),    
+    path('review/',views.review,name="review"),   
+    path('email_confirm/', views.email_confirm, name="email_confirm"), 
 ]
+

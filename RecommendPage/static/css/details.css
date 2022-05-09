@@ -300,3 +300,14 @@
 .inner .review .div-center .review-board hr{
     height: 1px;
 }
+
+/*details */
+
+.address .content .div{
+    vertical-align: sub;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+}

@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import *
-from nlp.caffe_nlp_pipeline import tags
+# from nlp.caffe_nlp_pipeline import tags
 import json
 
 from main.models import *

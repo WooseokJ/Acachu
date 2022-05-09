@@ -12,6 +12,14 @@ from .forms import *
 import random
 import json
 import time
+
+
+#login
+from django.shortcuts import render, redirect 
+from django.contrib.auth import authenticate, login, logout
+
+
+
 def main(request):
     tags = Tag.objects.all()
     result = []
@@ -43,6 +51,10 @@ def login(request):
             user = User.objects.get(user_account=user_account)    
             if PasswordHasher().verify(user.user_password, user_password):
                 request.session['user_id'] = user.user_id
+                user = authenticate(username=user_account, password=user_password) 
+                if user is not None: 
+                    login(request, user)
+                    return redirect('/')
                 return redirect('/')
         except:
             messages.warning(request,"로그인실패")
@@ -50,8 +62,36 @@ def login(request):
     else:
         messages.warning(request,"로그인실패")
         return redirect('/')
+    
+def email_confirm(request):
+    if request.method=='POST':
+        user_email=request.POST.get('User_email')
+        if User.objects.filter(user_email=user_email).exists():
+            user = User.objects.get(user_email=user_email)
+            user_password=request.POST.get('new_User_password',None)
+            user_re_password=request.POST.get('new_User_re_passsword',None)
+            if user_password==user_re_password:
+                user_info=User.objects.get(user_email=user_email)
+                user_password=PasswordHasher().hash(request.POST.get('new_User_password',None))
+                user_info.user_password=user_password
+                user_info.save()
+                message="새로운 비밀번호 생성"
+                return redirect('/')
+            else:
+                
+                return redirect('/')
             
+        else:
+            
+            return redirect('/')
+    else:    
+        
+        return redirect('/')
 
+
+    
+   
+    
 
 def logout(request):
     request.session.flush()
@@ -63,37 +103,37 @@ def signup(request):
         email=request.POST.get('User_email',None)
         password=request.POST.get('User_password',None)
         re_password=request.POST.get('User_re_password',None)  
+        check_1=request.POST.get('check_1')
         if password !=re_password:
             return render(request,'main/index.html',{})
-
         elif password == re_password:
             adj = random.choice(Adj.objects.all())
             noun = random.choice(Noun.objects.all())
             nick = adj.first + ' ' + noun.second
             password=PasswordHasher().hash(request.POST.get('User_password',None))
+            
+            
             try:
                 user=User.objects.create(user_account=account,
                             user_email=email,
                             user_password=password,
                             auth_id=1,
                             user_nickname=nick)
-                user.save()  
                 
                 return redirect('/')
             except:
                 if User.objects.filter(user_account=account).exists():
                     return redirect('/')
-                elif User.objects.filter(user_email=email).exists():
-                    
+                elif User.objects.filter(user_email=email).exists():   
                     return redirect('/')
                 else:
-                    return redirect('/')
-            
-        return redirect('/')
-
-            
+                    return redirect('/') 
+        return redirect('/')  
     else:
         return render(request,'main/index.html')
+ 
+
+
 
 
 def mypage(request):
@@ -131,14 +171,14 @@ def mypage(request):
     else:                                           
         user_info=User.objects.get(user_id=user_id)
         auth_id=user_info.auth_id
-        if auth_id==1: #일반용
+        if auth_id==1:          #일반용
             auth_yn=False 
             bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id).order_by('-bookmark_reg_date')[:5]
             store_info=Store.objects.all()
             review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
             return render(request,'main/mypage.html',{'user_info':user_info,'bookmark_info':bookmark_info,
                                                     'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
-        else:           # 업주용
+        else:                   # 업주용
             auth_yn=True 
             print(auth_yn)
             bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id).order_by('-bookmark_reg_date')[:1]

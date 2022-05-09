@@ -28,7 +28,7 @@ class User(models.Model):
     user_nickname = models.CharField(db_column='User_nickname', max_length=20)  # Field name made lowercase.
     user_email = models.CharField(db_column='User_email', max_length=50, blank=True, null=True)  # Field name made lowercase.
     user_profileurl = models.ImageField(db_column='User_profileurl', upload_to='images/', blank=True, null=True)  # Field name made lowercase.
-    
+
     auth = models.ForeignKey(Auth, on_delete=models.CASCADE)  # Field name made lowercase.
 
     class Meta:
