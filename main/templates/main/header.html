@@ -53,10 +53,11 @@
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block btn-lg" id ="login_btn" > 로그인</button>
                             </div>
+                               <!-- <p class="hint-text"><a href="#">패스워드 찾기</a></p>-->
                             <!--<div class="login_api">
                                     <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"><img src="/image/kakao_login_button.png"></a>
-                                </div> 
-                            <p class="hint-text"><a href="#">패스워드 찾기</a></p> --> 
+                                </div> -->
+                            
                         </form>
                     </div>
                     <div class="modal-footer">계정이 없나요? <a href="#myModal_signup" data-toggle="modal">회원가입</a></div>
@@ -64,9 +65,6 @@
             </div>
         </div> 
                             
-
-
-    
 
         
         
@@ -112,13 +110,28 @@
                             </div>
                         </div>        
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg" id ="signup_btn">Sign Up</button>
+
+                            <button onclick="error('{{error}}');" type="submit" class="btn btn-primary btn-block btn-lg" id ="signup_btn" >Sign Up</button>  
                         </div>
                     </form>
                 </div>  
             </div> 
         </div>
     </div>
+
+
+   <script>
+   
+       function error(error){
+            alert(error);
+        }
+   </script>
+
+ 
+    
+
+
+       
 
  
 </header>
