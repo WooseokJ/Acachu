@@ -16,16 +16,27 @@
         </div>
         
         {% if request.session.user_id == NULL %}
+        
         <div class="right-btns">
             <a href="#myModal" class="login" data-toggle="modal">Login</a>
             <a href="#myModal_signup" class="signup" data-toggle="modal">Signup</a>
         </div>
+
+
         {% else %} 
         <div class="right-btns">
             <a href='{% url "mypage" %}' class="login">Mypage</a>
-            <a href='{% url "logout" %}' class="signup">Logout</a>
+            <a href='{% url "logout" %}' onclick="logout()" class="signup">Logout</a>
         </div>
+        
+        <script>
+            function logout(){
+                alert("로그아웃되었습니다.")
+            }
+        </script>
+        
         {% endif %}
+
 
 
 
@@ -44,30 +55,79 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="text" id="login_id" class="form-control" name="login_id" placeholder="id" required="required">
+                                    <input type="text" id="login_id" class="form-control" maxlength="10" name="login_id" placeholder="id" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input type="password" id="login_pw" class="form-control" name="login_pw" placeholder="Password" required="required">
+                                    <input type="password" id="login_pw" class="form-control" minlength="8" name="login_pw" placeholder="Password" required="required">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block btn-lg" id ="login_btn" > 로그인</button>
                             </div>
-                               <!-- <p class="hint-text"><a href="#">패스워드 찾기</a></p>-->
+                               <p class="hint-text"> <a href="#email_confirm" data-toggle="modal">패스워드 찾기</a></p>
                             <!--<div class="login_api">
                                     <a href="https://kauth.kakao.com/oauth/authorize?client_id=d860d38c992ca8bf5f07dcc3fd5122b9&redirect_uri=http://localhost:9090/member/auth/kakao/callback&response_type=code"><img src="/image/kakao_login_button.png"></a>
                                 </div> -->
-                            
+                    
                         </form>
                     </div>
                     <div class="modal-footer">계정이 없나요? <a href="#myModal_signup" data-toggle="modal">회원가입</a></div>
                 </div>
             </div>
         </div> 
-                            
+    
+  
+
+  
+
+        <!--비밀번호찾기-->
+        <div id ="email_confirm" class="modal fade">
+            <div  class="modal-dialog signup-form">	
+                <div class="modal-content">
+                    <div class="modal-header">				
+                        <h4 class="modal-title">비밀번호 찾기</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+    
+                    <form method="post" action= {% url 'email_confirm' %} enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+                                <input type="email" class="form-control"id="User_email" name="User_email" placeholder="가입하신 이메일을 적어주세요." required="required">
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <input type="password"  class="form-control"id="new_User_password" minlength='8' name="new_User_password" placeholder="새로운 비밀번호 생성" required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                    <i class="fa fa-check"></i>
+                                </span> 
+                                <input type="password" class="form-control"id="new_User_re_passsword" minlength='8' name="new_User_re_passsword" placeholder="새로운 비밀번호 생성확인" required="required">
+                            </div>
+                        </div> 
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" id ="signup_btn">Submit</button>  
+                        </div>
+                    </form>
+                </div>  
+            </div> 
+        </div>
+    </div>
+
+    
+
+    
+
+
 
         
         
@@ -88,7 +148,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text"  class="form-control" id="user_account" name="user_account" placeholder="id" required="required">
+                                <input type="text"  class="form-control" id="user_account"  maxlength='10' name="user_account" placeholder="id" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,7 +160,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="password"  class="form-control"id="User_password" name="User_password" placeholder="Password" required="required">
+                                <input type="password"  class="form-control"id="User_password" minlength='8' name="User_password" placeholder="Password" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -109,12 +169,45 @@
                                     <i class="fa fa-lock"></i>
                                     <i class="fa fa-check"></i>
                                 </span> 
-                                <input type="password" class="form-control"id="User_re_password" name="User_re_password" placeholder="Confirm Password" required="required">
+                                <input type="password" class="form-control"id="User_re_password" minlength='8' name="User_re_password" placeholder="Confirm Password" required="required">
                             </div>
-                        </div>        
+                        </div>  
+                        <br>      
+                        <div class="checkbox_group">
+                        <input type="checkbox" id="check_all" >
+                        <label for="check_all">전체 동의</label><br>
+
+                        <input type="checkbox" id="check_1" class="normal" >
+                        <label for="check_1">개인정보 처리방침 동의</label><br>
+                        
+                        <input type="checkbox" id="check_2" class="normal" >
+                        <label for="check_2">서비스 이용약관 동의</label><br>
+                        
+                        <input type="checkbox" id="check_3" class="normal" >
+                        <label for="check_3">마케팅 수신 동의</label>
+                        
+                        </div>
+                        <script>
+                            // 체크박스 전체 선택
+                        $(".checkbox_group").on("click", "#check_all", function () {
+                            $(this).parents(".checkbox_group").find('input').prop("checked", $(this).is(":checked"));
+                        });
+
+                        // 체크박스 개별 선택
+                        $(".checkbox_group").on("click", ".normal", function() {
+                            var is_checked = true;
+
+                            $(".checkbox_group .normal").each(function(){
+                                is_checked = is_checked && $(this).is(":checked");
+                            });
+
+                            $("#check_all").prop("checked", is_checked);
+                        });
+                        </script>
+                        <br>
                         <div class="form-group">
 
-                            <button onclick="error('{{error}}');" type="submit" class="btn btn-primary btn-block btn-lg" id ="signup_btn" >Sign Up</button>  
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" id ="signup_btn" >Sign Up</button>  
                         </div>
                     </form>
                 </div>  
@@ -123,12 +216,6 @@
     </div>
 
 
-   <script>
-   
-       function error(error){
-            alert(error);
-        }
-   </script>
 
  
     
