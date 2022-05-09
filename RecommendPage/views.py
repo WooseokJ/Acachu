@@ -4,8 +4,11 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .forms import *
-from nlp.caffe_nlp_pipeline import tags
 import json
+
+from .task import tags
+from .task import PredictTask
+
 from django.db.models import Q
 from main.models import *
 
@@ -134,7 +137,13 @@ def new_review(request):
                                 review_mod_date = datetime.now())
         reviews = Review.objects.filter(store_id=store_id).values_list('review_content',flat=True)
         
-        print(tags(reviews))
+        lst = []
+
+        for i in reviews:
+            lst.append(i)
+        reviews = json.dumps(lst)
+
+        tags.delay(reviews)
 
     return redirect('/details/?store_id=' + form.data['store'])
 
