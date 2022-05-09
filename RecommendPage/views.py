@@ -3,6 +3,7 @@ from unicodedata import category
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 from .forms import *
 import json
 
@@ -93,30 +94,39 @@ def recommendList(request):
 def details(request):
     if request.method == 'GET':
         store_id = request.GET.get('store_id','0')
+        page = int(request.GET.get("page",1))
+        store = Store.objects.get(store_id = store_id)
+        review = Review.objects.filter(store_id = store_id).order_by('-review_id')
+        paginator = Paginator(review,7)
+        page_numbers_range = 10
+        max_index = paginator.num_pages
+        currnet_page = int(page) if page else 1
+        start_index = int((currnet_page-1)/ page_numbers_range) * page_numbers_range
+        end_index = start_index + page_numbers_range
+        
+        if end_index >= max_index:
+            end_index = max_index
+        paginator_range = paginator.page_range[start_index:end_index]
+        reviews = paginator.get_page(page)
+        images = Cafepicture.objects.filter(store_id = store_id)
+        tags = StoreTag.objects.filter(store=store)
         try:
             user_id = request.session['user_id']
-            store = Store.objects.get(store_id = store_id)
             user = User.objects.get(user_id=user_id)
-            review = Review.objects.filter(store_id = store_id).order_by('-review_id')
-            images = Cafepicture.objects.filter(store_id = store_id)
-            tags = StoreTag.objects.filter(store=store)
             bookmark = False
             if Bookmark.objects.filter(user=user, store=store).exists():
                 bookmark = True
         except: 
             user_id = 0
-            store = Store.objects.get(store_id = store_id)
             user = User.objects.filter(user_id=user_id)
-            review = Review.objects.filter(store_id = store_id)
-            images = Cafepicture.objects.filter(store_id = store_id)
-            tags = StoreTag.objects.filter(store=store)
             bookmark = False
             
         formreview = ReviewForm()
         return render(request,'RecommendPage/details.html',
                     {'store':store,
                     'user':user,
-                    'reviews':review,
+                    'reviews':reviews,
+                    'paginator_range':paginator_range,
                     'images':images,
                     'formreview':formreview,
                     'tags':tags,
