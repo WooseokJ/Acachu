@@ -18,7 +18,6 @@ from hanspell import spell_checker
 
 class PredictTask(Task):
     def __init__(self):
-        super().__init__()
         self.tags_model = None
         self.sentiment_model = None
         self.train = None
