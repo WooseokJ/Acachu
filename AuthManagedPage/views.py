@@ -31,6 +31,21 @@ def Aut(request):
                         'posts':posts
                        }
                     )
+        
+def managerboard(request):
+    if request.method == 'GET':
+        page = int(request.GET.get("page",1))
+        user_id = request.session['user_id']
+        user_info=User.objects.get(user_id=user_id)
+        boards = AuthBoard.objects.all().order_by('-ab_id') #글
+        paginator = Paginator(boards,10) # 글 10개
+        posts = paginator.get_page(page) # url에 있는 현재 page값 get_page로 전달
+
+        return render(request,'AuthManagedPage\managerBoard.html',
+                      { 'boards':boards,
+                        'posts':posts
+                       }
+                    )
 
 def post(request): #글작성
     if request.method=='POST':
@@ -48,7 +63,9 @@ def post(request): #글작성
             imgs.save()
             
         return redirect('/../authmanaged/')
-    return render(request,'AuthManagedPage\post.html')
+    uid = request.session['user_id']
+    storeauth = StoreAuth.objects.get(user__user_id=uid)
+    return render(request,'AuthManagedPage\post.html',{'store':storeauth})
 
 def contents(request, id): # 글 작성 후 확인
     try:
@@ -93,10 +110,15 @@ def contents_update(request,id): #수정기능
         return render(request,'AuthManagedPage/update.html',{'board':up_post, 'imgs':up_img})
 
 
-def contents_delete(request,id): #삭제
+def contents_delete1(request,id): #삭제
     del_post = AuthBoard.objects.get(pk=id)
     del_post.delete()
     return redirect('/../authmanaged/')
+
+def contents_delete2(request,id): #삭제
+    del_post = AuthBoard.objects.get(pk=id)
+    del_post.delete()
+    return redirect('/../managerboard/')
 
 def new_reply(request,id):
     form = ReplyForm(request.POST)

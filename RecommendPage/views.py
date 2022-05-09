@@ -143,7 +143,7 @@ def new_review(request):
             lst.append(i)
         reviews = json.dumps(lst)
 
-        tags.delay(reviews)
+        tags.delay(reviews, store_id)
 
     return redirect('/details/?store_id=' + form.data['store'])
 

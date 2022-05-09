@@ -16,6 +16,8 @@ from transformers import BertTokenizer
 from konlpy.tag import Okt
 from hanspell import spell_checker
 
+from main.models import *
+
 class PredictTask(Task):
     def __init__(self):
         self.tags_model = None
@@ -27,6 +29,7 @@ class PredictTask(Task):
     def __call__(self, *args, **kwargs):
         if not self.tags_model and not self.sentiment_model and not self.train:
             logging.info('Loading Model...')
+            os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
             save_path = os.getcwd() + '\\nlp\\bert_clf_v2'
             tags_model = tf.saved_model.load(save_path)
             train = np.load(os.getcwd()+'\\nlp\\x_train_okt_V3.npy', allow_pickle=True)
@@ -191,7 +194,7 @@ class PredictTask(Task):
 
 # 태그 추출 함수
 @shared_task(bind=True, base=PredictTask)
-def tags(self, review_list):
+def tags(self, review_list, store_id):
     review_list = json.loads(review_list)
     print('... review received ...')
     review_list = self.preprocessing(review_list)
@@ -220,5 +223,21 @@ def tags(self, review_list):
     for idx in pos_neg_sum.index:
         if (pos_neg_sum['Ratio'][idx] >= 0.7) and (pos_neg_sum['Tot_tag_count'][idx] >= 10):
             caffe_tags.append(idx)
+            
+    tag_names = {'dessert':'디저트',
+                 'beverage':'음료', 
+                 'coffee':'커피', 
+                 'atmosphere':'분위기', 
+                 'child':'유아동반', 
+                 'dog':'애견동반', 
+                 'study':'카공'}
+    for i in range(len(caffe_tags)):
+        caffe_tags[i] = tag_names[caffe_tags[i]]
+    store = Store.objects.get(store_id=store_id)    
+    StoreTag.objects.filter(store__store_id=store_id).delete()
+    
+    for caffe_tag in caffe_tags:
+        t = Tag.objects.get(tag_name=caffe_tag)
+        StoreTag.objects.create(store=store,tag=t)
 
     return caffe_tags
