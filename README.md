@@ -22,7 +22,7 @@
 ---
 
 # 4. 💾 ERD
-<img src=''>
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/erd.png?raw=true' style='height=500;width=500'>
 
 ---
 
@@ -32,7 +32,7 @@
 ---
 
 # 6. 📸 UI/UX
-<img src=''>
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/main_ui.PNG?raw=true' style='height=500;width=500'>
 
 ---
 # 7. 🔎 사용자 기능
