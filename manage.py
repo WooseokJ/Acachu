@@ -2,6 +2,11 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from keras.models import load_model
+
 
 
 def main():
@@ -19,4 +24,12 @@ def main():
 
 
 if __name__ == '__main__':
+    # # 카페 태그 모델 (BERT) Load :
+    # save_path = os.getcwd() + '\\nlp\\bert_clf_v2'
+    # tags_model = tf.saved_model.load(save_path)
+
+    # # 긍부정 분류 모델 (BiLSTM) Load :
+    # train = np.load(os.getcwd()+'\\nlp\\x_train_okt_V3.npy', allow_pickle=True)
+    # sentiment_model = load_model(os.getcwd()+'\\nlp\\bilstm_okt_v3.h5')
     main()
+

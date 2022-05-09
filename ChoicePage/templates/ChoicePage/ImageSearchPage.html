@@ -34,7 +34,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js" integrity="sha512-8E3KZoPoZCD+1dgfqhPbejQBnQfBXe8FuwL4z/c8sTrgeDMFEnoyTlH3obB4/fV+6Sg0a0XF+L/6xS4Xx1fUEg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script defer src="{% static 'js/common.js'%}"></script>
-        <script defer="defer" src="{% static 'js/send.js'%}"></script>
+        <script defer src="{% static 'js/send.js'%}"></script>
+        <script type="text/javascript"> 
+            var gif = "{% static 'image/loadingImg.gif'%}";
+            var imageurl = '{% url "imageadd" %}'
+        </script>
     </head>
 <body>
 	<!-- HEADER -->
@@ -47,7 +51,7 @@
         <div class='sub'>원하는 분위기의 이미지를 올려주세요</div>
     </div>
 
-    <form action="/imageadd/" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'imageadd' %}" method="POST" enctype="multipart/form-data" id="imageform">
         {% csrf_token %}
         <!-- 주소 -->
         <input type='hidden' id='sido' name='sido' value="{{ sido }}">
@@ -63,7 +67,7 @@
 
         <!-- 이미지 검색-->
         <div class='is-btn_div'>
-            <input type='submit' class = 'is-btn is-btn--black' value='카페 검색'>
+            <input type="submit" id='imgsubmit' class = 'is-btn is-btn--black' value="카페 검색">
         </div>
     </form>
     <!-- 파일 선택 및 미리보기-->
