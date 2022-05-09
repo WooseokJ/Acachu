@@ -82,7 +82,7 @@
             {% for storetag in storetags%}
             <div class="swiper-slide" onclick="location.href='{% url "details" %}?store_id={{storetag.store.store_id}}'">
               {% if storetag.store.store_image %}
-              <img src="{{storetag.store.store_image}}" alt=""/>
+              <img src="/media/{{storetag.store.store_image}}" alt=""/>
               {% else %}
               <img src="{% static 'image/no-image.png'%}" alt=""/>
               {% endif %}
