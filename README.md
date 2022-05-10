@@ -64,7 +64,7 @@
 
 
 ## 8. 💽 사용법
-- 모델 파일 : https://drive.google.com/drive/folders/16KeTBizMd5yqb34mMV1kslDUTOw1F8KC?usp=sharing
+- 모델 파일 : https://drive.google.com/file/d/1zxllSLgHfCMIFafWk3bUIBBvoi49ucMi/view?usp=sharing
 
 1. acahcu repository를 클론 한 뒤 프로젝트 폴더 내에 acachu.zip을 여기에 풀기로 풀어주세요
 2. settings.py 파일을 프로젝트폴더 안 config 폴더에 넣어주세요
