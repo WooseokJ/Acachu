@@ -55,15 +55,23 @@
 - 프로필 관리
 - 업장관리 페이지
 
-<br>
-
-### 8. 💽 사용법
-- 모델 파일 : https://drive.google.com/drive/folders/16KeTBizMd5yqb34mMV1kslDUTOw1F8KC?usp=sharing
-
-<br>
-# 💻 AI 기능
+### 💻 AI 기능
 - 🎞 이미지 분류 기능
 <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/image_classification.PNG?raw=true'>
 
 - 📃 카테고리 분류 기능
 <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/review_classification.PNG?raw=true' width='923'>
+
+
+## 8. 💽 사용법
+- 모델 파일 : https://drive.google.com/drive/folders/16KeTBizMd5yqb34mMV1kslDUTOw1F8KC?usp=sharing
+
+1. acahcu repository를 클론 한 뒤 프로젝트 폴더 내에 acachu.zip을 여기에 풀기로 풀어주세요
+2. settings.py 파일을 프로젝트폴더 안 config 폴더에 넣어주세요
+3. redis 설치파일로 redis를 설치하세요(https://github.com/microsoftarchive/redis/releases/tag/win-3.0.504,  Redis-x64-3.0.504.msi)
+4. requirements.txt 를 이용해 아나콘다 가상환경을 설정해주세요
+5. 프로젝트 폴더에서 아나콘다 프롬프트로 python manage.py runserver 명령을 통해 장고 서버를 실행해주세요
+6. 아나콘다 프롬프트를 하나 더 실행해서 프로젝트 폴더 내로 이동 후 celery -A config worker -l info -P eventlet 명령을 입력해주세요
+
+<br>
+
