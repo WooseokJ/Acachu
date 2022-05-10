@@ -191,8 +191,7 @@ class PredictTask(Task):
         predict_result = float(self.sentiment_model.predict(pad_new))
 
         return predict_result
-    
-    
+
     def pos_neg_ratio(self, data):
         label_index = ['dessert', 'beverage', 'coffee',
                        'atmosphere', 'child', 'dog', 'study']
