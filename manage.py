@@ -2,11 +2,6 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import numpy as np
-import tensorflow as tf
-from tensorflow import keras
-from keras.models import load_model
-
 
 
 def main():
@@ -25,4 +20,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

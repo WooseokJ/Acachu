@@ -1,7 +1,6 @@
 from datetime import datetime
-from django.urls import reverse
-from django.http import HttpResponseRedirect,Http404
-from django.shortcuts import redirect, render,get_object_or_404
+from django.http import Http404
+from django.shortcuts import redirect, render
 from main.models import *
 from .forms import *
 from django.core.paginator import Paginator
