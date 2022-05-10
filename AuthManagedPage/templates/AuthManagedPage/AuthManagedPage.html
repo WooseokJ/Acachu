@@ -102,7 +102,7 @@
                                         {% csrf_token %}
                                         <input type="file" id="upload_file1" class='real-upload' name='upload_file1' accept="image/*" required="required" multiple="multiple" style="display: none;">
                                         {% if store.store_image %}
-                                            <img src="/media/{{store.store_image}}" id="img_section1" class='upload img'></div>
+                                            <img src="{{store.store_image.url}}" id="img_section1" class='upload img'></div>
                                         {% else %}
                                         <img src="{% static 'image/no-image.png'%}" id="img_section1" class='upload img'></div>
                                         {% endif %}
