@@ -1,20 +1,18 @@
 from datetime import datetime
-from unicodedata import category
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
-from .forms import Store, User, Bookmark, ReviewForm, Review, Cafepicture, StoreTag
+from .forms import ReviewForm
 import json
 
 from .task import tags
-from .task import PredictTask
-
 from django.db.models import Q
-from main.models import 
-
+from main.models import Store, User, Bookmark, Review, Cafepicture, StoreTag
 
 # Create your views here.
+
+
 def recommendList(request):
     if request.method == 'POST':
         cate_name = request.POST.get('category', '')
@@ -27,67 +25,69 @@ def recommendList(request):
         if cate_name == '전체':
             if size == '2':
                 stores = Store.objects.filter(store_sinum=sido,
-                                                store_sggnum=sigg)
-                
+                                              store_sggnum=sigg)
+
             elif size == '3':
                 stores = Store.objects.filter(store_sinum=sido)
-                
+
             else:
                 size = '1'
                 stores = Store.objects.filter(store_sinum=sido,
-                                                store_sggnum=sigg,
-                                                store_emdnum=emdong)
-                
+                                              store_sggnum=sigg,
+                                              store_emdnum=emdong)
+
         elif ',' in cate_name:
             cate_names = str.split(cate_name, ',')
             if size == '2':
-                stores = Store.objects.filter(Q(store_sinum=sido, store_sggnum=sigg, tag__tag_name=cate_names[0])|\
-                    Q(store_sinum=sido,\
-                      store_sggnum=sigg,\
+                stores = Store.objects.filter(
+                    Q(store_sinum=sido,
+                      store_sggnum=sigg,
+                      tag__tag_name=cate_names[0]) |
+                    Q(store_sinum=sido,
+                      store_sggnum=sigg,
                       tag__tag_name=cate_names[1]))
-            
+
             elif size == '3':
-                stores = Store.objects.filter(Q(store_sinum=sido, \
-                                              tag__tag_name=cate_names[0])|\
-                    Q(store_sinum=sido,\
-                      store_sggnum=sigg, \
+                stores = Store.objects.filter(
+                    Q(store_sinum=sido,
+                      tag__tag_name=cate_names[0]) |
+                    Q(store_sinum=sido,
+                      store_sggnum=sigg,
                       tag__tag_name=cate_names[1]))
-            
+
             else:
                 size = '1'
-                stores = Store.objects.filter(Q(store_sinum=sido,\
-                                                store_sggnum=sigg,\
-                                                store_emdnum=emdong,\
-                                                tag__tag_name=cate_names[0])|\
-                    Q(store_sinum=sido, store_sggnum=sigg,\
+                stores = Store.objects.filter(
+                    Q(store_sinum=sido,
+                      store_sggnum=sigg,
+                      store_emdnum=emdong,
+                      tag__tag_name=cate_names[0]) |
+                    Q(store_sinum=sido, store_sggnum=sigg,
                       tag__tag_name=cate_names[1]))
             print(cate_names[0], cate_names[1])
             cate_name = ','.join(cate_names)
-        
+
         elif cate_name in imgcate:
             if size == '2':
-                stores = Store.objects.filter(store_sinum=sido,\
-                                              store_sggnum=sigg,\
+                stores = Store.objects.filter(store_sinum=sido,
+                                              store_sggnum=sigg,
                                               tag__tag_name=cate_name)
-                
             elif size == '3':
-                stores = Store.objects.filter(store_sinum=sido,\
+                stores = Store.objects.filter(store_sinum=sido,
                                               tag__tag_name=cate_name)
-            
             else:
                 size = '1'
-                stores = Store.objects.filter(store_sinum=sido,\
-                                              store_sggnum=sigg,\
-                                              store_emdnum=emdong,\
+                stores = Store.objects.filter(store_sinum=sido,
+                                              store_sggnum=sigg,
+                                              store_emdnum=emdong,
                                               tag__tag_name=cate_name)
-        
         else:
             if size == '2':
                 stores = Store.objects\
-                        .filter(store_sinum=sido,\
-                                store_sggnum=sigg)\
-                        .prefetch_related('storetag_set')\
-                        .filter(storetag__tag__tag_name=cate_name)
+                    .filter(store_sinum=sido,
+                            store_sggnum=sigg)\
+                    .prefetch_related('storetag_set')\
+                    .filter(storetag__tag__tag_name=cate_name)
             elif size == '3':
                 stores = Store.objects.filter(store_sinum=sido)\
                     .prefetch_related('storetag_set')\
@@ -95,22 +95,21 @@ def recommendList(request):
             else:
                 size = '1'
                 stores = Store.objects\
-                                    .filter(store_sinum=sido,\
-                                            store_sggnum=sigg,
-                                            store_emdnum=emdong)\
-                                    .prefetch_related('storetag_set')\
-                                    .filter(storetag__tag__tag_name=cate_name)
+                    .filter(store_sinum=sido,
+                            store_sggnum=sigg,
+                            store_emdnum=emdong)\
+                    .prefetch_related('storetag_set')\
+                    .filter(storetag__tag__tag_name=cate_name)
         print(size, cate_name)
-        return render(request, 'RecommendPage/recommendList.html',
-                              {'stores': stores,
-                               'size': size,
-                               'category': cate_name,
-                               'sido': sido,
-                               'sigg': sigg,
-                               'emdong': emdong,
-                               'adress': road_address
-                               }
-                      )
+        return render(request, 'RecommendPage/recommendList.html', {
+            'stores': stores,
+            'size': size,
+            'category': cate_name,
+            'sido': sido,
+            'sigg': sigg,
+            'emdong': emdong,
+            'adress': road_address})
+
 
 def details(request):
     if request.method == 'GET':
@@ -118,15 +117,15 @@ def details(request):
         page = int(request.GET.get("page", 1))
         store = Store.objects.get(store_id=store_id)
         review = Review.objects.filter(store_id=store_id)\
-                .order_by('-review_id')
+            .order_by('-review_id')
         paginator = Paginator(review, 7)
         page_numbers_range = 10
         max_index = paginator.num_pages
         currnet_page = int(page) if page else 1
-        start_index = int((currnet_page-1)/ page_numbers_range) \
-                          *page_numbers_range
+        start_index = int((currnet_page-1) / page_numbers_range) \
+            * page_numbers_range
         end_index = start_index + page_numbers_range
-        
+
         if end_index >= max_index:
             end_index = max_index
         paginator_range = paginator.page_range[start_index:end_index]
@@ -153,6 +152,8 @@ def details(request):
                        'formreview': formreview,
                        'tags': tags,
                        'bookmark': bookmark})
+
+
 def new_review(request):
     form = ReviewForm(request.POST)
     if form.is_valid():
@@ -167,8 +168,8 @@ def new_review(request):
                               review_reg_date=datetime.now(),
                               review_mod_date=datetime.now()
                               )
-        reviews = Review.objects.filter(store_id=store_id).\
-                                 values_list('review_content', flat=True)        
+        reviews = Review.objects.filter(store_id=store_id)\
+            .values_list('review_content', flat=True)
         lst = []
         for i in reviews:
             lst.append(i)
@@ -177,6 +178,8 @@ def new_review(request):
         tags.delay(reviews, store_id)
 
     return redirect('/details/?store_id=' + form.data['store'])
+
+
 @csrf_exempt
 def reg_bookmark(request):
     if request.method == 'POST':
@@ -190,6 +193,8 @@ def reg_bookmark(request):
                                 bookmark_reg_date=datetime.now()
                                 )
         return JsonResponse(jsonObject)
+
+
 @csrf_exempt
 def del_bookmark(request):
     if request.method == 'POST':

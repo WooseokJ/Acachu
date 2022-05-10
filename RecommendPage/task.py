@@ -177,13 +177,13 @@ class PredictTask(Task):
         predict_result = float(self.sentiment_model.predict(pad_new))
 
         return predict_result
+    
+    
     def pos_neg_ratio(self, data):
-        label_index = ['dessert', 'beverage', 'coffee', \
-                       'atmosphere', 'child', 'dog', 'study'
-                      ]
-        label_cols = ['Positive', 'Negative', \
-                      'Tot_tag_count', 'Ratio'
-                     ]
+        label_index = ['dessert', 'beverage', 'coffee',
+                       'atmosphere', 'child', 'dog', 'study']
+        label_cols = ['Positive', 'Negative',
+                      'Tot_tag_count', 'Ratio']
         pos_neg_sum = pd.DataFrame(index=label_index, columns=label_cols)
         pos_neg_sum = pos_neg_sum.fillna(0)
 
@@ -197,15 +197,16 @@ class PredictTask(Task):
                     else:
                         pos_neg_sum.loc[col]['Negative'] += 1
 
-        pos_neg_sum['Tot_tag_count'] = pos_neg_sum['Positive'] \
-                                     + pos_neg_sum['Negative']
+        pos_neg_sum['Tot_tag_count'] = pos_neg_sum['Positive']\
+            + pos_neg_sum['Negative']
         pos_neg_sum['Ratio'] = pos_neg_sum['Positive']\
-                              /pos_neg_sum['Tot_tag_count']
-
+            / pos_neg_sum['Tot_tag_count']
         pos_neg_sum = pos_neg_sum.fillna(0)
 
         return pos_neg_sum
 # 태그 추출 함수
+
+
 @shared_task(bind=True, base=PredictTask)
 def tags(self, review_list, store_id):
     review_list = json.loads(review_list)
@@ -234,8 +235,9 @@ def tags(self, review_list, store_id):
     caffe_tags = []
 
     for idx in pos_neg_sum.index:
-        if (pos_neg_sum['Ratio'][idx] >= 0.7) \
-            and (pos_neg_sum['Tot_tag_count'][idx] >= 10):
+        temp1 = pos_neg_sum['Ratio'][idx]
+        temp2 = pos_neg_sum['Tot_tag_count'][idx]
+        if (temp1 >= 0.7) and (temp2 >= 10):
             caffe_tags.append(idx)
     tag_names = {'dessert': '디저트',
                  'beverage': '음료',
