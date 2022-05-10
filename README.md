@@ -58,7 +58,7 @@
 <br>
 
 ### 8. 💽 사용법
-모델 파일 : https://drive.google.com/drive/folders/16KeTBizMd5yqb34mMV1kslDUTOw1F8KC?usp=sharing
+- 모델 파일 : https://drive.google.com/drive/folders/16KeTBizMd5yqb34mMV1kslDUTOw1F8KC?usp=sharing
 
 <br>
 # 💻 AI 기능
