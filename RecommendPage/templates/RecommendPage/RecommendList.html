@@ -59,7 +59,7 @@
           {% if store.store_image == NULL or store.store_image == "" %}
           <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
           {% else %}
-          <img src="/media/{{store.store_image}}" alt="cafeimage">
+          <img src="{{store.store_image.url}}" alt="cafeimage">
           {% endif %}
           <div class="content">
             <div class="cafename">{{store.store_name}}</div>

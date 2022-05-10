@@ -1,5 +1,5 @@
 from django.db import models
-
+from acachu_utils import rename_abimagefile, rename_cafeimagefile, rename_imagefile, rename_searchimagefile
 # Create your models here.
 
 
@@ -36,7 +36,7 @@ class User(models.Model):
                                   blank=True,
                                   null=True)
     user_profileurl = models.ImageField(db_column='User_profileurl',
-                                        upload_to='images/',
+                                        upload_to=rename_imagefile,
                                         blank=True,
                                         null=True)
 
@@ -70,7 +70,7 @@ class Store(models.Model):
     store_roadnum = models.CharField(db_column='Store_roadnum',
                                      max_length=50)
     store_image = models.ImageField(db_column='Store_image',
-                                    upload_to='cafe_images/',
+                                    upload_to=rename_cafeimagefile,
                                     max_length=255)
 
     tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, null=True)
@@ -98,7 +98,7 @@ class Authpicture(models.Model):
     authpicture_id = models.AutoField(db_column='Authpicture_id',
                                       primary_key=True)
     authpicture_img = models.ImageField(db_column='Authpicture_img',
-                                        upload_to='ab_images/',
+                                        upload_to=rename_abimagefile,
                                         blank=True,
                                         null=True)
 
@@ -213,7 +213,7 @@ class Searchpicture(models.Model):
     searchpicture_id = models.AutoField(db_column='Searchpicture_id',
                                         primary_key=True)
     searchpicture_url = models.ImageField(db_column='Searchpicture_url',
-                                          upload_to='search_images/')
+                                          upload_to=rename_searchimagefile)
 
     class Meta:
         db_table = 'searchpicture'
