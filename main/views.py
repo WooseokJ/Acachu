@@ -84,7 +84,7 @@ def email_confirm(request):
         else:
             
             return redirect('/')
-    else:    
+    else:
         
         return redirect('/')
 
@@ -124,11 +124,11 @@ def signup(request):
             except:
                 if User.objects.filter(user_account=account).exists():
                     return redirect('/')
-                elif User.objects.filter(user_email=email).exists():   
+                elif User.objects.filter(user_email=email).exists():
                     return redirect('/')
                 else:
-                    return redirect('/') 
-        return redirect('/')  
+                    return redirect('/')
+        return redirect('/')
     else:
         return render(request,'main/index.html')
  
@@ -156,9 +156,9 @@ def mypage(request):
             except:
                 redirect('/mypage')
             return redirect('/mypage')
-        else: #회원삭제  
+        else: #회원삭제
             password_del=request.POST.get('User_password_del',"0")
-            user_info=User.objects.get(user_id=user_id) 
+            user_info=User.objects.get(user_id=user_id)
             try:
                 if PasswordHasher().verify(user_info.user_password, password_del):
                     if delete == '삭제':
@@ -168,18 +168,18 @@ def mypage(request):
                     return redirect('/mypage')#redirect는 url만보는것.
             except:
                 return redirect('/mypage')
-    else:                                           
+    else:                                    
         user_info=User.objects.get(user_id=user_id)
         auth_id=user_info.auth_id
         if auth_id==1:          #일반용
-            auth_yn=False 
+            auth_yn=False
             bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id).order_by('-bookmark_reg_date')[:5]
             store_info=Store.objects.all()
             review_info=Review.objects.filter(user_id=user_info.user_id).order_by('-review_mod_date')[:5]
             return render(request,'main/mypage.html',{'user_info':user_info,'bookmark_info':bookmark_info,
                                                     'review_info':review_info,'store_info':store_info,'auth_yn':auth_yn})
         else:                   # 업주용
-            auth_yn=True 
+            auth_yn=True
             print(auth_yn)
             bookmark_info=Bookmark.objects.filter(user_id=user_info.user_id).order_by('-bookmark_reg_date')[:1]
             store_info=Store.objects.all()
