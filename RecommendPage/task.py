@@ -191,16 +191,13 @@ class PredictTask(Task):
         predict_result = float(self.sentiment_model.predict(pad_new))
 
         return predict_result
-
+    
+    
     def pos_neg_ratio(self, data):
-        label_index = [
-                        'dessert', 'beverage', 'coffee',
-                        'atmosphere', 'child', 'dog', 'study'
-                      ]
-        label_cols = [
-                        'Positive', 'Negative',
-                        'Tot_tag_count', 'Ratio'
-                     ]
+        label_index = ['dessert', 'beverage', 'coffee',
+                       'atmosphere', 'child', 'dog', 'study']
+        label_cols = ['Positive', 'Negative',
+                      'Tot_tag_count', 'Ratio']
         pos_neg_sum = pd.DataFrame(index=label_index, columns=label_cols)
         pos_neg_sum = pos_neg_sum.fillna(0)
 
