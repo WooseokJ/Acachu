@@ -15,19 +15,26 @@ def main(request):
             result.append(tmp)
         except Exception:
             continue
-    # print(result, 1)
-
+    result2 = []
+    for i in range(1, 5):
+        try:
+            tmp = random.choice(Store.objects.filter(tag__tag_id=i))
+            result2.append(tmp)
+        except Exception:
+            continue
     user_id = request.session.get('user_id', '0')
     try:
         user_info = User.objects.get(user_id=user_id)
         request.session['auth_id'] = user_info.auth.auth_id
         return render(request, 'main/index.html', {
             'storetags': result,
+            'stores': result2,
             'user_info': user_info
         })
     except Exception:
         return render(request, 'main/index.html', {
-            'storetags': result
+            'storetags': result,
+            'stores': result2
         })
 
 

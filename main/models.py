@@ -1,5 +1,6 @@
 from django.db import models
-from acachu_utils import rename_abimagefile, rename_cafeimagefile, rename_imagefile, rename_searchimagefile
+from acachu_utils import rename_abimagefile, rename_cafeimagefile,\
+    rename_imagefile, rename_searchimagefile
 # Create your models here.
 
 

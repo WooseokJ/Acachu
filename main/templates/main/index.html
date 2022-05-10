@@ -81,6 +81,17 @@
       <div class="inner">
         <div class="swiper-container">
           <div class="swiper-wrapper">
+            {% for store in stores %}
+            <div class="swiper-slide" onclick="location.href='{% url "details" %}?store_id={{store.store_id}}'">
+              {% if store.store_image %}
+              <img src="{{store.store_image.url}}" alt=""/>
+              {% else %}
+              <img src="{% static 'image/no-image.png'%}" alt=""/>
+              {% endif %}
+              <div class="title">{{store.store_name}} ({{store.tag.tag_name}})</div>
+              <div class="content">{{store.store_content}}</div>
+            </div>
+            {% endfor %}
             {% for storetag in storetags%}
             <div class="swiper-slide" onclick="location.href='{% url "details" %}?store_id={{storetag.store.store_id}}'">
               {% if storetag.store.store_image %}
@@ -103,8 +114,8 @@
       </div>
     </div>
     <div class="cafe-recommend-title">
-      <img src="{% static 'image/acachu.png'%}" alt="">
-      <img src="{% static 'image/introduce.jpg'%}" alt="">
+      <img src="{% static 'image/acachu.png'%}" alt="" class='mainpic1'>
+      <img src="{% static 'image/introduce.jpg'%}" alt="" class='mainpic2'>
     </div>
   </section> 
   

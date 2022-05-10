@@ -176,3 +176,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+/* CAFE-RECOMMEND-TITLE */
+section.cafe-image .cafe-recommend-title{
+    margin: 100px auto;
+}
+
+.cafe-recommend-title img{
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
