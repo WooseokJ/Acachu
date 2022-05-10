@@ -67,7 +67,7 @@
       {% if store.store_image == NULL or store.store_image == "" %}
       <img src="{% static 'image/no-image.png' %}" alt="cafeimage">
       {% else %}
-      <img src="/media/{{store.store_image}}" alt="cafeimage">
+      <img src="{{store.store_image.url}}" alt="cafeimage">
       {% endif %}
 
       <!-- CAFE-INFO -->
@@ -224,7 +224,7 @@
               {% if not review.user.user_profileurl or review.user.user_profileurl == "" %}
               <img src="{% static 'image/profile_img.jpg'%}" class ="review-image">
               {% else %}
-              <img src="/media/{{review.user.user_profileurl}}" class ="review-image" alt="image">
+              <img src="{{review.user.user_profileurl.url}}" class ="review-image" alt="image">
               {% endif %}
               <div class="content">
                 <div class="review-content">{{review.review_content}}</div>
