@@ -28,12 +28,12 @@
 <br>
 
 ## 5. :fire: 기대 효과
-<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/effet.PNG?raw=true' height='400'>
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/effet.PNG?raw=true' height='350'>
 
 <br>
 
 ## 6. 📸 UI/UX
-<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/main_ui.PNG?raw=true' height='505'>
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/main_ui.PNG?raw=true' height='442'>
 
 <br>
 
