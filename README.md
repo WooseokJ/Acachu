@@ -55,9 +55,15 @@
 - 프로필 관리
 - 업장관리 페이지
 
-<br>
+### 💻 AI 기능
+- 🎞 이미지 분류 기능
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/image_classification.PNG?raw=true'>
 
-### 8. 💽 사용법
+- 📃 카테고리 분류 기능
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/review_classification.PNG?raw=true' width='923'>
+
+
+## 8. 💽 사용법
 - 모델 파일 : https://drive.google.com/drive/folders/16KeTBizMd5yqb34mMV1kslDUTOw1F8KC?usp=sharing
 
 1. acahcu repository를 클론 한 뒤 프로젝트 폴더 내에 acachu.zip을 여기에 풀기로 풀어주세요
@@ -68,9 +74,4 @@
 6. 아나콘다 프롬프트를 하나 더 실행해서 프로젝트 폴더 내로 이동 후 celery -A config worker -l info -P eventlet 명령을 입력해주세요
 
 <br>
-# 💻 AI 기능
-- 🎞 이미지 분류 기능
-<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/image_classification.PNG?raw=true'>
 
-- 📃 카테고리 분류 기능
-<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/review_classification.PNG?raw=true' width='923'>
