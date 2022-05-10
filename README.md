@@ -57,6 +57,10 @@
 
 <br>
 
+### 8. 💽 사용법
+- 모델 파일 : https://drive.google.com/drive/folders/16KeTBizMd5yqb34mMV1kslDUTOw1F8KC?usp=sharing
+
+<br>
 # 💻 AI 기능
 - 🎞 이미지 분류 기능
 <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/image_classification.PNG?raw=true'>
