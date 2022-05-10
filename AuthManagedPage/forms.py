@@ -8,6 +8,7 @@ class ReplyForm(forms.ModelForm):
         model = Reply
         fields = ['reply_content']
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = AuthBoard

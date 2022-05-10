@@ -16,8 +16,7 @@ from transformers import BertTokenizer
 from konlpy.tag import Okt
 from hanspell import spell_checker
 
-from main.models import *
-
+from main.models import Store, Tag, StoreTag
 class PredictTask(Task):
     def __init__(self):
         self.tags_model = None
@@ -25,14 +24,14 @@ class PredictTask(Task):
         self.train = None
         self.tokenizer = None
         self.okt = None
-    
     def __call__(self, *args, **kwargs):
         if not self.tags_model and not self.sentiment_model and not self.train:
             logging.info('Loading Model...')
             os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
             save_path = os.getcwd() + '\\nlp\\bert_clf_v2'
             tags_model = tf.saved_model.load(save_path)
-            train = np.load(os.getcwd()+'\\nlp\\x_train_okt_V3.npy', allow_pickle=True)
+            train = np.load(os.getcwd()+'\\nlp\\x_train_okt_V3.npy',\
+                            allow_pickle=True)
             sentiment_model = load_model(os.getcwd()+'\\nlp\\bilstm_okt_v3.h5')
             self.tags_model = tags_model
             self.sentiment_model = sentiment_model
@@ -44,11 +43,11 @@ class PredictTask(Task):
 
     def preprocessing(self, review_list):
         review_list = pd.Series(review_list)
-
-        review_list = review_list.str.replace(pat=r'[^\w]',repl=r' ',regex=True)
-        review_list = review_list.str.replace(pat=r'([ㄱ-ㅎ ㅏ-ㅣ])+',repl=r' ',regex=True)
-        review_list = review_list.str.replace(pat=r'([a-z])+',repl=r' ',regex=True)
-
+        review_list = review_list.str.replace(pat=r'[^\w]', repl=r' ', regex=True)
+        review_list = review_list.str.replace(pat=r'([ㄱ-ㅎ ㅏ-ㅣ])+', \
+                                              repl=r' ',\
+                                              regex=True)
+        review_list = review_list.str.replace(pat=r'([a-z])+', repl=r' ', regex=True)
         review_list = review_list.str.replace(pat=r'^ +', repl=r"", regex=True) # white space 데이터를 empty value로 변경
         review_list.replace('', np.nan, inplace=True)
         review_list.dropna(inplace=True)
@@ -101,10 +100,10 @@ class PredictTask(Task):
 
         for sentence in sentences:
             tokenized_sentence = tokenizer.encode(
-                                sentence,                  # Sentence to encode.
-                                add_special_tokens = True, # Add '[CLS]' and '[SEP]'
-                                max_length = max_seq_len,  # Truncate all sentences.
-                        )
+                                 sentence,
+                                 add_special_tokens=True,
+                                 max_length=max_seq_len,
+                                 )
             
             tokenized_sentences.append(tokenized_sentence)
 
@@ -131,17 +130,26 @@ class PredictTask(Task):
         return dataset
     
     def predict(self, review, MAX_LEN=128):
-        label_cols = ['dessert', 'beverage', 'coffee', 'atmosphere', 'child', 'dog', 'study']
+        label_cols = ['dessert', 'beverage', 'coffee',\
+                      'atmosphere', 'child', 'dog', 'study'
+                     ]
         tokenizer = self.tokenizer
 
         rv_input_ids = self.tokenize_sentences(review, tokenizer, MAX_LEN)
-        rv_input_ids = pad_sequences(rv_input_ids, maxlen=MAX_LEN, dtype="long", value=0, truncating="post", padding="post")
+        rv_input_ids = pad_sequences(rv_input_ids, maxlen=MAX_LEN, \
+                                     dtype="long", value=0, \
+                                     truncating="post", padding="post")
         rv_attention_masks = self.create_attention_masks(rv_input_ids)
 
         rv_input_ids = tf.convert_to_tensor(rv_input_ids, dtype=tf.int64)
-        rv_attention_masks = tf.convert_to_tensor(rv_attention_masks, dtype=tf.int64)
+        rv_attention_masks = tf.convert_to_tensor(rv_attention_masks,\
+                                                  dtype=tf.int64)
 
-        rv_dataset = self.create_dataset((rv_input_ids, rv_attention_masks), batch_size=1, train=False, epochs=1)
+        rv_dataset = self.create_dataset\
+                    ((rv_input_ids, rv_attention_masks),\
+                     batch_size=1,
+                     train=False,
+                     epochs=1)
 
         rv_steps = len(review)
         preds = pd.DataFrame(columns=label_cols)
@@ -151,7 +159,9 @@ class PredictTask(Task):
             predictions = np.where(predictions >= 0.5, 1, 0) # sigmoid 값 2진
 
             data = sum(predictions.copy().tolist(), [])
-            preds = preds.append(pd.Series(data, index=preds.columns), ignore_index=True)
+            preds = preds.append(pd.Series\
+                                (data, index=preds.columns),\
+                                 ignore_index=True)
 
         return preds
     
@@ -159,19 +169,21 @@ class PredictTask(Task):
 
         # Okt 형태소 분석기
         # okt = Okt()
-        line = self.okt.morphs(line) # 토큰화
-        
-        tokenizer = Tokenizer(27452, oov_token = 'OOV') # 이전 모델 학습 시 적용된 값들 불러오기
+        line = self.okt.morphs(line)  # 토큰화        
+        tokenizer = Tokenizer(27452, oov_token='OOV')  # 이전 모델 학습 시 적용된 값들 불러오기
         tokenizer.fit_on_texts(self.train)
         encoded = tokenizer.texts_to_sequences([line]) # 정수 인코딩
-        pad_new = pad_sequences(encoded, maxlen = 100) # 패딩, maxlen 디폴트 100
+        pad_new = pad_sequences(encoded, maxlen=100) # 패딩, maxlen 디폴트 100
         predict_result = float(self.sentiment_model.predict(pad_new))
 
         return predict_result
     
+    
     def pos_neg_ratio(self, data):
-        label_index = ['dessert', 'beverage', 'coffee', 'atmosphere', 'child', 'dog', 'study']
-        label_cols = ['Positive', 'Negative', 'Tot_tag_count', 'Ratio']
+        label_index = ['dessert', 'beverage', 'coffee',
+                       'atmosphere', 'child', 'dog', 'study']
+        label_cols = ['Positive', 'Negative',
+                      'Tot_tag_count', 'Ratio']
         pos_neg_sum = pd.DataFrame(index=label_index, columns=label_cols)
         pos_neg_sum = pos_neg_sum.fillna(0)
 
@@ -185,14 +197,16 @@ class PredictTask(Task):
                     else:
                         pos_neg_sum.loc[col]['Negative'] += 1
 
-        pos_neg_sum['Tot_tag_count'] = pos_neg_sum['Positive'] + pos_neg_sum['Negative']
-        pos_neg_sum['Ratio'] = pos_neg_sum['Positive'] / pos_neg_sum['Tot_tag_count']
-
+        pos_neg_sum['Tot_tag_count'] = pos_neg_sum['Positive']\
+            + pos_neg_sum['Negative']
+        pos_neg_sum['Ratio'] = pos_neg_sum['Positive']\
+            / pos_neg_sum['Tot_tag_count']
         pos_neg_sum = pos_neg_sum.fillna(0)
 
         return pos_neg_sum
-
 # 태그 추출 함수
+
+
 @shared_task(bind=True, base=PredictTask)
 def tags(self, review_list, store_id):
     review_list = json.loads(review_list)
@@ -204,9 +218,9 @@ def tags(self, review_list, store_id):
     data = self.predict(review_list_split)
     print('... category predicted completed ...')
     data['review'] = review_list_split
-    data = data[['review', 'dessert', 'beverage', 'coffee', 'atmosphere', 'child', 'dog', 'study']]
+    data = data[['review', 'dessert', 'beverage', 'coffee',
+                 'atmosphere', 'child', 'dog', 'study']]
     data['pos_neg'] = np.nan
-    
     for idx in range(len(data['review'])):
         tmp = self.sentiment_predict(data['review'][idx])
         if tmp > 0.5:
@@ -221,23 +235,23 @@ def tags(self, review_list, store_id):
     caffe_tags = []
 
     for idx in pos_neg_sum.index:
-        if (pos_neg_sum['Ratio'][idx] >= 0.7) and (pos_neg_sum['Tot_tag_count'][idx] >= 10):
+        temp1 = pos_neg_sum['Ratio'][idx]
+        temp2 = pos_neg_sum['Tot_tag_count'][idx]
+        if (temp1 >= 0.7) and (temp2 >= 10):
             caffe_tags.append(idx)
-            
-    tag_names = {'dessert':'디저트',
-                 'beverage':'음료', 
-                 'coffee':'커피', 
-                 'atmosphere':'분위기', 
-                 'child':'유아동반', 
-                 'dog':'애견동반', 
-                 'study':'카공'}
+    tag_names = {'dessert': '디저트',
+                 'beverage': '음료',
+                 'coffee': '커피',
+                 'atmosphere': '분위기',
+                 'child': '유아동반',
+                 'dog': '애견동반',
+                 'study': '카공'}
     for i in range(len(caffe_tags)):
         caffe_tags[i] = tag_names[caffe_tags[i]]
-    store = Store.objects.get(store_id=store_id)    
+    store = Store.objects.get(store_id=store_id)
     StoreTag.objects.filter(store__store_id=store_id).delete()
-    
     for caffe_tag in caffe_tags:
         t = Tag.objects.get(tag_name=caffe_tag)
-        StoreTag.objects.create(store=store,tag=t)
+        StoreTag.objects.create(store=store, tag=t)
 
     return caffe_tags
