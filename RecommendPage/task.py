@@ -30,7 +30,8 @@ class PredictTask(Task):
             os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
             save_path = os.getcwd() + '\\nlp\\bert_clf_v2'
             tags_model = tf.saved_model.load(save_path)
-            train = np.load(os.getcwd()+'\\nlp\\x_train_okt_V3.npy', allow_pickle=True)
+            train = np.load(os.getcwd()+'\\nlp\\x_train_okt_V3.npy',\
+                            allow_pickle=True)
             sentiment_model = load_model(os.getcwd()+'\\nlp\\bilstm_okt_v3.h5')
             self.tags_model = tags_model
             self.sentiment_model = sentiment_model
@@ -42,11 +43,11 @@ class PredictTask(Task):
 
     def preprocessing(self, review_list):
         review_list = pd.Series(review_list)
-
         review_list = review_list.str.replace(pat=r'[^\w]', repl=r' ', regex=True)
-        review_list = review_list.str.replace(pat=r'([ㄱ-ㅎ ㅏ-ㅣ])+', repl=r' ', regex=True)
+        review_list = review_list.str.replace(pat=r'([ㄱ-ㅎ ㅏ-ㅣ])+', \
+                                              repl=r' ',\
+                                              regex=True)
         review_list = review_list.str.replace(pat=r'([a-z])+', repl=r' ', regex=True)
-
         review_list = review_list.str.replace(pat=r'^ +', repl=r"", regex=True) # white space 데이터를 empty value로 변경
         review_list.replace('', np.nan, inplace=True)
         review_list.dropna(inplace=True)
