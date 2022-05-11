@@ -19,7 +19,6 @@
  > - 대형 프랜차이즈 카페보다 개인 운영 카페에 대한 수요 증가
 <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/bg1.png?raw=true' width='600'>
 <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/bg2.jpg?raw=true' width='600'>
-<!-- <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/background.PNG?raw=true' height='400'> -->
 
 <br>
 
