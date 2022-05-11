@@ -17,8 +17,7 @@
 ## 3. :link: 선정 배경
  > - 코로나로 인한 개인 카페 폐업률 상승과 상권 경쟁 심화
  > - 대형 프랜차이즈 카페보다 개인 운영 카페에 대한 수요 증가
-<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/bg1.png?raw=true' width='600'>
-<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/bg2.jpg?raw=true' width='600'>
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/bg.jpg?raw=true' width='600'>
 
 <br>
 
