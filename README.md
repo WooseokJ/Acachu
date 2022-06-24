@@ -28,7 +28,7 @@
 <br>
 
 ## 5. :fire: 기대 효과
-<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/effet.PNG?raw=true' height='350'>
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/effect.png?raw=true' height='350'>
 
 <br>
 
