@@ -15,10 +15,9 @@
 <br>
 
 ## 3. :link: 선정 배경
- > - 코로나로 인한 폐업과 상권 경쟁 심화 문제
- > - 방대한 카페 자료로 인한 쉬운 검색서비스 필요
- > - 이미지 기반 추천 시스템으로 경쟁력 확보
-<!-- <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/background.PNG?raw=true' height='400'> -->
+ > - 코로나로 인한 개인 카페 폐업률 상승과 상권 경쟁 심화
+ > - 대형 프랜차이즈 카페보다 개인 운영 카페에 대한 수요 증가
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/bg.jpg?raw=true' width='600'>
 
 <br>
 
@@ -38,6 +37,7 @@
 <br>
 
 ## 7. 🔎 사용자 기능
+<img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/utils.png?raw=true' width='923'>
 
 ### 7.1 게스트(비로그인)
 - 추천 기능
@@ -55,11 +55,23 @@
 - 프로필 관리
 - 업장관리 페이지
 
-<br>
-
-# 💻 AI 기능
+### 💻 AI 기능
 - 🎞 이미지 분류 기능
 <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/image_classification.PNG?raw=true'>
 
 - 📃 카테고리 분류 기능
 <img src='https://github.com/AIVLE-School-first-Big-Project/Acachu/blob/main/readmeImage/review_classification.PNG?raw=true' width='923'>
+
+
+## 8. 💽 사용법
+- 모델 파일 : https://drive.google.com/file/d/1zxllSLgHfCMIFafWk3bUIBBvoi49ucMi/view?usp=sharing
+
+1. acahcu repository를 클론 한 뒤 프로젝트 폴더 내에 acachu.zip을 여기에 풀기로 풀어주세요
+2. settings.py 파일을 프로젝트폴더 안 config 폴더에 넣어주세요
+3. redis 설치파일로 redis를 설치하세요(https://github.com/microsoftarchive/redis/releases/tag/win-3.0.504,  Redis-x64-3.0.504.msi)
+4. requirements.txt 를 이용해 아나콘다 가상환경을 설정해주세요
+5. 프로젝트 폴더에서 아나콘다 프롬프트로 python manage.py runserver 명령을 통해 장고 서버를 실행해주세요
+6. 아나콘다 프롬프트를 하나 더 실행해서 프로젝트 폴더 내로 이동 후 celery -A config worker -l info -P eventlet 명령을 입력해주세요
+
+<br>
+
